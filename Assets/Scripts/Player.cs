@@ -47,7 +47,6 @@ namespace Player
             input.JumpDown = UnityEngine.Input.GetButtonDown("Jump");
             input.JumpUp = UnityEngine.Input.GetButtonUp("Jump");
         }
-
         #endregion
 
 
