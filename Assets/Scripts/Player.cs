@@ -2,68 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace Player
 {
-    public struct FrameInput
-    {
-        public float X;
-        public bool JumpDown;
-        public bool JumpUp;
-    }
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(PlayerMovement))]
+
 
     public class Player : MonoBehaviour
     {
-        //Variables
-        //Inputs
-        public FrameInput input;
+        private Rigidbody2D rb;
+        private BoxCollider2D playerCollider;
+        [SerializeField] private PlayerMovement movement;
 
-        //Stats
-        Vector3 currentSpeed;
-        Vector3 lastPosition;
+        public MovementInputs input;
 
-        public float jumpForce = 4f;
-        public float maxSpeed = 15f;
-        public float minSpeed = 5f;
-        public float walkAcceleration = 4f;
 
-        //
-        bool isGrounded;
-
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-
+            //Collisions
+            rb = GetComponent<Rigidbody2D>();
+            playerCollider = GetComponent<BoxCollider2D>();
+            movement = GetComponent<PlayerMovement>();
         }
 
-        // Update is called once per frame
         void Update()
         {
-            currentSpeed = (transform.position - _lastPosition) / Time.deltaTime;
-            _lastPosition = transform.position;
 
-            isGrounded = true;
+            TakeInputs();
+
+            movement.CheckCollsions();
+            movement.Walk(input);
+            movement.Jump(input);
+
+            movement.MoveCharacter();
+            
         }
 
-        void Walk()
+        #region Inputs
+        void TakeInputs()
         {
-            if (isGrounded)
-            {
-                if (currentSpeed.x < maxSpeed)
-                {
-                    currentSpeed.x += walkAcceleration;
-                }
-                if (currentSpeed.x > maxSpeed)
-                {
-                    currentSpeed.x = maxSpeed;
-                }
-                else if (currentSpeed.x < minSpeed)
-                {
-                    currentSpeed.x = minSpeed;
-                }
+            input.walk = Input.GetAxisRaw("Horizontal"); //Raw makes it more snappy
 
-            }
+            input.JumpDown = UnityEngine.Input.GetButtonDown("Jump");
+            input.JumpUp = UnityEngine.Input.GetButtonUp("Jump");
         }
+
+        #endregion
+
+
     }
 }
 
