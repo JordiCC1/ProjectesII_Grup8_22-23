@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+
+namespace Player
 {
-    //Variables
-    float walk;
-
-
-
-    // Update is called once per frame
-    void Update()
+    public class PlayerMovement : MonoBehaviour
     {
-        
+        void Walk();
+
+        void VerticalJump();
+
+        void ParabolicJump();
+
     }
 }
