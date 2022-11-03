@@ -1535,7 +1535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d89f9c747b581b4da0536c304ba18cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 0}
+  movement: {fileID: 1148490370}
 --- !u!50 &1148490367
 Rigidbody2D:
   serializedVersion: 4
@@ -1647,15 +1647,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f24f6d04d2b83b41849864158110d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 0
-  _groundLayer:
+  groundLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
+  colUp: 0
+  colRight: 0
+  colDown: 0
+  colLeft: 0
   maxSpeed: 0
   acceleration: 0
   deceleration: 0
   jumpForce: 0
-  coyoteTime: 0
 --- !u!1 &1654008900
 GameObject:
   m_ObjectHideFlags: 0

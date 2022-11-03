@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 namespace Player
 {
     public struct MovementInputs
@@ -14,11 +13,14 @@ namespace Player
 
     public class PlayerMovement : MonoBehaviour
     {
+        private BoxCollider2D boxCol;
+        [SerializeField] private LayerMask groundLayer;
+
+        Vector3 currentVelocity;
+
         private void Start()
         {
-
-            //bounds = playerCollider.bounds;
-            isGrounded = false;
+            boxCol = GetComponent<BoxCollider2D>();
 
             colDown = false;
             colLeft = false;
@@ -29,30 +31,32 @@ namespace Player
             acceleration = 40f;
             deceleration = 10f;
 
-            jumpForce = 4.0f;
-            coyoteTime = 2.0f;
+            jumpForce = 10.0f;
+            //coyoteTime = 0.5f;
+            //coyoteUsable = false;
+            //coyoteTimer = 0.0f;
+
+            //minFallSpeed = 10.0f;
+            //maxFallSpeed = 60.0f;
         }
 
         #region Collisions
 
-        //[SerializeField] private Bounds bounds;
-        [SerializeField] private bool isGrounded;
-        [SerializeField] private LayerMask _groundLayer;
+        [SerializeField] private bool isGrounded => 
+            Physics2D.Raycast(transform.position, -Vector3.up, boxCol.bounds.extents.y + 0.5f, groundLayer);
 
-        private bool colUp, colRight, colDown, colLeft;
+        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+
+        [SerializeField] private bool colUp, colRight, colDown, colLeft;
 
         public void CheckCollsions()
         {
-
-            isGrounded = colDown;
-
-
+            colDown = isGrounded;
         }
 
         #endregion
 
         #region Walk
-        Vector3 currentVelocity;
 
         [SerializeField] private float maxSpeed;
         [SerializeField] private float acceleration;
@@ -82,25 +86,7 @@ namespace Player
         #region Jump
 
         [SerializeField] private float jumpForce;
-        [SerializeField] private float coyoteTime;
-        private bool coyoteUsable = true;
-        public void Jump(MovementInputs input)
-        {
-            if (input.JumpDown)
-            {
-                if (isGrounded || coyoteUsable) //add coyote time
-                {
-                    currentVelocity.y += jumpForce;
-                    //coyoteUsable = false;
-                }
 
-            }
-            else
-            {
-
-            }
-
-        }
         #endregion
 
         #region Move
