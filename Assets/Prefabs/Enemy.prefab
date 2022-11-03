@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &726880447222749748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 83558583596154197}
+  m_Layer: 2
+  m_Name: RotatePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &83558583596154197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726880447222749748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5441422770906848453}
+  m_Father: {fileID: 5441422770562737944}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5441422770562737927
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +43,7 @@ GameObject:
   - component: {fileID: 5441422770562737944}
   - component: {fileID: 5441422770562737946}
   - component: {fileID: 5441422770562737945}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +63,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5441422771896704641}
-  - {fileID: 5441422770906848453}
+  - {fileID: 83558583596154197}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -101,7 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Range: 10
   Target: {fileID: 0}
-  Gun: {fileID: 5441422770906848452}
+  Gun: {fileID: 726880447222749748}
   bullet: {fileID: 8016540670365171682, guid: 54fa37be4c907cc458a69edeefbdccee, type: 3}
   Alarm: {fileID: 5441422771896704640}
   FireRate: 5
@@ -117,7 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5441422770906848453}
   - component: {fileID: 5441422770906848454}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: '"gun"'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,13 +164,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5441422770906848452}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.54, y: -0.02, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.75, z: 1}
+  m_LocalPosition: {x: 0.01, y: 0.88, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5441422771340149042}
-  m_Father: {fileID: 5441422770562737944}
-  m_RootOrder: 1
+  m_Father: {fileID: 83558583596154197}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5441422770906848454
 SpriteRenderer:
@@ -201,7 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5441422771340149042}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -216,7 +248,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5441422771340149041}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0.01, y: 0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -233,7 +265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5441422771896704641}
   - component: {fileID: 5441422771896704642}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Alarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
