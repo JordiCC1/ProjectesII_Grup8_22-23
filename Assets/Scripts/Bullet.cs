@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     public ParticleSystem ps;
     void Start()
     {
-        //ps = GetComponent<ParticleSystem>();
+        ps = GetComponent<ParticleSystem>();
         StartCoroutine(WaitThenDie());
     }
     private void OnCollisionEnter2D(Collision2D collision)
