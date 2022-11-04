@@ -5,10 +5,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 4.5f;
-    
+
     private void Update()
     {
-        transform.position += -transform.right *Time.deltaTime*speed;
+        transform.position += -transform.right * Time.deltaTime * speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -16,3 +16,4 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 }
+
