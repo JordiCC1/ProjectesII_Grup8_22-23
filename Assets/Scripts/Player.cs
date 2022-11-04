@@ -11,7 +11,6 @@ namespace Player
 
     public class Player : MonoBehaviour
     {
-        //private Rigidbody2D rb;
         [SerializeField] private PlayerMovement movement;
 
         public MovementInputs inputs;
@@ -25,12 +24,7 @@ namespace Player
         void Update()
         {
             TakeInputs();
-
-            movement.CheckCollsions();
-            movement.Walk(inputs);
-            //movement.Jump(inputs);
-
-            movement.MoveCharacter();   
+            movement.UpdateMovement(inputs);  
         }
 
         #region Inputs
