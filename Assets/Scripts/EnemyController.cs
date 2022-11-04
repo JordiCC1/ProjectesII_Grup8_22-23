@@ -23,8 +23,6 @@ public class EnemyController : MonoBehaviour
     float nextTimeToFire = 0;
     public Transform Shootpoint;
     public float Force;
-
-
     
     void Start()
     {
