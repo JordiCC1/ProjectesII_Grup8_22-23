@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 574239471}
   - component: {fileID: 574239473}
   - component: {fileID: 574239472}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 653292104}
   - component: {fileID: 653292106}
   - component: {fileID: 653292105}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 731469485}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ------ MAP ------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 801251592}
   - component: {fileID: 801251594}
   - component: {fileID: 801251593}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +527,7 @@ GameObject:
   - component: {fileID: 825807590}
   - component: {fileID: 825807592}
   - component: {fileID: 825807591}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: R_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 1140276276}
   - component: {fileID: 1140276278}
   - component: {fileID: 1140276277}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: 'L_Wall '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 1265283541}
   - component: {fileID: 1265283543}
   - component: {fileID: 1265283542}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Platform (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1014,7 +1014,7 @@ GameObject:
   - component: {fileID: 1545390932}
   - component: {fileID: 1545390934}
   - component: {fileID: 1545390933}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1130,7 +1130,7 @@ GameObject:
   - component: {fileID: 1688388596}
   - component: {fileID: 1688388598}
   - component: {fileID: 1688388597}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Platform (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1320,7 +1320,7 @@ GameObject:
   - component: {fileID: 2032276327}
   - component: {fileID: 2032276326}
   - component: {fileID: 2032276329}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: '"Player"'
   m_TagString: Player
   m_Icon: {fileID: 0}

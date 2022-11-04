@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     Vector2 Direction;
     public GameObject Gun;
     public GameObject bullet;
-    
+
     //Shows when the player is visible
     public GameObject Alarm;
     //Alpha Zero
@@ -23,19 +23,19 @@ public class EnemyController : MonoBehaviour
     float nextTimeToFire = 0;
     public Transform Shootpoint;
     public float Force;
-    
+
     void Start()
     {
         alphaM = Alarm.GetComponent<SpriteRenderer>().color;
         alphaZ.a = 0f;
         Alarm.GetComponent<SpriteRenderer>().color = alphaZ;
     }
-    
+
     void Update()
     {
         Vector2 targetPos = Target.position;
         Direction = targetPos - (Vector2)transform.position;
-        RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range,LayerMask.GetMask("Player", "Terrain"));
+        RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range, LayerMask.GetMask("Player", "Terrain"));
 
         if (rayInfo)
         {
@@ -77,3 +77,4 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, Range);
     }
 }
+

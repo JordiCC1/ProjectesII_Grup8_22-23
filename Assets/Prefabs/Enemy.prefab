@@ -138,7 +138,7 @@ MonoBehaviour:
   Gun: {fileID: 726880447222749748}
   bullet: {fileID: 8016540670365171682, guid: 54fa37be4c907cc458a69edeefbdccee, type: 3}
   Alarm: {fileID: 5441422771896704640}
-  FireRate: 5
+  FireRate: 2
   Shootpoint: {fileID: 5441422771340149042}
   Force: 100
 --- !u!50 &8152343628834463703
