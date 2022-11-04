@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 4836875311590967048}
   - component: {fileID: 1813933546162948854}
   - component: {fileID: 6527301768888941309}
-  - component: {fileID: 6837326611253583468}
   - component: {fileID: 1312183448330456076}
   - component: {fileID: 6624636367223027290}
+  - component: {fileID: 5911705266886300352}
   m_Layer: 2
   m_Name: _Bullet_
   m_TagString: Untagged
@@ -235,20 +235,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &6837326611253583468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8016540670365171682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f9e031bc64fba14290dbd82f8f13c3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 1.25
-  ps: {fileID: 1312183448330456076}
 --- !u!198 &1312183448330456076
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5029,3 +5015,17 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &5911705266886300352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016540670365171682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df866d522a854b7499db80b3ffefaac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeTime: 2
+  ps: {fileID: 1312183448330456076}

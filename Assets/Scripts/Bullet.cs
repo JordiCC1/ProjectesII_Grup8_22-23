@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float lifeTime;
-    void Start()
+    public float speed = 4.5f;
+
+    private void Update()
     {
-        StartCoroutine(WaitThenDie());
+        transform.position += -transform.right * Time.deltaTime * speed;
     }
-    IEnumerator WaitThenDie()
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
     }
 }
+
