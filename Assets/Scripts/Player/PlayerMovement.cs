@@ -31,6 +31,7 @@ namespace Player
         {
             Walk(inputs);
             Jump(inputs);
+            WallJump(inputs);
         }
         public void FixedUpdate()
         {
@@ -39,30 +40,33 @@ namespace Player
         }
 
         #region Collisions
-
-        //colDown = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+        [Header("Collisions")]
+        [SerializeField] float rayLength = 0.3f;
 
         [SerializeField] private bool colUp;
-        [SerializeField] private bool colRight;
-        [SerializeField] private bool colDown;
-        [SerializeField] private bool colLeft;
+        private bool colRight;
+        private bool colDown;
+        private bool colLeft;
         private bool isGrounded =>
-            Physics2D.Raycast(transform.position, -Vector3.up, boxCol.bounds.extents.y + 0.5f, groundLayer);
+            Physics2D.Raycast(transform.position, -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
 
-        public void CheckCollisions()
+        private void CheckCollisions()
         {
             if (colDown && !isGrounded)
                 timeLeftGrounded = Time.time;
             if (!colDown && isGrounded)
                 coyoteUsable = true;
 
+            colDown = isGrounded;
+
+            CheckRays();
         }
 
         private void CheckRays()
         {
-            colUp = Physics2D.Raycast(transform.position, Vector3.up, boxCol.bounds.extents.y + 0.5f, groundLayer);
-            colRight = Physics2D.Raycast(transform.position, Vector3.right, boxCol.bounds.extents.y + 0.5f, groundLayer);
-            colLeft = Physics2D.Raycast(transform.position, -Vector3.right, boxCol.bounds.extents.y + 0.5f, groundLayer);
+            colUp = Physics2D.Raycast(transform.position, Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
+            colRight = Physics2D.Raycast(transform.position, Vector3.right, boxCol.bounds.extents.y + rayLength, groundLayer);
+            colLeft = Physics2D.Raycast(transform.position, -Vector3.right, boxCol.bounds.extents.y + rayLength, groundLayer);
         }
 
         #endregion
@@ -72,13 +76,12 @@ namespace Player
         private float movementScale;
         [SerializeField] private float maxSpeed = 120f;
         [SerializeField] private float airControl = 0.5f;
-        [SerializeField] private float acceleration = 40f;
-        [SerializeField] private float deceleration = 10f;
 
-        public void Walk(MovementInputs input)
+        private void Walk(MovementInputs input)
         {
             movementScale = input.walk;
         }
+
         #endregion
 
         #region Jump
@@ -87,12 +90,13 @@ namespace Player
         bool shouldJump = false;
         private float startDrag;
         [SerializeField] private float isAirDrag = 5f;
+        [SerializeField] private float wallDrag = 20f;
 
         [Header("Buffer and Coyote Time")]
         [SerializeField] private float jumpBuffer = 0.1f;
         public float lastJumpInput;
-        public float coyoteTimeThreshold = 0.5f;
-        public float timeLeftGrounded;
+        [SerializeField] float coyoteTimeThreshold = 0.5f;
+        private float timeLeftGrounded;
         private bool coyoteUsable;
 
         private bool HasJumpBuffered => colDown && lastJumpInput + jumpBuffer > Time.time;
@@ -108,7 +112,12 @@ namespace Player
         private bool bulletTimeActive;
         [SerializeField] private float bulletTimeDrag = 10f;
 
-        public void Jump(MovementInputs inputs)
+        [Header("Wall Jump")]
+        [SerializeField] private float forceOfSideJump = 0.5f;
+        [SerializeField] private bool canWallJump;
+        private bool isHanging => (colLeft && !colDown) || (colRight && !colDown);
+
+        private void Jump(MovementInputs inputs)
         {
             //TODO: implement Bullet time into this script
 
@@ -117,40 +126,50 @@ namespace Player
                 shouldJump = true;
                 timeLeftGrounded = float.MinValue;
             }
+        }
 
-            if (!colDown)
+        private void WallJump(MovementInputs inputs)
+        {
+            if (inputs.JumpDown && isHanging)
             {
-
+                canWallJump = true;
             }
-
         }
 
         #endregion
 
         #region Move
-
-        public void MoveCharacterPhysics()
+        private void MoveCharacterPhysics()
         {
             //JUMP
             if (shouldJump)
             {
+                if (!colDown)
+                    rb.velocity = Vector3.zero;
                 rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
                 shouldJump = false;
+            }
+
+            if (canWallJump)
+            {
+                rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+                if (colLeft)
+                    rb.AddForce(jumpForce * Vector2.right * forceOfSideJump, ForceMode2D.Impulse);
+                if (colRight)
+                    rb.AddForce(jumpForce * -Vector2.right * forceOfSideJump, ForceMode2D.Impulse);
+
+                canWallJump = false;
             }
 
             isInApex = Mathf.Abs(rb.velocity.y) < apexThreshold && !colDown;
             rb.gravityScale = isInApex ? apexGravity : startGravity;
 
             //AIR DRAG
-            /*if(bulletTimeActive && !colDown)
-            {
-                rb.drag = bulletTimeDrag;
-            }
-            else*/
-            if (!colDown)
-            {
+            //WALL DRAG
+            if (isHanging)
+                rb.drag = wallDrag;
+            else if (!colDown)
                 rb.drag = isAirDrag;
-            }
             else
                 rb.drag = startDrag;
 

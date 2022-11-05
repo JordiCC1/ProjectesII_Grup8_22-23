@@ -37,7 +37,7 @@ namespace Player
                 JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
                 JumpUp = UnityEngine.Input.GetButtonUp("Jump")
             };
-            if (inputs.JumpUp == true)
+            if (inputs.JumpDown == true)
             {
                 movement.lastJumpInput = Time.time;
             }
