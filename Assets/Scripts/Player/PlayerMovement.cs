@@ -27,12 +27,15 @@ namespace Player
             startGravity = rb.gravityScale;
             startDrag = rb.drag;
         }
-        public void UpdateMovement(MovementInputs inputs)
+        public void UpdateMovement(MovementInputs inputs, bool _isBulletTimeActive)
         {
             Walk(inputs);
             Jump(inputs);
             WallJump(inputs);
+
+            bulletTimeActive = _isBulletTimeActive;
         }
+
         public void FixedUpdate()
         {
             CheckCollisions();
@@ -139,6 +142,7 @@ namespace Player
         #endregion
 
         #region Move
+
         private void MoveCharacterPhysics()
         {
             //JUMP
@@ -166,7 +170,9 @@ namespace Player
 
             //AIR DRAG
             //WALL DRAG
-            if (isHanging)
+            if (bulletTimeActive)
+                rb.drag = bulletTimeDrag;
+            else if (isHanging)
                 rb.drag = wallDrag;
             else if (!colDown)
                 rb.drag = isAirDrag;
