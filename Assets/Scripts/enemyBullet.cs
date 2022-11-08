@@ -7,9 +7,6 @@ public class enemyBullet : MonoBehaviour
     public float lifeTime;
     //public ParticleSystem ps;
 
-    
-    
-
     void Start()
     {
         //ps = GetComponent<ParticleSystem>();
