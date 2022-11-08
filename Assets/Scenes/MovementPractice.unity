@@ -1887,6 +1887,7 @@ GameObject:
   - component: {fileID: 1148490370}
   - component: {fileID: 1148490371}
   - component: {fileID: 1148490373}
+  - component: {fileID: 1148490372}
   - component: {fileID: 1148490374}
   m_Layer: 10
   m_Name: white block
@@ -2055,9 +2056,20 @@ MonoBehaviour:
   coyoteTimeThreshold: 0.5
   apexThreshold: 3
   apexGravity: 3
-  bulletTimeDrag: 20
-  forceOfSideJump: 0.5
-  canWallJump: 0
+  bulletTimeDrag: 10
+--- !u!114 &1148490372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148490364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d89f9c747b581b4da0536c304ba18cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 0}
 --- !u!114 &1148490373
 MonoBehaviour:
   m_ObjectHideFlags: 0
