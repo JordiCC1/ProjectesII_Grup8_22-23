@@ -8,6 +8,8 @@ public class EnemyController : MonoBehaviour
     public Transform Target;
     bool Detected = false;
 
+    public GameObject particles;
+
     Vector2 Direction;
     public GameObject Gun;
     public GameObject bullet;
@@ -76,5 +78,15 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.DrawWireSphere(transform.position, Range);
     }
-}
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bullet")
+    //    {
+    //        GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
+    //        ParticleIns.GetComponent<ParticleSystem>().Play();
+    //        Destroy(gameObject);
+    //    }
+    //}
+   }
 

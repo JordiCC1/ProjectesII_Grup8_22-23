@@ -5,18 +5,17 @@ using UnityEngine;
 public class enemyBullet : MonoBehaviour
 {
     public float lifeTime;
-    //public ParticleSystem ps;
+    public GameObject particles;
+
 
     void Start()
-    {
-        //ps = GetComponent<ParticleSystem>();
+    {        
         StartCoroutine(WaitThenDie());
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GetComponent<ParticleSystem>().Play();
-        ParticleSystem.EmissionModule em = GetComponent<ParticleSystem>().emission;
-        em.enabled = true;
+        GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
+        ParticleIns.GetComponent<ParticleSystem>().Play();        
         Destroy(gameObject);
     }
     IEnumerator WaitThenDie()
