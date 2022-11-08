@@ -26,15 +26,6 @@ namespace Player
             boxCol = GetComponent<BoxCollider2D>();
             startGravity = rb.gravityScale;
             startDrag = rb.drag;
-
-            /*
-            coyoteTime = 0.5f;
-            coyoteUsable = false;
-            coyoteTimer = 0.0f;
-
-            minFallSpeed = 10.0f;
-            maxFallSpeed = 60.0f;
-            */
         }
         public void UpdateMovement(MovementInputs inputs)
         {
@@ -49,17 +40,29 @@ namespace Player
 
         #region Collisions
 
-        [SerializeField]
+        //colDown = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
+
+        [SerializeField] private bool colUp;
+        [SerializeField] private bool colRight;
+        [SerializeField] private bool colDown;
+        [SerializeField] private bool colLeft;
         private bool isGrounded =>
             Physics2D.Raycast(transform.position, -Vector3.up, boxCol.bounds.extents.y + 0.5f, groundLayer);
 
-        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, groundLayer);
-
-        [SerializeField] private bool colUp, colRight, colDown, colLeft;
-
         public void CheckCollisions()
         {
-            colDown = isGrounded;
+            if (colDown && !isGrounded)
+                timeLeftGrounded = Time.time;
+            if (!colDown && isGrounded)
+                coyoteUsable = true;
+
+        }
+
+        private void CheckRays()
+        {
+            colUp = Physics2D.Raycast(transform.position, Vector3.up, boxCol.bounds.extents.y + 0.5f, groundLayer);
+            colRight = Physics2D.Raycast(transform.position, Vector3.right, boxCol.bounds.extents.y + 0.5f, groundLayer);
+            colLeft = Physics2D.Raycast(transform.position, -Vector3.right, boxCol.bounds.extents.y + 0.5f, groundLayer);
         }
 
         #endregion
@@ -85,6 +88,16 @@ namespace Player
         private float startDrag;
         [SerializeField] private float isAirDrag = 5f;
 
+        [Header("Buffer and Coyote Time")]
+        [SerializeField] private float jumpBuffer = 0.1f;
+        public float lastJumpInput;
+        public float coyoteTimeThreshold = 0.5f;
+        public float timeLeftGrounded;
+        private bool coyoteUsable;
+
+        private bool HasJumpBuffered => colDown && lastJumpInput + jumpBuffer > Time.time;
+        private bool CanUseCoyote => coyoteUsable && !colDown && timeLeftGrounded + coyoteTimeThreshold > Time.time;
+
         [Header("Jump Apex")]
         [SerializeField] private float apexThreshold = 0.1f;
         private bool isInApex = false;
@@ -97,9 +110,19 @@ namespace Player
 
         public void Jump(MovementInputs inputs)
         {
-            shouldJump |= inputs.JumpDown && colDown;
+            //TODO: implement Bullet time into this script
 
-            //bulletTimeActive = bt.isActive;
+            if (inputs.JumpDown && CanUseCoyote || HasJumpBuffered)
+            {
+                shouldJump = true;
+                timeLeftGrounded = float.MinValue;
+            }
+
+            if (!colDown)
+            {
+
+            }
+
         }
 
         #endregion
@@ -115,15 +138,16 @@ namespace Player
                 shouldJump = false;
             }
 
-            isInApex = Mathf.Abs(rb.velocity.y) < apexThreshold && !isGrounded;
+            isInApex = Mathf.Abs(rb.velocity.y) < apexThreshold && !colDown;
             rb.gravityScale = isInApex ? apexGravity : startGravity;
 
             //AIR DRAG
-            /*if(bulletTimeActive && !isGrounded)
+            /*if(bulletTimeActive && !colDown)
             {
                 rb.drag = bulletTimeDrag;
             }
-            else*/ if (!isGrounded)
+            else*/
+            if (!colDown)
             {
                 rb.drag = isAirDrag;
             }
@@ -132,7 +156,7 @@ namespace Player
 
             //GROUND MOVEMENT
             Vector2 movementForce = Vector2.right * movementScale * maxSpeed * Time.fixedDeltaTime;
-            if (!isGrounded)
+            if (!colDown)
             {
                 movementForce *= airControl;
             }
