@@ -12,19 +12,29 @@ namespace Player
     public class Player : MonoBehaviour
     {
         [SerializeField] private PlayerMovement movement;
+        [SerializeField] private BulletTime bt;
 
         public MovementInputs inputs;
+        public bool bulletTimeInput;
+
+        [SerializeField] bool isBulletTimeActive;
+
 
         private void Start()
         {
-            //rb = GetComponent<Rigidbody2D>();
             movement = GetComponent<PlayerMovement>();
+            bt = GetComponent<BulletTime>();
+
+            isBulletTimeActive = false;
         }
 
         void Update()
         {
             TakeInputs();
-            movement.UpdateMovement(inputs);  
+            movement.UpdateMovement(inputs, isBulletTimeActive);
+            bt.UpdateBulletTime(bulletTimeInput, isBulletTimeActive);
+
+            isBulletTimeActive = bulletTimeInput;
         }
 
         #region Inputs
@@ -37,6 +47,12 @@ namespace Player
                 JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
                 JumpUp = UnityEngine.Input.GetButtonUp("Jump")
             };
+            if (inputs.JumpDown == true)
+            {
+                movement.lastJumpInput = Time.time;
+            }
+
+            bulletTimeInput = Input.GetButton("Fire1");
         }
 
         #endregion
