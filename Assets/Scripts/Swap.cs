@@ -9,7 +9,7 @@ public class Swap : MonoBehaviour
     void Update()
     {
         //Check for mouse click 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
             Vector2 point = (Vector2) Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D raycastHit= Physics2D.Raycast(point, Vector2.zero);

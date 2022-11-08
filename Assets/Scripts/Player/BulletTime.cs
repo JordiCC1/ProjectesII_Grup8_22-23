@@ -5,35 +5,45 @@ namespace Player
     public class BulletTime : MonoBehaviour
     {
         public float slowdownFactor = 0.25f;
-        public bool isActive { get; private set; }
+        //public bool isActive { get; private set; }
 
-        void BulletTimeActive()
+        void BulletTimeActive(bool isActive)
         {
             Time.timeScale = slowdownFactor;
-            isActive = true;
         }
 
-        void FinishBulletTime()
+        void FinishBulletTime(bool isActive)
         {
             Time.timeScale = 1.0f;
-            isActive = false;
         }
 
-        private void Start()
+        public void UpdateBulletTime(bool input, bool isActive)
         {
-            isActive = false;
-        }
-
-        private void Update()
-        {
-            if (Input.GetButton("Fire1"))
+            if (input)
             {
-                BulletTimeActive();
+                BulletTimeActive(isActive);
             }
             else
             {
-                FinishBulletTime();
+                FinishBulletTime(isActive);
             }
         }
+
+        //private void Start()
+        //{
+        //    isActive = false;
+        //}
+
+        //private void Update()
+        //{
+        //    if (Input.GetButton("Fire1"))
+        //    {
+        //        BulletTimeActive();
+        //    }
+        //    else
+        //    {
+        //        FinishBulletTime();
+        //    }
+        //}
     }
 }
