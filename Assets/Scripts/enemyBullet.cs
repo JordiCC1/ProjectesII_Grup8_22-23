@@ -6,9 +6,6 @@ public class enemyBullet : MonoBehaviour
 {
     public float lifeTime;
     public GameObject particles;
-   
-
-
 
 
     void Start()
