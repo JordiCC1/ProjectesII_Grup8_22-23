@@ -36,9 +36,11 @@ namespace Player
                     timer = 0;
                 }
             }
+        }
 
-            //Check for mouse click 
-            if (Input.GetMouseButtonUp(0) && canFire && this.gameObject.GetComponentInParent<Player>().isBulletTimeActive)
+        public void Shoot()
+        {
+            if (Input.GetMouseButtonUp(0) && canFire)
             {
                 Instantiate(bullet, bulletTransform.position, Quaternion.identity, transform.parent);
                 canFire = false;

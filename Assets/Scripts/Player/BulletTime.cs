@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace Player
 {
@@ -27,6 +28,7 @@ namespace Player
                 }
                 else if (exitInput)
                 {
+                    this.gameObject.GetComponentInChildren<PlayerGun>().Shoot();
                     FinishBulletTime(isActive);
                 }
             }
