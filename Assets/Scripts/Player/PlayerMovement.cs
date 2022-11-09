@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
+    //
     public struct MovementInputs
     {
         public float walk;
@@ -51,17 +52,16 @@ namespace Player
         private bool colRight;
         private bool colDown;
         private bool colLeft;
-
-        private bool isGrounded =>
-            Physics2D.Raycast(transform.position, -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
-            ||
-            Physics2D.Raycast(new Vector3
-                (transform.position.x + boxCol.bounds.extents.x, transform.position.y, transform.position.z),
-                -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
-            ||
-            Physics2D.Raycast(new Vector3
-                (transform.position.x - boxCol.bounds.extents.x, transform.position.y, transform.position.z),
-                -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
+        public bool isGrounded =>
+           Physics2D.Raycast(transform.position, -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
+           ||
+           Physics2D.Raycast(new Vector3
+               (transform.position.x + boxCol.bounds.extents.x, transform.position.y, transform.position.z),
+               -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
+           ||
+           Physics2D.Raycast(new Vector3
+               (transform.position.x - boxCol.bounds.extents.x, transform.position.y, transform.position.z),
+               -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
 
         private void CheckCollisions()
         {

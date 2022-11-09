@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    //AudioManager.instance.EnemyDeathSFX();
+
     public float Range;
     public Transform Target;
     bool Detected = false;

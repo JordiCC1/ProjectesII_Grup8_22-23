@@ -9,6 +9,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip pBulletWallSFX;
     [SerializeField] AudioClip pBulletEnemySFX;
+    [SerializeField] AudioClip landingSFX;
+    [SerializeField] AudioClip enemyDeathSFX;
+    [SerializeField] AudioClip playerDeathSFX;
+
 
     private void Awake()
     {
@@ -23,12 +27,27 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void pBulletWallCollisionSFX()
+    public void PBulletWallCollisionSFX()
     {
         audioSource.PlayOneShot(pBulletWallSFX);
     } 
-    public void pBulletEnemyCollisionSFX()
+    public void PBulletEnemyCollisionSFX()
     {
         audioSource.PlayOneShot(pBulletEnemySFX);
+    }
+
+    public void LandingSFX()
+    {
+        audioSource.PlayOneShot(landingSFX);
+    } 
+
+    public void EnemyDeathSFX()
+    {
+        audioSource.PlayOneShot(enemyDeathSFX);
+    } 
+    
+    public void PlayerDeathSFX()
+    {
+        audioSource.PlayOneShot(playerDeathSFX);
     }
 }

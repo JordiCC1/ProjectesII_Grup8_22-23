@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace Player
 {
@@ -17,33 +18,21 @@ namespace Player
             Time.timeScale = 1.0f;
         }
 
-        public void UpdateBulletTime(bool input, bool isActive)
+        public void UpdateBulletTime(bool enterInput, bool isActive, bool exitInput, bool canBT)
         {
-            if (input)
+            if (canBT)
             {
-                BulletTimeActive(isActive);
-            }
-            else
-            {
-                FinishBulletTime(isActive);
+                if (enterInput)
+                {
+                    BulletTimeActive(isActive);
+                }
+                else if (exitInput)
+                {
+                    this.gameObject.GetComponentInChildren<PlayerGun>().Shoot();
+                    FinishBulletTime(isActive);
+                }
             }
         }
 
-        //private void Start()
-        //{
-        //    isActive = false;
-        //}
-
-        //private void Update()
-        //{
-        //    if (Input.GetButton("Fire1"))
-        //    {
-        //        BulletTimeActive();
-        //    }
-        //    else
-        //    {
-        //        FinishBulletTime();
-        //    }
-        //}
     }
 }
