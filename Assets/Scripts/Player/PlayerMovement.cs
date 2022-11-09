@@ -17,6 +17,7 @@ namespace Player
         private BoxCollider2D boxCol;
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private BulletTime bt;
+        [SerializeField] private ParticleSystem particles;
 
         [SerializeField] private LayerMask groundLayer;
 
@@ -50,8 +51,17 @@ namespace Player
         private bool colRight;
         private bool colDown;
         private bool colLeft;
+
         private bool isGrounded =>
-            Physics2D.Raycast(transform.position, -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
+            Physics2D.Raycast(transform.position, -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
+            ||
+            Physics2D.Raycast(new Vector3
+                (transform.position.x + boxCol.bounds.extents.x, transform.position.y, transform.position.z),
+                -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
+            ||
+            Physics2D.Raycast(new Vector3
+                (transform.position.x - boxCol.bounds.extents.x, transform.position.y, transform.position.z),
+                -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
 
         private void CheckCollisions()
         {
@@ -79,6 +89,7 @@ namespace Player
         private float movementScale;
         [SerializeField] private float maxSpeed = 120f;
         [SerializeField] private float airControl = 0.5f;
+        private bool isWalking;
 
         private void Walk(MovementInputs input)
         {
