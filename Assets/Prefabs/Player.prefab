@@ -255,7 +255,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 2048
-  rayLength: 0.15
+  rayLength: 0.05
   colUp: 0
   maxSpeed: 10000
   airControl: 0.05
@@ -268,7 +268,7 @@ MonoBehaviour:
   apexThreshold: 3
   apexGravity: 3
   bulletTimeDrag: 20
-  forceOfSideJump: 0.5
+  forceOfSideJump: 1
   canWallJump: 0
 --- !u!114 &27149512573143974
 MonoBehaviour:

@@ -15,9 +15,9 @@ namespace Player
         [SerializeField] private BulletTime bt;
 
         public MovementInputs inputs;
-        public bool bulletTimeInput;
 
-        [SerializeField] bool isBulletTimeActive;
+
+        public bool isBulletTimeActive;
 
 
         private void Start()
@@ -32,9 +32,7 @@ namespace Player
         {
             TakeInputs();
             movement.UpdateMovement(inputs, isBulletTimeActive);
-            bt.UpdateBulletTime(bulletTimeInput, isBulletTimeActive);
-
-            isBulletTimeActive = bulletTimeInput;
+            bt.UpdateBulletTime(Input.GetMouseButtonDown(0), isBulletTimeActive,Input.GetMouseButtonUp(0), !movement.isGrounded);
         }
 
         #region Inputs
@@ -52,7 +50,6 @@ namespace Player
                 movement.lastJumpInput = Time.time;
             }
 
-            bulletTimeInput = Input.GetButton("Fire1");
         }
 
         #endregion

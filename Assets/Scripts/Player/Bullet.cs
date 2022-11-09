@@ -35,7 +35,6 @@ public class Bullet : MonoBehaviour
         }
         else
             AudioManager.instance.pBulletWallCollisionSFX();
-        Debug.Log("sound");
         Destroy(gameObject);
     }
 

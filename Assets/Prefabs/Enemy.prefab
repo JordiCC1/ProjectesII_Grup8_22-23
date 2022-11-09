@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 6
-  Target: {fileID: 27149512573143902, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
+  Target: {fileID: 0}
   particles: {fileID: 3934082505798368739, guid: f1a3c6424ed681e4abdfc0fdbbf13e39, type: 3}
   Gun: {fileID: 726880447222749748}
   bullet: {fileID: 8016540670365171682, guid: 54fa37be4c907cc458a69edeefbdccee, type: 3}
@@ -150,7 +150,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5441422770562737927}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
