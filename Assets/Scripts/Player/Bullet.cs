@@ -10,8 +10,6 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     public float lifeTime;
 
-
-
     private void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -31,10 +29,10 @@ public class Bullet : MonoBehaviour
         if (objCollided.CompareTag("Enemy"))
         {
             SwapGameObject(objCollided);
-            AudioManager.instance.pBulletEnemyCollisionSFX();
+            AudioManager.instance.PBulletEnemyCollisionSFX();
         }
         else
-            AudioManager.instance.pBulletWallCollisionSFX();
+            AudioManager.instance.PBulletWallCollisionSFX();
         Destroy(gameObject);
     }
 

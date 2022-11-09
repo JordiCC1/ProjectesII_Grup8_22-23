@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
+    //
     public struct MovementInputs
     {
         public float walk;
