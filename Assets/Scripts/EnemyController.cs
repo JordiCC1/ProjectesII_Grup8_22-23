@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    
+
     public float Range;
     public Transform Target;
     bool Detected = false;
@@ -31,6 +33,8 @@ public class EnemyController : MonoBehaviour
         alphaM = Alarm.GetComponent<SpriteRenderer>().color;
         alphaZ.a = 0f;
         Alarm.GetComponent<SpriteRenderer>().color = alphaZ;
+       
+       
     }
 
     void Update()
@@ -70,6 +74,7 @@ public class EnemyController : MonoBehaviour
     }
     void Shoot()
     {
+        AudioManager.instance.EnemyShootSFX();
         GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);
         BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
     }
@@ -83,7 +88,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bullet")
         {
-            AudioManager.instance.EnemyDeathSFX();
+            AudioManager.instance.EnemyDeathSFX();           
             GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
             ParticleIns.GetComponent<ParticleSystem>().Play();
             Destroy(gameObject);
