@@ -32,6 +32,10 @@ namespace Player
                     FinishBulletTime(isActive);
                 }
             }
+            else
+            {
+                FinishBulletTime(isActive);
+            }
         }
 
     }
