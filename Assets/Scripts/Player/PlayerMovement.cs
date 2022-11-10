@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Player
 {
-    //
     public struct MovementInputs
     {
         public float walk;
@@ -28,12 +27,15 @@ namespace Player
             boxCol = GetComponent<BoxCollider2D>();
             startGravity = rb.gravityScale;
             startDrag = rb.drag;
+            wasGrounded = true;
         }
         public void UpdateMovement(MovementInputs inputs, bool _isBulletTimeActive)
         {
             Walk(inputs);
             Jump(inputs);
             WallJump(inputs);
+
+            Landing();
 
             bulletTimeActive = _isBulletTimeActive;
         }
@@ -81,6 +83,15 @@ namespace Player
             colRight = Physics2D.Raycast(transform.position, Vector3.right, boxCol.bounds.extents.y + rayLength, groundLayer);
             colLeft = Physics2D.Raycast(transform.position, -Vector3.right, boxCol.bounds.extents.y + rayLength, groundLayer);
         }
+
+        //private void OnCollisionEnter2D(Collision2D collision)
+        //{
+        //    if (collision.gameObject.CompareTag("Bullet"))
+        //    {
+        //        AudioManager.instance.PlayerDeathSFX();
+        //        Destroy(gameObject);
+        //    }
+        //}
 
         #endregion
 
@@ -197,6 +208,26 @@ namespace Player
                 movementForce *= airControl;
             }
             rb.AddForce(movementForce, ForceMode2D.Force);
+        }
+
+        #endregion
+
+        #region SFX
+
+        private bool wasGrounded;
+
+        private void Landing()
+        {
+            if (!isGrounded)
+            {
+                wasGrounded = false;
+            }
+            else if (isGrounded && !wasGrounded)
+            {
+                AudioManager.instance.LandingSFX();
+                wasGrounded = true;
+            }
+            
         }
 
         #endregion

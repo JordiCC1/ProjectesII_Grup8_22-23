@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    //AudioManager.instance.EnemyDeathSFX();
-
     public float Range;
     public Transform Target;
     bool Detected = false;
@@ -81,14 +79,15 @@ public class EnemyController : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, Range);
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bullet")
-    //    {
-    //        GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
-    //        ParticleIns.GetComponent<ParticleSystem>().Play();
-    //        Destroy(gameObject);
-    //    }
-    //}
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bullet")
+        {
+            AudioManager.instance.EnemyDeathSFX();
+            GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
+            ParticleIns.GetComponent<ParticleSystem>().Play();
+            Destroy(gameObject);
+        }
+    }
 }
 

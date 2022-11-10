@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Player
 {
-    //AudioManager.instance.PlayerDeathSFX();
     //AudioManager.instance.LandingSFX();
 
     [RequireComponent(typeof(Rigidbody2D))]
