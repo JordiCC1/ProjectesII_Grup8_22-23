@@ -18,7 +18,7 @@ namespace Player
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private BulletTime bt;
         [SerializeField] private ParticleSystem particles;
-
+        
         [SerializeField] private LayerMask groundLayer;
 
 
@@ -84,14 +84,14 @@ namespace Player
             colLeft = Physics2D.Raycast(transform.position, -Vector3.right, boxCol.bounds.extents.y + rayLength, groundLayer);
         }
 
-        //private void OnCollisionEnter2D(Collision2D collision)
-        //{
-        //    if (collision.gameObject.CompareTag("Bullet"))
-        //    {
-        //        AudioManager.instance.PlayerDeathSFX();
-        //        Destroy(gameObject);
-        //    }
-        //}
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Bullet"))
+            {                
+                AudioManager.instance.PlayerDeathSFX();
+                Destroy(gameObject);
+            }
+        }
 
         #endregion
 
@@ -223,7 +223,7 @@ namespace Player
                 wasGrounded = false;
             }
             else if (isGrounded && !wasGrounded)
-            {
+            {                
                 AudioManager.instance.LandingSFX();
                 wasGrounded = true;
             }

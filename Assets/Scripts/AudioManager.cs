@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip landingSFX;
     [SerializeField] AudioClip enemyDeathSFX;
     [SerializeField] AudioClip playerDeathSFX;
+    [SerializeField] AudioClip enemyShoot;
 
 
     private void Awake()
@@ -49,5 +50,9 @@ public class AudioManager : MonoBehaviour
     public void PlayerDeathSFX()
     {
         audioSource.PlayOneShot(playerDeathSFX);
+    }
+    public void EnemyShootSFX()
+    {        
+        audioSource.PlayOneShot(enemyShoot,0.2f);        
     }
 }
