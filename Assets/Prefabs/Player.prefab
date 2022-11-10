@@ -173,8 +173,8 @@ MonoBehaviour:
   rayLength: 0.05
   colUp: 0
   maxSpeed: 10000
-  airControl: 0.05
-  jumpForce: 25
+  airControl: 0.15
+  jumpForce: 30
   isAirDrag: 1
   wallDrag: 20
   jumpBuffer: 0.15
