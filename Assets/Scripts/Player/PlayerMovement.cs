@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -89,7 +90,9 @@ namespace Player
             if (collision.gameObject.CompareTag("Bullet"))
             {                
                 AudioManager.instance.PlayerDeathSFX();
-                Destroy(gameObject);
+                Destroy(gameObject);                
+                SceneManager.LoadScene(0);
+                //StartCoroutine(WaitAndDie());
             }
         }
 
@@ -230,6 +233,14 @@ namespace Player
             
         }
 
+        #endregion
+
+        #region Death
+        IEnumerator WaitAndDie()
+        {
+            yield return new WaitForSeconds(2);
+            SceneManager.LoadScene(0);
+        }
         #endregion
     }
 }
