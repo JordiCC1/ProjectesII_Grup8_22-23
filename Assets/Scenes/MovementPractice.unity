@@ -2022,20 +2022,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: white block
       objectReference: {fileID: 0}
-    - target: {fileID: 27149512573143973, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 3939820252754042392, guid: a6cfae6f65e16844687b66c14e05c2a8, type: 3}
-    - target: {fileID: 27149512573143973, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
-      propertyPath: bulletTransform
-      value: 
-      objectReference: {fileID: 1900540751}
-    - target: {fileID: 8497246183552514453, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 27149512573143973, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
 --- !u!1001 &1381747754
 PrefabInstance:
@@ -2472,11 +2459,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1900540751 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7569515720698804833, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
-  m_PrefabInstance: {fileID: 1029481495}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1999009994
 GameObject:
   m_ObjectHideFlags: 0
