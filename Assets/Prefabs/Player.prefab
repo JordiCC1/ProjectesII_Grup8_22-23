@@ -170,8 +170,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 2048
-  rayLength: 0.05
+  rayLength: 0.01
   colUp: 0
+  colDown: 0
   maxSpeed: 10000
   airControl: 0.15
   jumpForce: 30
