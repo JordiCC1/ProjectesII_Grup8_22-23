@@ -153,7 +153,7 @@ namespace Player
 
         [Header("Bullet Time")]
         private bool bulletTimeActive;
-        [SerializeField] private float bulletTimeControl = 10f;
+        [SerializeField] private float bulletTimeControl = 1.5f;
 
         [Header("Wall Jump")]
         [SerializeField] private float forceOfSideJump = 0.5f;
@@ -221,8 +221,8 @@ namespace Player
             //GROUND MOVEMENT
             Vector2 movementForce = Vector2.right * movementScale * maxSpeed * Time.fixedDeltaTime;
             if (bulletTimeActive)
-                rb.drag *= bulletTimeControl;
-            if (!colDown)
+                movementForce *= bulletTimeControl;
+            else if (!colDown)
                 movementForce *= airControl;
 
 
