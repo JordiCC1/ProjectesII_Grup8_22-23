@@ -100,17 +100,6 @@ namespace Player
                 -Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer);
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.CompareTag("Bullet"))
-            {
-                AudioManager.instance.PlayerDeathSFX();
-                Destroy(gameObject);
-                SceneManager.LoadScene(0);
-                //StartCoroutine(WaitAndDie());
-            }
-        }
-
         #endregion
 
         #region Walk

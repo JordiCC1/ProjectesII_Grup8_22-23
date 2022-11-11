@@ -10,6 +10,9 @@ public class EnemyController : MonoBehaviour
     public Transform Target;
     bool Detected = false;
 
+    //Time to wait to shoot the enemies
+    public float waitTime;
+
     public GameObject particles;
 
     Vector2 Direction;
@@ -17,7 +20,8 @@ public class EnemyController : MonoBehaviour
     public GameObject bullet;
 
     //Shows when the player is visible
-    public GameObject Alarm;
+    public GameObject Alarm1;
+    public GameObject Alarm2;
     //Alpha Zero
     Color alphaZ;
     //Max alpha
@@ -30,11 +34,11 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        alphaM = Alarm.GetComponent<SpriteRenderer>().color;
+        alphaM = Alarm1.GetComponent<SpriteRenderer>().color;
         alphaZ.a = 0f;
-        Alarm.GetComponent<SpriteRenderer>().color = alphaZ;
-       
-       
+        Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
+        Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
+
     }
 
     void Update()
@@ -49,8 +53,9 @@ public class EnemyController : MonoBehaviour
             {
                 if (Detected == false)
                 {
-                    Detected = true;
-                    Alarm.GetComponent<SpriteRenderer>().color = alphaM;
+                    Alarm1.GetComponent<SpriteRenderer>().color = alphaM;
+                    Alarm2.GetComponent<SpriteRenderer>().color = alphaM;
+                    StartCoroutine("PlayerDetected");
                 }
             }
             else
@@ -58,7 +63,8 @@ public class EnemyController : MonoBehaviour
                 if (Detected == true)
                 {
                     Detected = false;
-                    Alarm.GetComponent<SpriteRenderer>().color = alphaZ;
+                    Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
+                    Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
                 }
             }
         }
@@ -94,5 +100,13 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    IEnumerator PlayerDetected()
+    {
+        yield return new WaitForSeconds(waitTime);
+        Detected = true;
+    }
 }
+
+
 
