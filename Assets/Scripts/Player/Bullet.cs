@@ -37,7 +37,6 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-
     public void SwapGameObject(GameObject Objective)
     {
         Vector3 lastPos = this.gameObject.transform.parent.position;

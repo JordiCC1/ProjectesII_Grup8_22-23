@@ -17,7 +17,8 @@ namespace Player
         [SerializeField] private PlayerMovement movement;
         [SerializeField] private BulletTime bt;
 
-        public MovementInputs inputs;
+        public MovementInputs moveInputs;
+        public BulletTimeInputs btInputs;
 
         public bool isInvincible = false;
 
@@ -36,8 +37,8 @@ namespace Player
         void Update()
         {
             TakeInputs();
-            movement.UpdateMovement(inputs, isBulletTimeActive);            
-            bt.UpdateBulletTime(Input.GetMouseButtonDown(0), isBulletTimeActive, Input.GetMouseButtonUp(0), !movement.isGrounded);
+            movement.UpdateMovement(moveInputs, isBulletTimeActive);
+            bt.UpdateBulletTime(btInputs, isBulletTimeActive, !movement.isGrounded);
             UpdateInvincible();
         }
 
@@ -45,17 +46,25 @@ namespace Player
 
         private void TakeInputs()
         {
-            inputs = new MovementInputs
+            moveInputs = new MovementInputs
             {
                 walk = Input.GetAxisRaw("Horizontal"), //Raw makes it more snappy
                 JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
                 JumpUp = UnityEngine.Input.GetButtonUp("Jump")
             };
-            if (inputs.JumpDown == true)
-            {
+            if (moveInputs.JumpDown == true)
                 movement.lastJumpInput = Time.time;
-            }
 
+
+            btInputs = new BulletTimeInputs
+            {
+                BulletTimeDown = Input.GetMouseButtonDown(0),
+                BulletTimeUp = Input.GetMouseButtonUp(0)
+            };
+            if (btInputs.BulletTimeDown == true)
+                isBulletTimeActive = true;
+            if (btInputs.BulletTimeUp == true)
+                isBulletTimeActive = false;
         }
 
         #endregion
@@ -83,7 +92,7 @@ namespace Player
                 StartCoroutine("ReturnToNormalState");
             }
         }
-        IEnumerator ReturnToNormalState() 
+        IEnumerator ReturnToNormalState()
         {
             yield return new WaitForSeconds(invincibilityTime);
             isInvincible = false;

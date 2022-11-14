@@ -107,7 +107,6 @@ namespace Player
         private float movementScale;
         [SerializeField] private float maxSpeed = 120f;
         [SerializeField] private float airControl = 0.5f;
-        private bool isWalking;
 
         private void Walk(MovementInputs input)
         {
@@ -123,6 +122,10 @@ namespace Player
         private float startDrag;
         [SerializeField] private float isAirDrag = 5f;
         [SerializeField] private float wallDrag = 20f;
+
+        [Header("Bullet Time")]
+        private bool bulletTimeActive;
+        [SerializeField] private float bulletTimeControl = 1.5f;
 
         [Header("Buffer and Coyote Time")]
         [SerializeField] private float jumpBuffer = 0.1f;
@@ -140,12 +143,9 @@ namespace Player
         private float startGravity;
         [SerializeField] private float apexGravity = 3f;
 
-        [Header("Bullet Time")]
-        private bool bulletTimeActive;
-        [SerializeField] private float bulletTimeControl = 1.5f;
-
         [Header("Wall Jump")]
-        [SerializeField] private float forceOfSideJump = 0.5f;
+        [SerializeField] private float forceOfSideJumpSide = 0.5f;
+        [SerializeField] private float forceOfSideJumpUp = 2.0f;
         [SerializeField] private bool canWallJump;
         private bool isHanging => (colLeft && !colDown) || (colRight && !colDown);
 
@@ -185,11 +185,11 @@ namespace Player
 
             if (canWallJump)
             {
-                rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+                rb.AddForce(jumpForce * Vector2.up * forceOfSideJumpUp, ForceMode2D.Impulse);
                 if (colLeft)
-                    rb.AddForce(jumpForce * Vector2.right * forceOfSideJump, ForceMode2D.Impulse);
+                    rb.AddForce(jumpForce * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
                 if (colRight)
-                    rb.AddForce(jumpForce * -Vector2.right * forceOfSideJump, ForceMode2D.Impulse);
+                    rb.AddForce(jumpForce * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
 
                 canWallJump = false;
             }
