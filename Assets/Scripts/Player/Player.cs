@@ -19,10 +19,10 @@ namespace Player
 
         public MovementInputs inputs;
 
+        [Header("Invincibility")]
         public bool isInvincible = false;
 
-
-        public bool isBulletTimeActive;
+        private bool isBulletTimeActive;
 
 
         private void Start()
