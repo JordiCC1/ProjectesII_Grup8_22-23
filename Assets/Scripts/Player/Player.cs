@@ -9,12 +9,12 @@ namespace Player
 
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
-    [RequireComponent(typeof(PlayerMovement))]
+    [RequireComponent(typeof(Movement))]
     [RequireComponent(typeof(BulletTime))]
 
     public class Player : MonoBehaviour
     {
-        [SerializeField] private PlayerMovement movement;
+        [SerializeField] private Movement movement;
         [SerializeField] private BulletTime bt;
 
         public MovementInputs moveInputs;
@@ -28,7 +28,7 @@ namespace Player
 
         private void Start()
         {
-            movement = GetComponent<PlayerMovement>();
+            movement = GetComponent<Movement>();
             bt = GetComponent<BulletTime>();
 
             isBulletTimeActive = false;

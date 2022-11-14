@@ -12,7 +12,7 @@ namespace Player
         public bool JumpUp;
     }
 
-    public class PlayerMovement : MonoBehaviour
+    public class Movement : MonoBehaviour
     {
         [Header("Physics")]
         private BoxCollider2D boxCol;
