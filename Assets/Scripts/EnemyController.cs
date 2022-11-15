@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
 
 public class EnemyController : MonoBehaviour
 {
@@ -28,6 +29,10 @@ public class EnemyController : MonoBehaviour
     //Max alpha
     Color alphaM;
 
+    private Vector3 originalScale;
+    private Vector3 scaleTo;
+
+
     public float FireRate;
     float nextTimeToFire = 0;
     public Transform Shootpoint;
@@ -40,6 +45,8 @@ public class EnemyController : MonoBehaviour
         Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
         Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
 
+        originalScale = transform.localScale;
+        scaleTo = originalScale * 1.25f;
     }
 
     void Update()
@@ -57,6 +64,7 @@ public class EnemyController : MonoBehaviour
                     Alarm1.GetComponent<SpriteRenderer>().color = alphaM;
                     Alarm2.GetComponent<SpriteRenderer>().color = alphaM;
                     StartCoroutine("PlayerDetected");
+                    
                 }
             }
             else
@@ -71,9 +79,11 @@ public class EnemyController : MonoBehaviour
         }
         if (Detected)
         {
+            
             Gun.transform.up = Direction;
+            transform.DOScale(scaleTo, 0.5f);
             if (Time.time > nextTimeToFire)
-            {
+            {                
                 nextTimeToFire = Time.time + 1 / FireRate;
                 Shoot();
             }
@@ -81,9 +91,12 @@ public class EnemyController : MonoBehaviour
     }
     void Shoot()
     {
+        transform.DOScale(originalScale, 0.4f);
+        CinemachineShake.Instance.ShakeCamera(5f, .1f);
         AudioManager.instance.EnemyShootSFX();
         GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);
         BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
+        
     }
 
     private void OnDrawGizmosSelected()
