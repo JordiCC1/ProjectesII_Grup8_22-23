@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class EnemyController : MonoBehaviour
 {
@@ -97,7 +98,9 @@ public class EnemyController : MonoBehaviour
             AudioManager.instance.EnemyDeathSFX();           
             GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
             ParticleIns.GetComponent<ParticleSystem>().Play();
+            CinemachineShake.Instance.ShakeCamera(5f, .1f);
             Destroy(gameObject);
+            
         }
     }
 
