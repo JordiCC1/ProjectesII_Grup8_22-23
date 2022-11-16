@@ -43,8 +43,6 @@ public class Bullet : MonoBehaviour
         this.gameObject.transform.parent.position = Objective.transform.position;
         Objective.transform.position = lastPos;
         this.gameObject.GetComponentInParent<Player.Player>().isInvincible=true;
-        Debug.Log("Invicible");
-        StartCoroutine("GetReturnToNormalState");
     }
 }
 

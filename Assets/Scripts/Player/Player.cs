@@ -20,10 +20,9 @@ namespace Player
         public MovementInputs moveInputs;
         public BulletTimeInputs btInputs;
 
-        public bool isInvincible = false;
+        [HideInInspector]public bool isInvincible = false;
 
-
-        public bool isBulletTimeActive;
+        [HideInInspector] public bool isBulletTimeActive;
 
 
         private void Start()
@@ -59,14 +58,15 @@ namespace Player
             btInputs = new BulletTimeInputs
             {
                 BulletTimeDown = Input.GetMouseButtonDown(0),
-                BulletTimeUp = Input.GetMouseButtonUp(0)
+                BulletTimeUp = Input.GetMouseButtonUp(0),
+
             };
             if (btInputs.BulletTimeDown == true)
                 isBulletTimeActive = true;
             if (btInputs.BulletTimeUp == true)
                 isBulletTimeActive = false;
         }
-
+        
         #endregion
 
         #region Collisions
@@ -99,5 +99,6 @@ namespace Player
             Debug.Log("not Invicible");
         }
         #endregion
+
     }
 }

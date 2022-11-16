@@ -7,40 +7,49 @@ namespace Player
     {
         public bool BulletTimeDown;
         public bool BulletTimeUp;
+        public bool lastState;
     }
 
     public class BulletTime : MonoBehaviour
     {
         public float slowdownFactor = 0.25f;
-        //public bool isActive { get; private set; }
 
         void BulletTimeActive()
         {
             Time.timeScale = slowdownFactor;
+            
         }
 
         void FinishBulletTime()
         {
             Time.timeScale = 1.0f;
+           
         }
 
         public void UpdateBulletTime(BulletTimeInputs inputs, bool isActive, bool canBT)
         {
+            
             if (canBT)
             {
-                if (inputs.BulletTimeDown)
+                if (StaminaController.instance.stamina > 0)
                 {
-                    BulletTimeActive();
-                }
-                else if (inputs.BulletTimeUp)
-                {
-                    this.gameObject.GetComponentInChildren<PlayerGun>().Shoot();
-                    FinishBulletTime();
+                    if (inputs.BulletTimeDown)
+                    {
+                        BulletTimeActive();
+                        StaminaController.instance.UseStamina();
+                    }
+                    else if (inputs.BulletTimeUp)
+                    {
+                        this.gameObject.GetComponentInChildren<PlayerGun>().Shoot();
+                        FinishBulletTime();
+                        StaminaController.instance.StopStamina();
+                    }
                 }
             }
             else
             {
                 FinishBulletTime();
+                StaminaController.instance.StopStamina();
             }
         }
 
