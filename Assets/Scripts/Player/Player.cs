@@ -37,7 +37,7 @@ namespace Player
         {
             TakeInputs();
             movement.UpdateMovement(moveInputs, isBulletTimeActive);
-            bt.UpdateBulletTime(btInputs, isBulletTimeActive, !movement.isGrounded);
+            bt.UpdateBulletTime(btInputs, CanBT());
             UpdateInvincible();
         }
 
@@ -67,6 +67,14 @@ namespace Player
                 isBulletTimeActive = false;
         }
         
+        private bool CanBT()
+        {
+            if (!movement.isGrounded && StaminaController.instance.stamina >= 0)
+                return true;
+            else
+                return false;
+        }
+
         #endregion
 
         #region Collisions

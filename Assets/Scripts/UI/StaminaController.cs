@@ -8,12 +8,11 @@ namespace Player {
     {
         [Header("Stamina Main")]
         [SerializeField] private float maxStamina = 100.0f;
-        [SerializeField] public float stamina { get; private set; }
+        [field:SerializeField] public float stamina { get; private set; }
         private bool coroutineActive;
 
-        [Header("Stamian Regen")]
+        [Header("Stamian Drain")]
         [Range(0, 50)] [SerializeField] private float staminaDrain = 2f;
-        [Range(0, 1)] [SerializeField] private float staminaWait = 0.5f;
 
         [Header("Stamina UI")]
         public Slider staminaBar;
@@ -28,13 +27,13 @@ namespace Player {
         private void Start()
         {
             stamina = maxStamina;
-            staminaBar.maxValue = maxStamina;
-            staminaBar.value = maxStamina;
+            staminaBar.maxValue = maxStamina-1;
+            staminaBar.value = maxStamina-1;
         }
 
         private void Update()
         {
-            staminaBar.value = stamina;
+            staminaBar.value = stamina-1;
         }
 
         public void UseStamina()
@@ -48,9 +47,9 @@ namespace Player {
 
         private IEnumerator DrainStamina()
         {
-            while (stamina>=0)
+            while (stamina>=0.0f)
             {
-                if (stamina - staminaDrain >= 0)
+                if (stamina - staminaDrain >= 0.0f)
                 {
                     stamina -= staminaDrain*Time.deltaTime;
                     Debug.Log("--");

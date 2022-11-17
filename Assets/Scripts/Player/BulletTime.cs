@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace Player
 {
+
     public struct BulletTimeInputs
     {
         public bool BulletTimeDown;
@@ -13,25 +14,26 @@ namespace Player
     public class BulletTime : MonoBehaviour
     {
         public float slowdownFactor = 0.25f;
+        private bool isActive=false;
 
         void BulletTimeActive()
         {
             Time.timeScale = slowdownFactor;
-            
+            isActive = true;
         }
 
         void FinishBulletTime()
         {
             Time.timeScale = 1.0f;
-           
+            isActive = false;
         }
 
-        public void UpdateBulletTime(BulletTimeInputs inputs, bool isActive, bool canBT)
+        public void UpdateBulletTime(BulletTimeInputs inputs, bool canBT)
         {
-            
+
             if (canBT)
             {
-                if (StaminaController.instance.stamina > 0)
+                if (StaminaController.instance.stamina >= 1.0f)
                 {
                     if (inputs.BulletTimeDown)
                     {
@@ -44,6 +46,11 @@ namespace Player
                         FinishBulletTime();
                         StaminaController.instance.StopStamina();
                     }
+                }
+                else
+                {
+                    FinishBulletTime();
+                    StaminaController.instance.StopStamina();
                 }
             }
             else
