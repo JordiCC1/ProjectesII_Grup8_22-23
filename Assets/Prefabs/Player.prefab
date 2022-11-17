@@ -185,8 +185,9 @@ MonoBehaviour:
   coyoteTimeThreshold: 0.2
   apexThreshold: 3
   apexGravity: 3
-  bulletTimeControl: 200
-  forceOfSideJump: 1
+  bulletTimeControl: 0.9
+  forceOfSideJumpSide: 0.5
+  forceOfSideJumpUp: 0.5
   canWallJump: 0
 --- !u!114 &27149512573143974
 MonoBehaviour:

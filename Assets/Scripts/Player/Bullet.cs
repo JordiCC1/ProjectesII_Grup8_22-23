@@ -37,14 +37,12 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-
     public void SwapGameObject(GameObject Objective)
     {
         Vector3 lastPos = this.gameObject.transform.parent.position;
         this.gameObject.transform.parent.position = Objective.transform.position;
         Objective.transform.position = lastPos;
         this.gameObject.GetComponentInParent<Player.Player>().isInvincible=true;
-        Debug.Log("Invicible");      
     }
 }
 

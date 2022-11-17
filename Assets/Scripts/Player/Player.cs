@@ -9,25 +9,25 @@ namespace Player
 
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
-    [RequireComponent(typeof(PlayerMovement))]
+    [RequireComponent(typeof(Movement))]
     [RequireComponent(typeof(BulletTime))]
 
     public class Player : MonoBehaviour
     {
-        [SerializeField] private PlayerMovement movement;
+        [SerializeField] private Movement movement;
         [SerializeField] private BulletTime bt;
 
-        public MovementInputs inputs;
+        public MovementInputs moveInputs;
+        public BulletTimeInputs btInputs;
 
-        public bool isInvincible = false;
+        [HideInInspector]public bool isInvincible = false;
 
-
-        public bool isBulletTimeActive;
+        [HideInInspector] public bool isBulletTimeActive;
 
 
         private void Start()
         {
-            movement = GetComponent<PlayerMovement>();
+            movement = GetComponent<Movement>();
             bt = GetComponent<BulletTime>();
 
             isBulletTimeActive = false;
@@ -36,8 +36,8 @@ namespace Player
         void Update()
         {
             TakeInputs();
-            movement.UpdateMovement(inputs, isBulletTimeActive);            
-            bt.UpdateBulletTime(Input.GetMouseButtonDown(0), isBulletTimeActive, Input.GetMouseButtonUp(0), !movement.isGrounded);
+            movement.UpdateMovement(moveInputs, isBulletTimeActive);
+            bt.UpdateBulletTime(btInputs, CanBT());
             UpdateInvincible();
         }
 
@@ -45,17 +45,34 @@ namespace Player
 
         private void TakeInputs()
         {
-            inputs = new MovementInputs
+            moveInputs = new MovementInputs
             {
                 walk = Input.GetAxisRaw("Horizontal"), //Raw makes it more snappy
                 JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
                 JumpUp = UnityEngine.Input.GetButtonUp("Jump")
             };
-            if (inputs.JumpDown == true)
-            {
+            if (moveInputs.JumpDown == true)
                 movement.lastJumpInput = Time.time;
-            }
 
+
+            btInputs = new BulletTimeInputs
+            {
+                BulletTimeDown = Input.GetMouseButtonDown(0),
+                BulletTimeUp = Input.GetMouseButtonUp(0),
+
+            };
+            if (btInputs.BulletTimeDown == true)
+                isBulletTimeActive = true;
+            if (btInputs.BulletTimeUp == true)
+                isBulletTimeActive = false;
+        }
+        
+        private bool CanBT()
+        {
+            if (!movement.isGrounded && StaminaController.instance.stamina >= 0)
+                return true;
+            else
+                return false;
         }
 
         #endregion
@@ -83,12 +100,13 @@ namespace Player
                 StartCoroutine("ReturnToNormalState");
             }
         }
-        IEnumerator ReturnToNormalState() 
+        IEnumerator ReturnToNormalState()
         {
             yield return new WaitForSeconds(invincibilityTime);
             isInvincible = false;
             Debug.Log("not Invicible");
         }
         #endregion
+
     }
 }
