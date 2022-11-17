@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 using DG.Tweening;
 
 public class EnemyController : MonoBehaviour
@@ -27,11 +26,10 @@ public class EnemyController : MonoBehaviour
     //Alpha Zero
     Color alphaZ;
     //Max alpha
-    Color alphaM;
+    Color alphaM;   
 
     private Vector3 originalScale;
     private Vector3 scaleTo;
-
 
     public float FireRate;
     float nextTimeToFire = 0;
@@ -46,7 +44,7 @@ public class EnemyController : MonoBehaviour
         Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
 
         originalScale = transform.localScale;
-        scaleTo = originalScale * 1.25f;
+        scaleTo = originalScale * 1.35f;
     }
 
     void Update()
@@ -62,10 +60,8 @@ public class EnemyController : MonoBehaviour
                 if (Detected == false)
                 {
                     Alarm1.GetComponent<SpriteRenderer>().color = alphaM;
-                    Alarm2.GetComponent<SpriteRenderer>().color = alphaM;
-                    //StartCoroutine("PlayerDetected");
+                    Alarm2.GetComponent<SpriteRenderer>().color = alphaM;                    
                     Detected = true;
-
                 }
             }
             else
@@ -84,10 +80,8 @@ public class EnemyController : MonoBehaviour
             Gun.transform.up = Direction;
             if (Time.time > nextTimeToFire)
             {                
-                nextTimeToFire = Time.time + 1 / FireRate;
-                //    Shoot();
+                nextTimeToFire = Time.time + 1 / FireRate;                
                 StartCoroutine("WaitToShoot");
-
             }
         }
     }    
@@ -106,13 +100,11 @@ public class EnemyController : MonoBehaviour
     }
 
     void Shoot()
-    {
-        
+    {        
         CinemachineShake.Instance.ShakeCamera(5f, .1f);
         AudioManager.instance.EnemyShootSFX();
         GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);
         BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -124,7 +116,6 @@ public class EnemyController : MonoBehaviour
             ParticleIns.GetComponent<ParticleSystem>().Play();
             CinemachineShake.Instance.ShakeCamera(5f, .1f);
             Destroy(gameObject);
-
         }
     }
 }

@@ -24,10 +24,12 @@ namespace Player
             {
                 if (enterInput)
                 {
+                    CinemachineShake.Instance.ShakeCamera(7f, 3f);
                     BulletTimeActive(isActive);
                 }
                 else if (exitInput)
                 {
+                    CinemachineShake.Instance.ShakeCamera(5f, .1f);
                     this.gameObject.GetComponentInChildren<PlayerGun>().Shoot();
                     FinishBulletTime(isActive);
                 }
