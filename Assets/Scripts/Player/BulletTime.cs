@@ -14,7 +14,14 @@ namespace Player
     public class BulletTime : MonoBehaviour
     {
         public float slowdownFactor = 0.25f;
-        private bool isActive=false;
+        public bool isActive=false;
+
+        public static BulletTime instance;
+
+        private void Awake()
+        {
+            instance = this;
+        }
 
         void BulletTimeActive()
         {
@@ -37,7 +44,7 @@ namespace Player
             }
             if (canBT)
             {
-                if (StaminaController.instance.stamina >= 1.0f)
+                if (StaminaController.instance.stamina >= 0.0f)
                 {
                     if (inputs.BulletTimeDown)
                     {

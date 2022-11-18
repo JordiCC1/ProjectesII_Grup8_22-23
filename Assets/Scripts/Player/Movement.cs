@@ -210,7 +210,7 @@ namespace Player
 
             //GROUND MOVEMENT
             Vector2 movementForce = Vector2.right * movementScale * maxSpeed * Time.fixedDeltaTime;
-            if (bulletTimeActive)
+            if (BulletTime.instance.isActive)
                 movementForce *= bulletTimeControl;
             else if (!colDown)
                 movementForce *= airControl;

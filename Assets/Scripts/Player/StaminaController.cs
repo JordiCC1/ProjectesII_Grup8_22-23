@@ -28,13 +28,14 @@ namespace Player {
         {
             stamina = maxStamina;
             staminaBar.maxValue = maxStamina-1;
-            staminaBar.value = maxStamina-1;
+            staminaBar.value = stamina;
         }
 
         private void Update()
         {
             staminaBar.value = stamina-1;
         }
+
         #region UseStamina
         public void UseStamina()
         {
@@ -65,6 +66,7 @@ namespace Player {
             Debug.Log("sTOP");
         }
         #endregion
+
         #region ResetStamina
         //Resets the stamina to max stamina
         public void ResetStamina()
