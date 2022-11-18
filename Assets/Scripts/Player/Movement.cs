@@ -57,15 +57,15 @@ namespace Player
         [SerializeField] private bool colLeft;
         public bool isGrounded =>
            Physics2D.Raycast(transform.position,
-               -Vector3.up, rayLength, groundLayer)
+               -Vector3.up, rayLength * 10, groundLayer)
            ||
            Physics2D.Raycast(new Vector3
                (transform.position.x, transform.position.y + boxCol.bounds.extents.y, transform.position.z),
-               -Vector3.up, rayLength, groundLayer)
+               -Vector3.up, rayLength * 10, groundLayer)
            ||
            Physics2D.Raycast(new Vector3
                (transform.position.x, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
-               -Vector3.up, rayLength, groundLayer);
+               -Vector3.up, rayLength * 10, groundLayer);
 
         private void CheckCollisions()
         {

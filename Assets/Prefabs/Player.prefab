@@ -173,7 +173,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 2048
-  rayLength: 0.15
+  rayLength: 0.02
   colUp: 0
   colRight: 0
   colDown: 0
