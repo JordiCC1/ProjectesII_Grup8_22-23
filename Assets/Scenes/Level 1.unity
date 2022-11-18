@@ -407,7 +407,6 @@ GameObject:
   m_Component:
   - component: {fileID: 318087110}
   - component: {fileID: 318087112}
-  - component: {fileID: 318087111}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -438,22 +437,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 470.4094, y: 106.768}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &318087111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 318087109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f695a396af99a145921fefe49616012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxStamina: 10
-  <stamina>k__BackingField: 0
-  staminaDrain: 1
-  staminaBar: {fileID: 318087112}
 --- !u!114 &318087112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27333,6 +27316,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 788760264}
   m_CullTransparentMesh: 1
+--- !u!1 &793001476 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 27149512573143903, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
+  m_PrefabInstance: {fileID: 2145972362}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &865895004
 GameObject:
   m_ObjectHideFlags: 0
@@ -29963,6 +29951,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 27149512573143902, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
   m_PrefabInstance: {fileID: 2145972362}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2112402456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793001476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f695a396af99a145921fefe49616012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStamina: 2
+  <stamina>k__BackingField: 0
+  staminaDrain: 2
+  staminaBar: {fileID: 318087112}
 --- !u!1 &2127972035
 GameObject:
   m_ObjectHideFlags: 0
@@ -30118,12 +30122,17 @@ PrefabInstance:
       propertyPath: bulletTransform
       value: 
       objectReference: {fileID: 1479236455}
+    - target: {fileID: 2255903284837805064, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
+      propertyPath: staminaBar
+      value: 
+      objectReference: {fileID: 318087112}
     - target: {fileID: 8497246183552514453, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 27149512573143973, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
+    - {fileID: 2255903284837805064, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
 --- !u!1001 &2950469610095907622
 PrefabInstance:
