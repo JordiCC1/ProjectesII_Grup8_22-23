@@ -14,7 +14,14 @@ namespace Player
     public class BulletTime : MonoBehaviour
     {
         public float slowdownFactor = 0.25f;
-        private bool isActive=false;
+        public bool isActive=false;
+
+        public static BulletTime instance;
+
+        private void Awake()
+        {
+            instance = this;
+        }
 
         void BulletTimeActive()
         {
@@ -26,14 +33,18 @@ namespace Player
         {
             Time.timeScale = 1.0f;
             isActive = false;
+            StaminaController.instance.ResetStamina();
         }
 
         public void UpdateBulletTime(BulletTimeInputs inputs, bool canBT)
         {
-
+            if (inputs.BulletTimeUp)
+            {
+                this.gameObject.GetComponentInChildren<PlayerGun>().Shoot();
+            }
             if (canBT)
             {
-                if (StaminaController.instance.stamina >= 1.0f)
+                if (StaminaController.instance.stamina >= 0.0f)
                 {
                     if (inputs.BulletTimeDown)
                     {
@@ -42,7 +53,6 @@ namespace Player
                     }
                     else if (inputs.BulletTimeUp)
                     {
-                        this.gameObject.GetComponentInChildren<PlayerGun>().Shoot();
                         FinishBulletTime();
                         StaminaController.instance.StopStamina();
                     }
