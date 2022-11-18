@@ -221,7 +221,7 @@ MonoBehaviour:
   maxStamina: 2
   <stamina>k__BackingField: 0
   staminaDrain: 1
-  staminaBar: {fileID: 0}
+  staminaBar: {fileID: 7609031435567466262, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
 --- !u!1 &6860530578194479861
 GameObject:
   m_ObjectHideFlags: 0
