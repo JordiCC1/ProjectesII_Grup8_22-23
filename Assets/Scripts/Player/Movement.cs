@@ -180,6 +180,7 @@ namespace Player
                 if (!colDown)
                     rb.velocity = Vector3.zero;
                 rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+                coyoteUsable = false;
                 shouldJump = false;
             }
 

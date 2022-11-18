@@ -61,10 +61,6 @@ namespace Player
                 BulletTimeUp = Input.GetMouseButtonUp(0),
 
             };
-            if (btInputs.BulletTimeDown == true)
-                isBulletTimeActive = true;
-            if (btInputs.BulletTimeUp == true)
-                isBulletTimeActive = false;
         }
         
         private bool CanBT()

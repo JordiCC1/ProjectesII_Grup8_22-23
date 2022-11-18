@@ -31,7 +31,10 @@ namespace Player
 
         public void UpdateBulletTime(BulletTimeInputs inputs, bool canBT)
         {
-
+            if (inputs.BulletTimeUp)
+            {
+                this.gameObject.GetComponentInChildren<PlayerGun>().Shoot();
+            }
             if (canBT)
             {
                 if (StaminaController.instance.stamina >= 1.0f)
@@ -43,7 +46,6 @@ namespace Player
                     }
                     else if (inputs.BulletTimeUp)
                     {
-                        this.gameObject.GetComponentInChildren<PlayerGun>().Shoot();
                         FinishBulletTime();
                         StaminaController.instance.StopStamina();
                     }
