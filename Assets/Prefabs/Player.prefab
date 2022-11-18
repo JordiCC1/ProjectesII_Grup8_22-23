@@ -190,7 +190,7 @@ MonoBehaviour:
   apexThreshold: 3
   apexGravity: 3
   forceOfSideJumpSide: 0.8
-  forceOfSideJumpUp: 1
+  forceOfSideJumpUp: 1.2
   canWallJump: 0
 --- !u!114 &27149512573143974
 MonoBehaviour:
