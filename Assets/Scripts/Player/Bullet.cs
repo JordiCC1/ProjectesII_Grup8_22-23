@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Bullet : MonoBehaviour
 {
     public float speed = 4.5f;
@@ -42,6 +43,8 @@ public class Bullet : MonoBehaviour
         Vector3 lastPos = this.gameObject.transform.parent.position;
         this.gameObject.transform.parent.position = Objective.transform.position;
         Objective.transform.position = lastPos;
+        this.gameObject.GetComponentInParent<Player.Player>().isInvincible=true;
+        Debug.Log("Invicible");      
     }
 }
 

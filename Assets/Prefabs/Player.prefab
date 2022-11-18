@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 27149512573143903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.044, y: 0.354, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 11f8fa7994738ff4089032829e8c592d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1c62fe3dc1050e48ae2ce23e009c033, type: 3}
   m_Color: {r: 0.4910135, g: 0.8396226, b: 0.33664113, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,18 +124,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.05}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.9}
+  m_Size: {x: 0.9, y: 1.8}
   m_EdgeRadius: 0
 --- !u!114 &27149512573143969
 MonoBehaviour:
@@ -151,7 +151,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 27149512573143968}
   bt: {fileID: 27149512573143974}
+  isInvincible: 0
   isBulletTimeActive: 0
+  invincibilityTime: 0.5
 --- !u!114 &27149512573143968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,8 +172,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 2048
-  rayLength: 0.05
+  rayLength: 0.01
   colUp: 0
+  colDown: 0
   maxSpeed: 10000
   airControl: 0.15
   jumpForce: 30
@@ -182,7 +185,7 @@ MonoBehaviour:
   coyoteTimeThreshold: 0.2
   apexThreshold: 3
   apexGravity: 3
-  bulletTimeDrag: 20
+  bulletTimeControl: 200
   forceOfSideJump: 1
   canWallJump: 0
 --- !u!114 &27149512573143974
@@ -273,7 +276,7 @@ Transform:
   m_GameObject: {fileID: 8059106899634304723}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8497246183552514453}

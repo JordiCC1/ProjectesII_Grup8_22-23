@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -18,6 +19,8 @@ namespace Player
 
         public MovementInputs inputs;
 
+        public bool isInvincible = false;
+
 
         public bool isBulletTimeActive;
 
@@ -33,8 +36,9 @@ namespace Player
         void Update()
         {
             TakeInputs();
-            movement.UpdateMovement(inputs, isBulletTimeActive);
-            bt.UpdateBulletTime(Input.GetMouseButtonDown(0), isBulletTimeActive,Input.GetMouseButtonUp(0), !movement.isGrounded);
+            movement.UpdateMovement(inputs, isBulletTimeActive);            
+            bt.UpdateBulletTime(Input.GetMouseButtonDown(0), isBulletTimeActive, Input.GetMouseButtonUp(0), !movement.isGrounded);
+            UpdateInvincible();
         }
 
         #region Inputs
@@ -54,6 +58,37 @@ namespace Player
 
         }
 
+        #endregion
+
+        #region Collisions
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Bullet") && !isInvincible)
+            {
+                AudioManager.instance.PlayerDeathSFX();
+                Destroy(gameObject);
+                SceneManager.LoadScene(0);
+                //StartCoroutine(WaitAndDie());
+            }
+        }
+
+        #endregion
+
+        #region Invincibility
+        public float invincibilityTime = 0.0f;
+        void UpdateInvincible()
+        {
+            if (isInvincible)
+            {
+                StartCoroutine("ReturnToNormalState");
+            }
+        }
+        IEnumerator ReturnToNormalState() 
+        {
+            yield return new WaitForSeconds(invincibilityTime);
+            isInvincible = false;
+            Debug.Log("not Invicible");
+        }
         #endregion
     }
 }

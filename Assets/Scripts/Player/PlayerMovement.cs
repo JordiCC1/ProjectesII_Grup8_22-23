@@ -19,7 +19,7 @@ namespace Player
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private BulletTime bt;
         [SerializeField] private ParticleSystem particles;
-        
+
         [SerializeField] private LayerMask groundLayer;
 
 
@@ -53,17 +53,18 @@ namespace Player
 
         [SerializeField] private bool colUp;
         private bool colRight;
-        private bool colDown;
+        [SerializeField] private bool colDown;
         private bool colLeft;
         public bool isGrounded =>
-           Physics2D.Raycast(transform.position, -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
-           ||
-           Physics2D.Raycast(new Vector3
-               (transform.position.x + boxCol.bounds.extents.x, transform.position.y, transform.position.z),
+           Physics2D.Raycast(transform.position,
                -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
            ||
            Physics2D.Raycast(new Vector3
-               (transform.position.x - boxCol.bounds.extents.x, transform.position.y, transform.position.z),
+               (transform.position.x, transform.position.y + boxCol.bounds.extents.y, transform.position.z),
+               -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
+           ||
+           Physics2D.Raycast(new Vector3
+               (transform.position.x, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
                -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
 
         private void CheckCollisions()
@@ -80,20 +81,23 @@ namespace Player
 
         private void CheckRays()
         {
-            colUp = Physics2D.Raycast(transform.position, Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
-            colRight = Physics2D.Raycast(transform.position, Vector3.right, boxCol.bounds.extents.y + rayLength, groundLayer);
-            colLeft = Physics2D.Raycast(transform.position, -Vector3.right, boxCol.bounds.extents.y + rayLength, groundLayer);
-        }
+            colUp = Physics2D.Raycast(transform.position, Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer) ||
+                Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + boxCol.bounds.extents.y, transform.position.z),
+                Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer) ||
+                Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
+                Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
 
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.CompareTag("Bullet"))
-            {                
-                AudioManager.instance.PlayerDeathSFX();
-                Destroy(gameObject);                
-                SceneManager.LoadScene(0);
-                //StartCoroutine(WaitAndDie());
-            }
+            colRight = Physics2D.Raycast(transform.position, Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer) ||
+                Physics2D.Raycast(new Vector3(transform.position.x + boxCol.bounds.extents.x, transform.position.y, transform.position.z),
+                Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer) ||
+                Physics2D.Raycast(new Vector3(transform.position.x - boxCol.bounds.extents.x, transform.position.y, transform.position.z),
+                Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer);
+
+            colLeft = Physics2D.Raycast(transform.position, -Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer) ||
+                Physics2D.Raycast(new Vector3(transform.position.x + boxCol.bounds.extents.x, transform.position.y, transform.position.z),
+                -Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer) ||
+                Physics2D.Raycast(new Vector3(transform.position.x - boxCol.bounds.extents.x, transform.position.y, transform.position.z),
+                -Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer);
         }
 
         #endregion
@@ -138,7 +142,7 @@ namespace Player
 
         [Header("Bullet Time")]
         private bool bulletTimeActive;
-        [SerializeField] private float bulletTimeDrag = 10f;
+        [SerializeField] private float bulletTimeControl = 1.5f;
 
         [Header("Wall Jump")]
         [SerializeField] private float forceOfSideJump = 0.5f;
@@ -195,9 +199,8 @@ namespace Player
 
             //AIR DRAG
             //WALL DRAG
-            if (bulletTimeActive)
-                rb.drag = bulletTimeDrag;
-            else if (isHanging)
+
+            if (isHanging)
                 rb.drag = wallDrag;
             else if (!colDown)
                 rb.drag = isAirDrag;
@@ -206,10 +209,13 @@ namespace Player
 
             //GROUND MOVEMENT
             Vector2 movementForce = Vector2.right * movementScale * maxSpeed * Time.fixedDeltaTime;
-            if (!colDown)
-            {
+            if (bulletTimeActive)
+                movementForce *= bulletTimeControl;
+            else if (!colDown)
                 movementForce *= airControl;
-            }
+
+
+
             rb.AddForce(movementForce, ForceMode2D.Force);
         }
 
@@ -226,11 +232,11 @@ namespace Player
                 wasGrounded = false;
             }
             else if (isGrounded && !wasGrounded)
-            {                
+            {
                 AudioManager.instance.LandingSFX();
                 wasGrounded = true;
             }
-            
+
         }
 
         #endregion
