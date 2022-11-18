@@ -52,20 +52,20 @@ namespace Player
         [SerializeField] float rayLength = 0.3f;
 
         [SerializeField] private bool colUp;
-        private bool colRight;
+        [SerializeField] private bool colRight;
         [SerializeField] private bool colDown;
-        private bool colLeft;
+        [SerializeField] private bool colLeft;
         public bool isGrounded =>
            Physics2D.Raycast(transform.position,
-               -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
+               -Vector3.up, rayLength, groundLayer)
            ||
            Physics2D.Raycast(new Vector3
                (transform.position.x, transform.position.y + boxCol.bounds.extents.y, transform.position.z),
-               -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer)
+               -Vector3.up, rayLength, groundLayer)
            ||
            Physics2D.Raycast(new Vector3
                (transform.position.x, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
-               -Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
+               -Vector3.up, rayLength, groundLayer);
 
         private void CheckCollisions()
         {
@@ -81,23 +81,23 @@ namespace Player
 
         private void CheckRays()
         {
-            colUp = Physics2D.Raycast(transform.position, Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer) ||
+            colUp = Physics2D.Raycast(transform.position, Vector3.up, rayLength, groundLayer) ||
                 Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + boxCol.bounds.extents.y, transform.position.z),
-                Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer) ||
+                Vector3.up, rayLength, groundLayer) ||
                 Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
-                Vector3.up, boxCol.bounds.extents.y + rayLength, groundLayer);
+                Vector3.up, rayLength, groundLayer);
 
-            colRight = Physics2D.Raycast(transform.position, Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer) ||
+            colRight = Physics2D.Raycast(transform.position, Vector3.right, rayLength, groundLayer) ||
                 Physics2D.Raycast(new Vector3(transform.position.x + boxCol.bounds.extents.x, transform.position.y, transform.position.z),
-                Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer) ||
+                Vector3.right, rayLength, groundLayer) ||
                 Physics2D.Raycast(new Vector3(transform.position.x - boxCol.bounds.extents.x, transform.position.y, transform.position.z),
-                Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer);
+                Vector3.right, rayLength, groundLayer);
 
-            colLeft = Physics2D.Raycast(transform.position, -Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer) ||
+            colLeft = Physics2D.Raycast(transform.position, -Vector3.right, rayLength, groundLayer) ||
                 Physics2D.Raycast(new Vector3(transform.position.x + boxCol.bounds.extents.x, transform.position.y, transform.position.z),
-                -Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer) ||
+                -Vector3.right, rayLength, groundLayer) ||
                 Physics2D.Raycast(new Vector3(transform.position.x - boxCol.bounds.extents.x, transform.position.y, transform.position.z),
-                -Vector3.right, boxCol.bounds.extents.x + rayLength, groundLayer);
+                -Vector3.right, rayLength, groundLayer);
         }
 
         #endregion
