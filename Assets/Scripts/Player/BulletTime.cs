@@ -26,6 +26,7 @@ namespace Player
         {
             Time.timeScale = 1.0f;
             isActive = false;
+            StaminaController.instance.ResetStamina();
         }
 
         public void UpdateBulletTime(BulletTimeInputs inputs, bool canBT)
