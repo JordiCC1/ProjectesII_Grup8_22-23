@@ -7,7 +7,7 @@ namespace Player {
     public class StaminaController : MonoBehaviour
     {
         [Header("Stamina Main")]
-        [SerializeField] private float maxStamina = 3.0f;
+        [SerializeField] private float maxStamina = 2.0f;
         [field:SerializeField] public float stamina { get; private set; }
         private bool coroutineActive;
 
@@ -15,8 +15,7 @@ namespace Player {
         [Range(0, 50)] [SerializeField] private float staminaDrain = 1f;
 
         [Header("Stamina UI")]
-        public Slider staminaBar;
-
+        public GameObject staminaBar;
         public static StaminaController instance;
 
         private void Awake()
@@ -27,13 +26,12 @@ namespace Player {
         private void Start()
         {
             stamina = maxStamina;
-            staminaBar.maxValue = maxStamina-1;
-            staminaBar.value = stamina;
+            staminaBar.GetComponentInChildren<StaminaBar>().SetMaxStamina(stamina-1);
         }
 
         private void Update()
         {
-            staminaBar.value = stamina-1;
+            staminaBar.GetComponentInChildren<StaminaBar>().SetStamina(stamina - 1);
         }
 
         #region UseStamina
