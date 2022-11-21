@@ -254,7 +254,7 @@ namespace TarodevController
 
         private void CalculateJump()
         {
-            // Jump if: grounded or within coyote threshold || sufficient jump buffer
+            // CalculateJump if: grounded or within coyote threshold || sufficient jump buffer
             if (Input.JumpDown && CanUseCoyote || HasBufferedJump)
             {
                 _currentVerticalSpeed = _jumpHeight;

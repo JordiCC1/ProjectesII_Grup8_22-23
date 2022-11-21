@@ -32,8 +32,8 @@ namespace Player
         }
         public void UpdateMovement(MovementInputs inputs, bool _isBulletTimeActive)
         {
-            Walk(inputs);
-            Jump(inputs);
+            movementScale = inputs.walk;
+            CalculateJump(inputs);
             WallJump(inputs);
 
             Landing();
@@ -42,19 +42,23 @@ namespace Player
         }
 
         public void FixedUpdate()
-        {
+        {    
             CheckCollisions();
+
+            CalculateWalk();
+            CalculateJump();
+        
             MoveCharacterPhysics();
         }
 
         #region Collisions
         [Header("Collisions")]
-        [SerializeField] float rayLength = 0.3f;
-
+        [SerializeField] private float rayLength = 0.3f;
         [SerializeField] private bool colUp;
         [SerializeField] private bool colRight;
         [SerializeField] private bool colDown;
         [SerializeField] private bool colLeft;
+
         public bool isGrounded =>
            Physics2D.Raycast(transform.position,
                -Vector3.up, rayLength * 10, groundLayer)
@@ -104,13 +108,23 @@ namespace Player
 
         #region Walk
         [Header("Walk")]
-        private float movementScale;
         [SerializeField] private float maxSpeed = 120f;
-        [SerializeField] private float airControl = 0.5f;
+        [SerializeField] private float acceleration = 10.0f;
+        [SerializeField] private float deceleration = 5.0f;
+        [SerializeField] private float velPower = 10.5f;
 
-        private void Walk(MovementInputs input)
+        private float movementScale;    
+        private float targetSpeed;
+        private float speedDif;
+        private float accelRate;
+        private float movement;
+
+        private void CalculateWalk()
         {
-            movementScale = input.walk;
+            targetSpeed = movementScale * maxSpeed;
+            speedDif = targetSpeed - rb.velocity.x;
+            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deceleration;
+            movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPower) * Mathf.Sign(speedDif);
         }
 
         #endregion
@@ -118,19 +132,20 @@ namespace Player
         #region Jump
         [Header("Jump")]
         [SerializeField] private float jumpForce = 10.0f;
-        bool shouldJump = false;
-        private float startDrag;
         [SerializeField] private float isAirDrag = 5f;
         [SerializeField] private float wallDrag = 20f;
+        [SerializeField] private float airControl = 0.5f;
+        private bool shouldJump = false;
+        private float startDrag;
 
         [Header("Bullet Time")]
-        private bool bulletTimeActive;
         [SerializeField] private float bulletTimeControl = 1.5f;
+        private bool bulletTimeActive;
 
         [Header("Buffer and Coyote Time")]
         [SerializeField] private float jumpBuffer = 0.1f;
+        [SerializeField] private float coyoteTimeThreshold = 0.5f;
         public float lastJumpInput;
-        [SerializeField] float coyoteTimeThreshold = 0.5f;
         private float timeLeftGrounded;
         private bool coyoteUsable;
 
@@ -139,17 +154,17 @@ namespace Player
 
         [Header("Jump Apex")]
         [SerializeField] private float apexThreshold = 0.1f;
+        [SerializeField] private float apexGravity = 3f;
         private bool isInApex = false;
         private float startGravity;
-        [SerializeField] private float apexGravity = 3f;
 
         [Header("Wall Jump")]
         [SerializeField] private float forceOfSideJumpSide = 0.5f;
         [SerializeField] private float forceOfSideJumpUp = 2.0f;
         [SerializeField] private bool canWallJump;
-        private bool isHanging => (colLeft && !colDown) || (colRight && !colDown);
+        private bool isHanging => (colLeft && !colDown && movementScale < 0) || (colRight && !colDown && movementScale > 0);
 
-        private void Jump(MovementInputs inputs)
+        private void CalculateJump(MovementInputs inputs)
         {
             //TODO: implement Bullet time into this script
 
@@ -174,7 +189,7 @@ namespace Player
 
         private void MoveCharacterPhysics()
         {
-            //JUMP
+            /*//JUMP
             if (shouldJump)
             {
                 if (!colDown)
@@ -210,14 +225,15 @@ namespace Player
 
             //GROUND MOVEMENT
             Vector2 movementForce = Vector2.right * movementScale * maxSpeed * Time.fixedDeltaTime;
+
             if (BulletTime.instance.isActive)
                 movementForce *= bulletTimeControl;
             else if (!colDown)
                 movementForce *= airControl;
+ 
+            rb.AddForce(movementForce, ForceMode2D.Force);*/
 
-
-
-            rb.AddForce(movementForce, ForceMode2D.Force);
+            rb.AddForce(movement * Vector2.right);
         }
 
         #endregion
