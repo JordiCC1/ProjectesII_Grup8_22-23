@@ -104,9 +104,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 15
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.06
   m_GravityScale: 10
   m_Material: {fileID: 0}
   m_Interpolate: 1
@@ -179,23 +179,24 @@ MonoBehaviour:
   colRight: 0
   colDown: 0
   colLeft: 0
-  maxSpeed: 30
-  acceleration: 25
-  deceleration: 1
+  maxSpeed: 135
+  acceleration: 23
+  deceleration: 6
   velPower: 1
-  jumpForce: 30
-  isAirDrag: 1
-  wallDrag: 20
-  airControl: 0
-  bulletTimeControl: 0.9
-  jumpBuffer: 0.15
-  coyoteTimeThreshold: 0.2
-  lastJumpInput: 0
-  apexThreshold: 3
-  apexGravity: 3
+  jumpHeight: 500
+  apexThreshold: 1
+  apexGravity: 6
+  airDrag: 2
+  wallDrag: 15
+  airControl: 0.22
+  isInApex: 0
   forceOfSideJumpSide: 0.8
   forceOfSideJumpUp: 1
   canWallJump: 0
+  jumpBuffer: 0.15
+  coyoteTimeThreshold: 0.2
+  lastJumpInput: 0
+  bulletTimeControl: 0.9
 --- !u!114 &27149512573143974
 MonoBehaviour:
   m_ObjectHideFlags: 0
