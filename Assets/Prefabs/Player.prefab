@@ -189,14 +189,15 @@ MonoBehaviour:
   airDrag: 2
   wallDrag: 15
   airControl: 0.22
-  isInApex: 0
+  earlyJumpModifier: 2.5
   forceOfSideJumpSide: 0.8
   forceOfSideJumpUp: 1
-  canWallJump: 0
-  jumpBuffer: 0.15
-  coyoteTimeThreshold: 0.2
+  shouldWallJump: 0
+  jumpBuffer: 0.2
+  coyoteTimeThreshold: 0.15
   lastJumpInput: 0
   bulletTimeControl: 0.9
+  dashDistance: 0
 --- !u!114 &27149512573143974
 MonoBehaviour:
   m_ObjectHideFlags: 0

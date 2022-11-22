@@ -17,12 +17,7 @@ namespace Player
         [Header("Physics")]
         private BoxCollider2D boxCol;
         [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private BulletTime bt;
-        [SerializeField] private ParticleSystem particles;
         [SerializeField] private LayerMask groundLayer;
-
-        [SerializeField] private Vector3 velocity;
-        [SerializeField] private Vector3 lastPosition;
 
         private void Start()
         {
@@ -30,31 +25,22 @@ namespace Player
             normalGravity = rb.gravityScale;
             startDrag = rb.drag;
         }
-        public void UpdateMovement(MovementInputs inputs, bool _isBulletTimeActive)
+        public void UpdateMovement(MovementInputs inputs)
         {
-            movementScale = inputs.walk;
-            jumpDown = inputs.JumpDown;
-            jumpReleased = inputs.JumpUp;
-
-            if (jumpReleased)
-                Debug.Log("------------------" + jumpReleased + "------------------");
-
             Landing();
 
-            bulletTimeActive = _isBulletTimeActive;
+            movementScale = inputs.walk;
+            jumpDown |= inputs.JumpDown;
+            jumpReleased |= inputs.JumpUp;
         }
 
         public void FixedUpdate()
         {
-            velocity = (transform.position - lastPosition) / Time.deltaTime;
-            lastPosition = transform.position;
-
             CheckCollisions();
 
             CalculateJumpApex();
             CalculateWalk();
             CalculateJump();
-            CalculateWallJump();
 
             MoveCharacterPhysics();
         }
@@ -154,13 +140,14 @@ namespace Player
         [SerializeField] private float airDrag = 5f;
         [SerializeField] private float wallDrag = 20f;
         [SerializeField] private float airControl = 0.5f;
-        private bool shouldJump = false;
+        [SerializeField] private float earlyJumpModifier = 2.5f;
+        private bool shouldJump;
         private float startDrag;
         private bool jumpDown;
         private bool jumpReleased;
         private float normalGravity;
-        [SerializeField] private bool isInApex = false;
-        [SerializeField] private bool endedJumpEarly;
+        private bool isInApex;
+        private bool endedJumpEarly;
 
         [Header("Wall Jump")]
         [SerializeField] private float forceOfSideJumpSide = 0.5f;
@@ -187,7 +174,6 @@ namespace Player
 
         [Header("Bullet Time")]
         [SerializeField] private float bulletTimeControl = 1.5f;
-        private bool bulletTimeActive;
 
         private void CalculateJumpApex()
         {
@@ -198,7 +184,7 @@ namespace Player
         }
         private void CalculateJump()
         {
-            if (jumpDown && CanUseCoyote || HasJumpBuffered)
+            if (jumpDown && (CanUseCoyote || HasJumpBuffered))
             {
                 shouldJump = true;
                 endedJumpEarly = false;
@@ -206,17 +192,20 @@ namespace Player
                 timeLeftGrounded = float.MinValue;
             }
 
-            if (!colDown && jumpReleased && !endedJumpEarly && velocity.y > 0)
-                endedJumpEarly = true;
-        }
-
-        private void CalculateWallJump()
-        {
-            if (jumpDown && CanUseWallCoyote || HasWallJumpBuffered)
+            if (jumpDown && (CanUseWallCoyote || HasWallJumpBuffered))
             {
                 shouldWallJump = true;
+                coyoteUsable = false;
                 timeLeftWall = float.MinValue;
             }
+
+            if (!colDown && jumpReleased && !endedJumpEarly && rb.velocity.y > 0)
+            {
+                endedJumpEarly = true;
+            }
+
+            jumpDown = false;
+            jumpReleased = false;
         }
 
         #endregion
@@ -253,20 +242,15 @@ namespace Player
                 shouldWallJump = false;
             }
 
-            //APEX
-
-
             if (endedJumpEarly)
             {
-                rb.velocity = new Vector2(velocity.x, velocity.y /= 3);
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / earlyJumpModifier);
                 endedJumpEarly = false;
             }
 
             rb.gravityScale = isInApex ? apexGravity : normalGravity;
 
-
-            //AIR DRAG
-            //WALL DRAG
+            // DRAG
             if (isHanging)
                 rb.drag = wallDrag;
             else if (!colDown)

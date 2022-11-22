@@ -36,7 +36,7 @@ namespace Player
         void Update()
         {
             TakeInputs();
-            movement.UpdateMovement(moveInputs, isBulletTimeActive);
+            movement.UpdateMovement(moveInputs);
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateInvincible();
         }
@@ -51,8 +51,8 @@ namespace Player
                 JumpDown = Input.GetButtonDown("Jump"),
                 JumpUp = Input.GetButtonUp("Jump")
             };
-            if (moveInputs.JumpDown == true)
-                movement.lastJumpInput = Time.time;
+            if (moveInputs.JumpDown)
+                 movement.lastJumpInput = Time.time;
 
 
             btInputs = new BulletTimeInputs
@@ -99,7 +99,7 @@ namespace Player
         {
             yield return new WaitForSeconds(invincibilityTime);
             isInvincible = false;
-            Debug.Log("not Invicible");
+            //Debug.Log("not Invicible");
         }
         #endregion
 
