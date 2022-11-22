@@ -48,8 +48,8 @@ namespace Player
             moveInputs = new MovementInputs
             {
                 walk = Input.GetAxisRaw("Horizontal"), //Raw makes it more snappy
-                JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
-                JumpUp = UnityEngine.Input.GetButtonUp("Jump")
+                JumpDown = Input.GetButtonDown("Jump"),
+                JumpUp = Input.GetButtonUp("Jump")
             };
             if (moveInputs.JumpDown == true)
                 movement.lastJumpInput = Time.time;
@@ -58,8 +58,7 @@ namespace Player
             btInputs = new BulletTimeInputs
             {
                 BulletTimeDown = Input.GetMouseButtonDown(0),
-                BulletTimeUp = Input.GetMouseButtonUp(0),
-
+                BulletTimeUp = Input.GetMouseButtonUp(0)
             };
         }
         

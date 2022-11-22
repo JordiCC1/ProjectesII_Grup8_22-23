@@ -19,9 +19,10 @@ namespace Player
         [SerializeField] private Rigidbody2D rb;
         [SerializeField] private BulletTime bt;
         [SerializeField] private ParticleSystem particles;
-
         [SerializeField] private LayerMask groundLayer;
 
+        [SerializeField] private Vector3 velocity;
+        [SerializeField] private Vector3 lastPosition;
 
         private void Start()
         {
@@ -33,7 +34,10 @@ namespace Player
         {
             movementScale = inputs.walk;
             jumpDown = inputs.JumpDown;
-            jumpUp = inputs.JumpUp;
+            jumpReleased = inputs.JumpUp;
+
+            if (jumpReleased)
+                Debug.Log("------------------" + jumpReleased + "------------------");
 
             Landing();
 
@@ -42,6 +46,9 @@ namespace Player
 
         public void FixedUpdate()
         {
+            velocity = (transform.position - lastPosition) / Time.deltaTime;
+            lastPosition = transform.position;
+
             CheckCollisions();
 
             CalculateJumpApex();
@@ -84,7 +91,7 @@ namespace Player
             }
             if ((colLeft || colRight) && !isHanging)
                 timeLeftWall = Time.time;
-      
+
             colDown = isGrounded;
 
             CheckRays();
@@ -150,17 +157,17 @@ namespace Player
         private bool shouldJump = false;
         private float startDrag;
         private bool jumpDown;
-        private bool jumpUp;
+        private bool jumpReleased;
         private float normalGravity;
         [SerializeField] private bool isInApex = false;
-        private bool endedJumpEarly;
+        [SerializeField] private bool endedJumpEarly;
 
         [Header("Wall Jump")]
         [SerializeField] private float forceOfSideJumpSide = 0.5f;
         [SerializeField] private float forceOfSideJumpUp = 2.0f;
-        [SerializeField] private bool canWallJump;
-        private bool isHanging => 
-            (colLeft && !colDown && movementScale < 0) || (colRight && !colDown && movementScale > 0);
+        [SerializeField] private bool shouldWallJump;
+        private bool isHanging =>
+            !colDown && (colLeft && movementScale < 0) || (colRight && movementScale > 0);
 
         [Header("Buffer and Coyote Time")]
         [SerializeField] private float jumpBuffer = 0.1f;
@@ -168,11 +175,10 @@ namespace Player
         public float lastJumpInput;
         private float timeLeftGrounded;
         private bool coyoteUsable;
-
         private float timeLeftWall;
-        private bool HasJumpBuffered => 
+        private bool HasJumpBuffered =>
             colDown && lastJumpInput + jumpBuffer > Time.time;
-        private bool CanUseCoyote => 
+        private bool CanUseCoyote =>
             coyoteUsable && !colDown && timeLeftGrounded + coyoteTimeThreshold > Time.time;
         private bool HasWallJumpBuffered =>
             isHanging && lastJumpInput + jumpBuffer > Time.time;
@@ -200,19 +206,25 @@ namespace Player
                 timeLeftGrounded = float.MinValue;
             }
 
-            if (jumpUp && !colDown && !endedJumpEarly && rb.velocity.y > 0)
+            if (!colDown && jumpReleased && !endedJumpEarly && velocity.y > 0)
                 endedJumpEarly = true;
-
         }
 
         private void CalculateWallJump()
         {
             if (jumpDown && CanUseWallCoyote || HasWallJumpBuffered)
             {
-                canWallJump = true;
+                shouldWallJump = true;
                 timeLeftWall = float.MinValue;
             }
         }
+
+        #endregion
+
+        #region Dash
+        [Header("Dash")]
+        [SerializeField] private float dashDistance;
+
 
         #endregion
 
@@ -230,7 +242,7 @@ namespace Player
                 shouldJump = false;
             }
 
-            if (canWallJump)
+            if (shouldWallJump)
             {
                 rb.AddForce(jumpHeight * Vector2.up * forceOfSideJumpUp, ForceMode2D.Impulse);
                 if (colLeft)
@@ -238,14 +250,17 @@ namespace Player
                 if (colRight)
                     rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
 
-                canWallJump = false;
+                shouldWallJump = false;
             }
 
             //APEX
-            /*if (endedJumpEarly)
+
+
+            if (endedJumpEarly)
             {
-                rb.velocity = Vector2.zero;
-            }*/
+                rb.velocity = new Vector2(velocity.x, velocity.y /= 3);
+                endedJumpEarly = false;
+            }
 
             rb.gravityScale = isInApex ? apexGravity : normalGravity;
 
