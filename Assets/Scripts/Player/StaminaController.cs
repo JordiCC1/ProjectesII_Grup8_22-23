@@ -27,11 +27,14 @@ namespace Player {
         {
             stamina = maxStamina;
             staminaBar.GetComponentInChildren<StaminaBar>().SetMaxStamina(stamina-1);
+            staminaBar.SetActive(false);
         }
 
         private void Update()
         {
             staminaBar.GetComponentInChildren<StaminaBar>().SetStamina(stamina - 1);
+            if (stamina == maxStamina && staminaBar.activeInHierarchy)
+                staminaBar.SetActive(false);
         }
 
         #region UseStamina
@@ -41,6 +44,8 @@ namespace Player {
             {
                 coroutineActive = true;
                 StartCoroutine(DrainStamina());
+                if (!staminaBar.activeInHierarchy)
+                    staminaBar.SetActive(true);
             }
         }
 
