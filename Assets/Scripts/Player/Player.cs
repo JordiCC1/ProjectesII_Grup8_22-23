@@ -80,7 +80,8 @@ namespace Player
             {
                 AudioManager.instance.PlayerDeathSFX();
                 Destroy(gameObject);
-                SceneManager.LoadScene(0);
+                int scene = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(scene, LoadSceneMode.Single);
                 //StartCoroutine(WaitAndDie());
             }
         }
