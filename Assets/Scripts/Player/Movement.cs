@@ -48,10 +48,9 @@ namespace Player
         #region Collisions
         [Header("Collisions")]
         [SerializeField] private float rayLength = 0.3f;
-        [SerializeField] private bool colUp;
-        [SerializeField] private bool colRight;
+        [SerializeField] private bool colFront;
         [SerializeField] private bool colDown;
-        [SerializeField] private bool colLeft;
+        [SerializeField] private bool colBack;
         private bool landingThisFrame;
 
         public bool isGrounded =>
@@ -75,7 +74,7 @@ namespace Player
                 coyoteUsable = true;
                 landingThisFrame = true;
             }
-            if ((colLeft || colRight) && !isHanging)
+            if ((colBack || colFront) && !isHanging)
                 timeLeftWall = Time.time;
 
             colDown = isGrounded;
@@ -88,23 +87,35 @@ namespace Player
             var pos = transform.position;
             var extent = boxCol.bounds.extents;
 
-            colUp = Physics2D.Raycast(pos, Vector3.up, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(pos.x, pos.y + extent.y, pos.z),
-                Vector3.up, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(pos.x, pos.y - extent.y, pos.z),
-                Vector3.up, rayLength, groundLayer);
+            if (isFacingRight)
+            {
+                colFront = Physics2D.Raycast(pos, Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
+                    Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
+                    Vector3.right, rayLength, groundLayer);
 
-            colRight = Physics2D.Raycast(pos, Vector3.right, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
-                Vector3.right, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
-                Vector3.right, rayLength, groundLayer);
+                colBack = Physics2D.Raycast(pos, -Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
+                    -Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
+                    -Vector3.right, rayLength, groundLayer);
+            }
+            else
+            {
+                colFront = Physics2D.Raycast(pos, -Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
+                    -Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
+                    -Vector3.right, rayLength, groundLayer);
 
-            colLeft = Physics2D.Raycast(pos, -Vector3.right, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
-                -Vector3.right, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
-                -Vector3.right, rayLength, groundLayer);
+                colBack = Physics2D.Raycast(pos, Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
+                    Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
+                    Vector3.right, rayLength, groundLayer);
+            }
+
         }
 
         #endregion
@@ -154,7 +165,7 @@ namespace Player
         [SerializeField] private float forceOfSideJumpUp = 2.0f;
         [SerializeField] private bool shouldWallJump;
         private bool isHanging =>
-            !colDown && (colLeft && movementScale < 0) || (colRight && movementScale > 0);
+            !colDown && colFront && movementScale != 0; // this line might have to change
 
         [Header("Buffer and Coyote Time")]
         [SerializeField] private float jumpBuffer = 0.1f;
@@ -236,9 +247,9 @@ namespace Player
             if (shouldWallJump)
             {
                 rb.AddForce(jumpHeight * Vector2.up * forceOfSideJumpUp, ForceMode2D.Impulse);
-                if (colLeft)
+                if (!isFacingRight)
                     rb.AddForce(jumpHeight * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
-                if (colRight)
+                else
                     rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
 
                 shouldWallJump = false;
