@@ -17,62 +17,65 @@ namespace Player
         [Header("Physics")]
         private BoxCollider2D boxCol;
         [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private BulletTime bt;
-        [SerializeField] private ParticleSystem particles;
-
         [SerializeField] private LayerMask groundLayer;
-
 
         private void Start()
         {
             boxCol = GetComponent<BoxCollider2D>();
-            startGravity = rb.gravityScale;
+            normalGravity = rb.gravityScale;
             startDrag = rb.drag;
-            wasGrounded = true;
         }
-        public void UpdateMovement(MovementInputs inputs, bool _isBulletTimeActive)
+        public void UpdateMovement(MovementInputs inputs)
         {
-            Walk(inputs);
-            Jump(inputs);
-            WallJump(inputs);
-
             Landing();
 
-            bulletTimeActive = _isBulletTimeActive;
+            movementScale = inputs.walk;
+            jumpDown |= inputs.JumpDown;
+            jumpReleased |= inputs.JumpUp;
         }
 
         public void FixedUpdate()
         {
             CheckCollisions();
+
+            CalculateJumpApex();
+            CalculateWalk();
+            CalculateJump();
+
             MoveCharacterPhysics();
         }
 
         #region Collisions
         [Header("Collisions")]
-        [SerializeField] float rayLength = 0.3f;
-
-        [SerializeField] private bool colUp;
-        [SerializeField] private bool colRight;
+        [SerializeField] private float rayLength = 0.3f;
+        [SerializeField] private bool colFront;
         [SerializeField] private bool colDown;
-        [SerializeField] private bool colLeft;
+        [SerializeField] private bool colBack;
+        private bool landingThisFrame;
+
         public bool isGrounded =>
            Physics2D.Raycast(transform.position,
-               -Vector3.up, rayLength * 10, groundLayer)
-           ||
+               -Vector3.up, rayLength * 5, groundLayer) ||
            Physics2D.Raycast(new Vector3
-               (transform.position.x, transform.position.y + boxCol.bounds.extents.y, transform.position.z),
-               -Vector3.up, rayLength * 10, groundLayer)
-           ||
+               (transform.position.x + 0.01f, transform.position.y + boxCol.bounds.extents.y, transform.position.z),
+               -Vector3.up, rayLength * 5, groundLayer) ||
            Physics2D.Raycast(new Vector3
-               (transform.position.x, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
-               -Vector3.up, rayLength * 10, groundLayer);
+               (transform.position.x + 0.01f, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
+               -Vector3.up, rayLength * 5, groundLayer);
 
         private void CheckCollisions()
         {
+            landingThisFrame = false;
+
             if (colDown && !isGrounded)
                 timeLeftGrounded = Time.time;
             if (!colDown && isGrounded)
+            {
                 coyoteUsable = true;
+                landingThisFrame = true;
+            }
+            if ((colBack || colFront) && !isHanging)
+                timeLeftWall = Time.time;
 
             colDown = isGrounded;
 
@@ -81,96 +84,153 @@ namespace Player
 
         private void CheckRays()
         {
-            colUp = Physics2D.Raycast(transform.position, Vector3.up, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y + boxCol.bounds.extents.y, transform.position.z),
-                Vector3.up, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(transform.position.x, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
-                Vector3.up, rayLength, groundLayer);
+            var pos = transform.position;
+            var extent = boxCol.bounds.extents;
 
-            colRight = Physics2D.Raycast(transform.position, Vector3.right, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(transform.position.x + boxCol.bounds.extents.x, transform.position.y, transform.position.z),
-                Vector3.right, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(transform.position.x - boxCol.bounds.extents.x, transform.position.y, transform.position.z),
-                Vector3.right, rayLength, groundLayer);
+            if (isFacingRight)
+            {
+                colFront = Physics2D.Raycast(pos, Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
+                    Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
+                    Vector3.right, rayLength, groundLayer);
 
-            colLeft = Physics2D.Raycast(transform.position, -Vector3.right, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(transform.position.x + boxCol.bounds.extents.x, transform.position.y, transform.position.z),
-                -Vector3.right, rayLength, groundLayer) ||
-                Physics2D.Raycast(new Vector3(transform.position.x - boxCol.bounds.extents.x, transform.position.y, transform.position.z),
-                -Vector3.right, rayLength, groundLayer);
+                colBack = Physics2D.Raycast(pos, -Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
+                    -Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
+                    -Vector3.right, rayLength, groundLayer);
+            }
+            else
+            {
+                colFront = Physics2D.Raycast(pos, -Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
+                    -Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
+                    -Vector3.right, rayLength, groundLayer);
+
+                colBack = Physics2D.Raycast(pos, Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
+                    Vector3.right, rayLength, groundLayer) ||
+                    Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
+                    Vector3.right, rayLength, groundLayer);
+            }
+
         }
 
         #endregion
 
         #region Walk
         [Header("Walk")]
-        private float movementScale;
         [SerializeField] private float maxSpeed = 120f;
-        [SerializeField] private float airControl = 0.5f;
+        [SerializeField] private float acceleration = 10.0f;
+        [SerializeField] private float deceleration = 5.0f;
+        [SerializeField] private float velPower = 10.5f;
 
-        private void Walk(MovementInputs input)
+        private float movementScale;
+        private float targetSpeed;
+        private float speedDif;
+        private float accelRate;
+        private float movement;
+
+        private void CalculateWalk()
         {
-            movementScale = input.walk;
+            targetSpeed = movementScale * maxSpeed;
+            speedDif = targetSpeed - rb.velocity.x;
+            accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deceleration;
+            movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPower) * Mathf.Sign(speedDif);
         }
 
         #endregion
 
-        #region Jump
+        #region Jump 
         [Header("Jump")]
-        [SerializeField] private float jumpForce = 10.0f;
-        bool shouldJump = false;
-        private float startDrag;
-        [SerializeField] private float isAirDrag = 5f;
-        [SerializeField] private float wallDrag = 20f;
-
-        [Header("Bullet Time")]
-        private bool bulletTimeActive;
-        [SerializeField] private float bulletTimeControl = 1.5f;
-
-        [Header("Buffer and Coyote Time")]
-        [SerializeField] private float jumpBuffer = 0.1f;
-        public float lastJumpInput;
-        [SerializeField] float coyoteTimeThreshold = 0.5f;
-        private float timeLeftGrounded;
-        private bool coyoteUsable;
-
-        private bool HasJumpBuffered => colDown && lastJumpInput + jumpBuffer > Time.time;
-        private bool CanUseCoyote => coyoteUsable && !colDown && timeLeftGrounded + coyoteTimeThreshold > Time.time;
-
-        [Header("Jump Apex")]
+        [SerializeField] private float jumpHeight = 10.0f;
         [SerializeField] private float apexThreshold = 0.1f;
-        private bool isInApex = false;
-        private float startGravity;
         [SerializeField] private float apexGravity = 3f;
+        [SerializeField] private float airDrag = 5f;
+        [SerializeField] private float wallDrag = 20f;
+        [SerializeField] private float airControl = 0.5f;
+        [SerializeField] private float earlyJumpModifier = 2.5f;
+        private bool shouldJump;
+        private float startDrag;
+        private bool jumpDown;
+        private bool jumpReleased;
+        private float normalGravity;
+        private bool isInApex;
+        private bool endedJumpEarly;
 
         [Header("Wall Jump")]
         [SerializeField] private float forceOfSideJumpSide = 0.5f;
         [SerializeField] private float forceOfSideJumpUp = 2.0f;
-        [SerializeField] private bool canWallJump;
-        private bool isHanging => (colLeft && !colDown) || (colRight && !colDown);
+        [SerializeField] private bool shouldWallJump;
+        private bool isHanging =>
+            !colDown && colFront && movementScale != 0; // this line might have to change
 
-        private void Jump(MovementInputs inputs)
+        [Header("Buffer and Coyote Time")]
+        [SerializeField] private float jumpBuffer = 0.1f;
+        [SerializeField] private float coyoteTimeThreshold = 0.5f;
+        public float lastJumpInput;
+        private float timeLeftGrounded;
+        private bool coyoteUsable;
+        private float timeLeftWall;
+        private bool HasJumpBuffered =>
+            colDown && lastJumpInput + jumpBuffer > Time.time;
+        private bool CanUseCoyote =>
+            coyoteUsable && !colDown && timeLeftGrounded + coyoteTimeThreshold > Time.time;
+        private bool HasWallJumpBuffered =>
+            isHanging && lastJumpInput + jumpBuffer > Time.time;
+        private bool CanUseWallCoyote =>
+            coyoteUsable && !isHanging && timeLeftWall + coyoteTimeThreshold > Time.time;
+
+        [Header("Bullet Time")]
+        [SerializeField] private float bulletTimeControl = 1.5f;
+
+        private void CalculateJumpApex()
         {
-            //TODO: implement Bullet time into this script
-
-            if (inputs.JumpDown && CanUseCoyote || HasJumpBuffered)
+            if (!colDown)
+                isInApex = Mathf.Abs(rb.velocity.y) < apexThreshold && !colDown;
+            else
+                isInApex = false;
+        }
+        private void CalculateJump()
+        {
+            if (jumpDown && (CanUseCoyote || HasJumpBuffered))
             {
                 shouldJump = true;
+                endedJumpEarly = false;
+                coyoteUsable = false;
                 timeLeftGrounded = float.MinValue;
             }
-        }
 
-        private void WallJump(MovementInputs inputs)
-        {
-            if (inputs.JumpDown && isHanging)
+            if (jumpDown && (CanUseWallCoyote || HasWallJumpBuffered))
             {
-                canWallJump = true;
+                shouldWallJump = true;
+                coyoteUsable = false;
+                timeLeftWall = float.MinValue;
             }
+
+            if (!colDown && jumpReleased && !endedJumpEarly && rb.velocity.y > 0)
+            {
+                endedJumpEarly = true;
+            }
+
+            jumpDown = false;
+            jumpReleased = false;
         }
 
         #endregion
 
+        #region Dash
+        [Header("Dash")]
+        [SerializeField] private float dashDistance;
+
+
+        #endregion
+
         #region Move
+
+        private bool isFacingRight = true;
 
         private void MoveCharacterPhysics()
         {
@@ -179,65 +239,68 @@ namespace Player
             {
                 if (!colDown)
                     rb.velocity = Vector3.zero;
-                rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
-                coyoteUsable = false;
+                rb.AddForce(jumpHeight * Vector2.up, ForceMode2D.Impulse);
+
                 shouldJump = false;
             }
 
-            if (canWallJump)
+            if (shouldWallJump)
             {
-                rb.AddForce(jumpForce * Vector2.up * forceOfSideJumpUp, ForceMode2D.Impulse);
-                if (colLeft)
-                    rb.AddForce(jumpForce * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
-                if (colRight)
-                    rb.AddForce(jumpForce * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
+                rb.AddForce(jumpHeight * Vector2.up * forceOfSideJumpUp, ForceMode2D.Impulse);
+                if (!isFacingRight)
+                    rb.AddForce(jumpHeight * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
+                else
+                    rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
 
-                canWallJump = false;
+                shouldWallJump = false;
             }
 
-            isInApex = Mathf.Abs(rb.velocity.y) < apexThreshold && !colDown;
-            rb.gravityScale = isInApex ? apexGravity : startGravity;
+            if (endedJumpEarly)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y / earlyJumpModifier);
+                endedJumpEarly = false;
+            }
 
-            //AIR DRAG
-            //WALL DRAG
+            rb.gravityScale = isInApex ? apexGravity : normalGravity;
 
+            // DRAG
             if (isHanging)
                 rb.drag = wallDrag;
             else if (!colDown)
-                rb.drag = isAirDrag;
+                rb.drag = airDrag;
             else
                 rb.drag = startDrag;
 
             //GROUND MOVEMENT
-            Vector2 movementForce = Vector2.right * movementScale * maxSpeed * Time.fixedDeltaTime;
             if (BulletTime.instance.isActive)
-                movementForce *= bulletTimeControl;
+                movement *= bulletTimeControl;
             else if (!colDown)
-                movementForce *= airControl;
+                movement *= airControl;
 
+            rb.AddForce(movement * Vector2.right);
 
+            if (isFacingRight && movementScale < 0)
+                Flip();
+            else if (!isFacingRight && movementScale > 0)
+                Flip();
+        }
 
-            rb.AddForce(movementForce, ForceMode2D.Force);
+        private void Flip()
+        {
+            var scale = transform.localScale;
+
+            transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
+            isFacingRight = !isFacingRight;
         }
 
         #endregion
 
         #region SFX
 
-        private bool wasGrounded;
-
         private void Landing()
         {
-            if (!isGrounded)
-            {
-                wasGrounded = false;
-            }
-            else if (isGrounded && !wasGrounded)
-            {
+            if (landingThisFrame)
                 AudioManager.instance.LandingSFX();
-                wasGrounded = true;
-            }
-
         }
 
         #endregion

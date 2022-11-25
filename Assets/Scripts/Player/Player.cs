@@ -20,23 +20,20 @@ namespace Player
         public MovementInputs moveInputs;
         public BulletTimeInputs btInputs;
 
-        [HideInInspector]public bool isInvincible = false;
-
-        [HideInInspector] public bool isBulletTimeActive;
+        [HideInInspector] public bool isInvincible = false;
+        [HideInInspector] public bool isBulletTimeActive = false;
 
 
         private void Start()
         {
             movement = GetComponent<Movement>();
             bt = GetComponent<BulletTime>();
-
-            isBulletTimeActive = false;
         }
 
         void Update()
         {
             TakeInputs();
-            movement.UpdateMovement(moveInputs, isBulletTimeActive);
+            movement.UpdateMovement(moveInputs);
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateInvincible();
         }
@@ -48,18 +45,17 @@ namespace Player
             moveInputs = new MovementInputs
             {
                 walk = Input.GetAxisRaw("Horizontal"), //Raw makes it more snappy
-                JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
-                JumpUp = UnityEngine.Input.GetButtonUp("Jump")
+                JumpDown = Input.GetButtonDown("Jump"),
+                JumpUp = Input.GetButtonUp("Jump")
             };
-            if (moveInputs.JumpDown == true)
-                movement.lastJumpInput = Time.time;
+            if (moveInputs.JumpDown)
+                 movement.lastJumpInput = Time.time;
 
 
             btInputs = new BulletTimeInputs
             {
                 BulletTimeDown = Input.GetMouseButtonDown(0),
-                BulletTimeUp = Input.GetMouseButtonUp(0),
-
+                BulletTimeUp = Input.GetMouseButtonUp(0)
             };
         }
         
@@ -100,7 +96,7 @@ namespace Player
         {
             yield return new WaitForSeconds(invincibilityTime);
             isInvincible = false;
-            Debug.Log("not Invicible");
+            //Debug.Log("not Invicible");
         }
         #endregion
 
