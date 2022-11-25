@@ -10,7 +10,7 @@ namespace Enemy
         //Shooting range
         [SerializeField]private float Range;
         //Position of the player
-        [SerializeField] private Transform Target;        
+        [SerializeField] private GameObject Target;        
         //Time to wait to shoot when it sees the player
         [SerializeField] private float waitTime;
         //Where it shoots from
@@ -49,6 +49,8 @@ namespace Enemy
 
         void Start()
         {
+            Target = GameObject.FindGameObjectWithTag("Player");
+
             alphaM = Alarm1.GetComponent<SpriteRenderer>().color;
             alphaZ.a = 0f;
             Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
@@ -60,7 +62,7 @@ namespace Enemy
 
         void Update()
         {
-            Vector2 targetPos = Target.position;
+            Vector2 targetPos = Target.transform.position;
             Direction = targetPos - (Vector2)transform.position;
             RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range, LayerMask.GetMask("Player", "Terrain"));
 
@@ -114,7 +116,7 @@ namespace Enemy
         IEnumerator WaitToShoot()
         {
             transform.DOScale(scaleTo, 0.5f);
-            yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(waitTime);  ////fer un yield waituntil swapped o algo similar
             transform.DOScale(originalScale, 0.5f);
             Shoot();
         }
