@@ -169,16 +169,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 27149512573143900}
-  bt: {fileID: 27149512573143974}
-  particles: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 2048
   rayLength: 0.02
-  colUp: 0
-  colRight: 0
+  colFront: 0
   colDown: 0
-  colLeft: 0
+  colBack: 0
   maxSpeed: 135
   acceleration: 23
   deceleration: 6
@@ -277,6 +274,7 @@ MonoBehaviour:
   bulletTransform: {fileID: 7569515720698804833}
   canFire: 1
   timeBetweenFire: 0
+  playerTransform: {fileID: 27149512573143902}
 --- !u!1 &8059106899634304723
 GameObject:
   m_ObjectHideFlags: 0
