@@ -45,6 +45,7 @@ namespace Player
             Objective.transform.position = lastPos;
             this.gameObject.GetComponentInParent<Player>().isInvincible = true;
             StaminaController.instance.ResetStamina();
+            StartCoroutine(BulletTime.instance.BackToNormalSpeed());
         }
     }
 

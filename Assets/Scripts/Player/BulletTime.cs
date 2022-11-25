@@ -14,26 +14,22 @@ namespace Player
     public class BulletTime : MonoBehaviour
     {
         public float slowdownFactor = 0.25f;
-        public bool isActive=false;
+        public bool isActive = false;
 
         public static BulletTime instance;
 
+        private float actualTimeScale;
+
         private void Awake()
         {
-            instance = this;
-        }
-
-        void BulletTimeActive()
-        {
-            Time.timeScale = slowdownFactor;
-            isActive = true;
-        }
-
-        void FinishBulletTime()
-        {
-            Time.timeScale = 1.0f;
-            isActive = false;
-            StaminaController.instance.ResetStamina();
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
         public void UpdateBulletTime(BulletTimeInputs inputs, bool canBT)
@@ -65,9 +61,37 @@ namespace Player
             }
             else
             {
-                FinishBulletTime();
                 StaminaController.instance.StopStamina();
             }
+        }
+
+        void BulletTimeActive()
+        {
+            Time.timeScale = slowdownFactor;
+            actualTimeScale = slowdownFactor;
+            isActive = true;
+            AudioManager.instance.ChangePitch(0.9f);
+        }
+
+        void FinishBulletTime()
+        {
+            Time.timeScale = 1.0f;
+            actualTimeScale = 1.0f;
+            isActive = false;
+            StaminaController.instance.ResetStamina();
+            AudioManager.instance.ChangePitch(1.0f);
+        }
+
+        public IEnumerator BackToNormalSpeed()
+        {
+            while (actualTimeScale < 1.0f)
+            {
+                yield return new WaitForSeconds(0.1f);
+                actualTimeScale += 0.1f;
+                Time.timeScale = actualTimeScale;
+            }
+            actualTimeScale = 1.0f;
+            Time.timeScale = actualTimeScale;
         }
 
     }
