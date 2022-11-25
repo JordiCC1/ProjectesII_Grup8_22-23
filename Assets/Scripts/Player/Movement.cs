@@ -219,6 +219,8 @@ namespace Player
 
         #region Move
 
+        private bool isFacingRight = true;
+
         private void MoveCharacterPhysics()
         {
             //JUMP
@@ -265,6 +267,19 @@ namespace Player
                 movement *= airControl;
 
             rb.AddForce(movement * Vector2.right);
+
+            if (isFacingRight && movementScale < 0)
+                Flip();
+            else if (!isFacingRight && movementScale > 0)
+                Flip();
+        }
+
+        private void Flip()
+        {
+            var scale = transform.localScale;
+
+            transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
+            isFacingRight = !isFacingRight;
         }
 
         #endregion

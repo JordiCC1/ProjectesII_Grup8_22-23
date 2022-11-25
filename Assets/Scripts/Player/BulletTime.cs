@@ -40,7 +40,7 @@ namespace Player
         {
             if (inputs.BulletTimeUp)
             {
-                this.gameObject.GetComponentInChildren<PlayerGun>().Shoot();
+                this.gameObject.GetComponentInChildren<Gun>().Shoot();
             }
             if (canBT)
             {

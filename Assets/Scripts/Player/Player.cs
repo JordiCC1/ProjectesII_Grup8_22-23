@@ -20,17 +20,14 @@ namespace Player
         public MovementInputs moveInputs;
         public BulletTimeInputs btInputs;
 
-        [HideInInspector]public bool isInvincible = false;
-
-        [HideInInspector] public bool isBulletTimeActive;
+        [HideInInspector] public bool isInvincible = false;
+        [HideInInspector] public bool isBulletTimeActive = false;
 
 
         private void Start()
         {
             movement = GetComponent<Movement>();
             bt = GetComponent<BulletTime>();
-
-            isBulletTimeActive = false;
         }
 
         void Update()
