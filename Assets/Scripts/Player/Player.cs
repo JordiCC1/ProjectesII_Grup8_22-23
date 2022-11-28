@@ -11,11 +11,13 @@ namespace Player
     [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(Movement))]
     [RequireComponent(typeof(BulletTime))]
+    [RequireComponent(typeof(Animation))]
 
     public class Player : MonoBehaviour
     {
         [SerializeField] private Movement movement;
         [SerializeField] private BulletTime bt;
+        [SerializeField] private Animation anim;
 
         public MovementInputs moveInputs;
         public BulletTimeInputs btInputs;
