@@ -13,6 +13,7 @@ namespace Enemy
         [SerializeField] private GameObject Target;        
         //Time to wait to shoot when it sees the player
         [SerializeField] private float waitTime;
+        [SerializeField] private float knockedTime;
         //Where it shoots from
         [SerializeField] private Transform Shootpoint;
         //Force of the bullet
@@ -28,6 +29,7 @@ namespace Enemy
         //What it shoots
         [SerializeField] private GameObject bullet;
 
+        private SpriteRenderer sr;
         //Wait time to shoot the player
         private float nextTimeToFire = 0;
 
@@ -42,6 +44,7 @@ namespace Enemy
         /// Hasta aqui se podra borrar        
        
         private bool Detected = false;
+        public bool swapped = false;
 
         private Vector3 originalScale;
         private Vector3 scaleTo;        
@@ -58,13 +61,18 @@ namespace Enemy
 
             originalScale = transform.localScale;
             scaleTo = originalScale * 1.35f;
+            sr = gameObject.GetComponent<SpriteRenderer>();
+
         }
 
         void Update()
         {
+            
             Vector2 targetPos = Target.transform.position;
             Direction = targetPos - (Vector2)transform.position;
             RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range, LayerMask.GetMask("Player", "Terrain"));
+
+            StartCoroutine("KnockedTime");
 
             if (rayInfo)
             {
@@ -87,7 +95,7 @@ namespace Enemy
                     }
                 }
             }
-            if (Detected)
+            if (Detected && !swapped)
             {
 
                 Gun.transform.up = Direction;
@@ -133,6 +141,30 @@ namespace Enemy
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
                 Destroy(gameObject);
             }
+        }
+        #endregion
+
+        #region Swap
+        public void OnSwap()
+        {
+            Debug.Log("knocked");
+            swapped = true;
+        }
+
+        IEnumerator KnockedTime()
+        {
+            yield return new WaitUntil(() => swapped);
+            sr.DOFade(0.2f, 0.8f);
+            yield return new WaitForSeconds(.5f);
+            sr.DOFade(1f, 0.5f);
+
+            yield return new WaitForSeconds(knockedTime);
+            if (swapped)
+            {
+                swapped = false;
+                Debug.Log("finish knocked");
+            }
+
         }
         #endregion
     }

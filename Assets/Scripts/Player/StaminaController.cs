@@ -66,7 +66,7 @@ namespace Player {
         {
             StopAllCoroutines();
             coroutineActive = false;
-            Debug.Log("sTOP");
+            //Debug.Log("sTOP");
         }
         #endregion
 
