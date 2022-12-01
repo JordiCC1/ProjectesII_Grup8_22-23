@@ -28,6 +28,11 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void ChangePitch(float pitch)
+    {
+        audioSource.pitch = pitch;
+    }
+
     public void PBulletWallCollisionSFX()
     {
         audioSource.PlayOneShot(pBulletWallSFX);
