@@ -18,6 +18,7 @@ namespace Player {
         public GameObject staminaBar;
         public static StaminaController instance;
 
+
         private void Awake()
         {
             instance = this;
