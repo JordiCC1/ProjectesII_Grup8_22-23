@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using Enemy;
 
 namespace Player
 {
@@ -30,21 +32,25 @@ namespace Player
             GameObject objCollided = collision.gameObject;
             if (objCollided.CompareTag("Enemy"))
             {
+                objCollided.GetComponent<Controller>().OnSwap();                
                 SwapGameObject(objCollided);
                 AudioManager.instance.PBulletEnemyCollisionSFX();
             }
             else
                 AudioManager.instance.PBulletWallCollisionSFX();
-            Destroy(gameObject);
+            Destroy(gameObject);            
         }
 
         public void SwapGameObject(GameObject Objective)
         {
             Vector3 lastPos = this.gameObject.transform.parent.position;
-            this.gameObject.transform.parent.position = Objective.transform.position;
+            Vector3 newPos = Objective.transform.position;
+            this.gameObject.transform.parent.position = newPos;
             Objective.transform.position = lastPos;
             this.gameObject.GetComponentInParent<Player>().isInvincible = true;
             StaminaController.instance.ResetStamina();
+            StartCoroutine(BulletTime.instance.BackToNormalSpeed());
+            this.gameObject.GetComponentInParent<Player>().WarpCamera(lastPos);
         }
     }
 

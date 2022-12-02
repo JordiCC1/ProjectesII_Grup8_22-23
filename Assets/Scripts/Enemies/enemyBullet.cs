@@ -14,6 +14,7 @@ public class enemyBullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
         ParticleIns.GetComponent<ParticleSystem>().Play();        
         Destroy(gameObject);

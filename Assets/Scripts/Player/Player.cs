@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 namespace Player
 {
     //AudioManager.instance.LandingSFX();
@@ -11,11 +12,12 @@ namespace Player
     [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(Movement))]
     [RequireComponent(typeof(BulletTime))]
+    [RequireComponent(typeof(PlayerCamera))]
 
     public class Player : MonoBehaviour
     {
         [SerializeField] private Movement movement;
-        [SerializeField] private BulletTime bt;
+        [SerializeField] private BulletTime bt;        
 
         public MovementInputs moveInputs;
         public BulletTimeInputs btInputs;
@@ -101,5 +103,11 @@ namespace Player
         }
         #endregion
 
+        #region Camera
+        public void WarpCamera(Vector3 positionDelta)
+        {
+            PlayerCamera.instance.UpdateCamera(this.transform, positionDelta);
+        }
+        #endregion
     }
 }
