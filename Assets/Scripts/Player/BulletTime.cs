@@ -13,12 +13,20 @@ namespace Player
 
     public class BulletTime : MonoBehaviour
     {
-        public float slowdownFactor = 0.25f;
+        [Header("Bullet Time")]
+        public float slowdownFactor = 0.2f;
+        private float normalTimeScale = 1.0f;
+        private float actualTimeScale;
+
         public bool isActive = false;
 
         public static BulletTime instance;
 
-        private float actualTimeScale;
+        public float timeToNormal=3.0f;
+
+        [Header("Interpolation")]
+        Interpolator lerp;
+        public AnimationCurve curve;
 
         private void Awake()
         {
@@ -30,6 +38,8 @@ namespace Player
             {
                 Destroy(gameObject);
             }
+
+            lerp = new Interpolator(timeToNormal);
         }
 
         public void UpdateBulletTime(BulletTimeInputs inputs, bool canBT)
@@ -63,6 +73,7 @@ namespace Player
             {
                 StaminaController.instance.StopStamina();
             }
+            Time.timeScale = actualTimeScale;
         }
 
         void BulletTimeActive()
@@ -70,28 +81,29 @@ namespace Player
             Time.timeScale = slowdownFactor;
             actualTimeScale = slowdownFactor;
             isActive = true;
-            AudioManager.instance.ChangePitch(0.9f);
+            AudioManager.instance.ChangePitch(0.8f);
         }
 
         void FinishBulletTime()
         {
-            Time.timeScale = 1.0f;
             actualTimeScale = 1.0f;
+            Time.timeScale =actualTimeScale;
             isActive = false;
             StaminaController.instance.ResetStamina();
             AudioManager.instance.ChangePitch(1.0f);
         }
 
-        public IEnumerator BackToNormalSpeed()
+        public void BackToNormal()
         {
-            while (actualTimeScale < 1.0f)
-            {
-                yield return new WaitForSeconds(0.1f);
-                actualTimeScale += 0.1f;
-                Time.timeScale = actualTimeScale;
-            }
-            actualTimeScale = 1.0f;
-            Time.timeScale = actualTimeScale;
+            lerp.Update(Time.deltaTime);
+
+            if (lerp.IsMaxPrecise)
+                lerp.ToMin();
+
+            else if (lerp.IsMinPrecise)
+                lerp.ToMax();
+
+            actualTimeScale = Mathf.Lerp(actualTimeScale, normalTimeScale, curve.Evaluate(lerp.Value));
         }
 
     }

@@ -230,7 +230,7 @@ namespace Player
 
         #region Move
 
-        private bool isFacingRight = true;
+        public bool isFacingRight { get; private set; } = true;
 
         private void MoveCharacterPhysics()
         {
