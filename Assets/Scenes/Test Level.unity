@@ -14206,6 +14206,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 27149512573143974, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
+      propertyPath: curve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 27149512573143974, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 27149512573143974, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7609031436340940521, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
       propertyPath: m_RootOrder
       value: 1
