@@ -8,9 +8,9 @@ namespace Enemy
     public class Controller : MonoBehaviour
     {
         //Shooting range
-        [SerializeField]private float Range;
+        [SerializeField] private float Range;
         //Position of the player
-        [SerializeField] private GameObject Target;        
+        [SerializeField] private GameObject Target;
         //Time to wait to shoot when it sees the player
         [SerializeField] private float waitTime;
         [SerializeField] private float knockedTime;
@@ -29,7 +29,16 @@ namespace Enemy
         //What it shoots
         [SerializeField] private GameObject bullet;
 
+        //Stun Animation
         private SpriteRenderer sr;
+        private float minimum = 0.3f;
+        private float maximum = 1.0f;
+        private float cyclesPerSecond = 2.0f;
+        private float alpha;
+        private bool increasing = true;
+        private Color srColor;
+        private Color maxAlpha;
+
         //Wait time to shoot the player
         private float nextTimeToFire = 0;
 
@@ -42,13 +51,13 @@ namespace Enemy
         //Max alpha
         private Color alphaM;
         /// Hasta aqui se podra borrar        
-       
+
         private bool Detected = false;
         public bool swapped = false;
 
         private Vector3 originalScale;
-        private Vector3 scaleTo;        
-       
+        private Vector3 scaleTo;
+
 
         void Start()
         {
@@ -62,12 +71,14 @@ namespace Enemy
             originalScale = transform.localScale;
             scaleTo = originalScale * 1.35f;
             sr = gameObject.GetComponent<SpriteRenderer>();
-
+            maxAlpha = sr.color;
+            srColor = sr.color;
+            alpha = maximum;
         }
 
         void Update()
         {
-            
+
             Vector2 targetPos = Target.transform.position;
             Direction = targetPos - (Vector2)transform.position;
             RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range, LayerMask.GetMask("Player", "Terrain"));
@@ -105,6 +116,7 @@ namespace Enemy
                     StartCoroutine("WaitToShoot");
                 }
             }
+            Blink();
         }
 
         #region Shoot
@@ -154,21 +166,28 @@ namespace Enemy
         IEnumerator KnockedTime()
         {
             yield return new WaitUntil(() => swapped);
-            sr.DOFade(0.2f, 0.8f);
-            yield return new WaitForSeconds(.5f);
-            sr.DOFade(1f, 0.5f);
-
             yield return new WaitForSeconds(knockedTime);
             if (swapped)
             {
                 swapped = false;
                 Debug.Log("finish knocked");
+                sr.color = maxAlpha;
             }
 
+        }
+
+        void Blink()
+        {
+            if (swapped)
+            {
+                float t = Time.deltaTime;
+                if (alpha >= maximum) increasing = false;
+                if (alpha <= minimum) increasing = true;
+                alpha = increasing ? alpha += t * cyclesPerSecond * 2 : alpha -= t * cyclesPerSecond;
+                srColor.a = alpha;
+                sr.color = srColor;
+            }
         }
         #endregion
     }
 }
-
-
-
