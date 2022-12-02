@@ -24,6 +24,7 @@ namespace Enemy
         [SerializeField] private GameObject particles;
         //Vector to the player
         private Vector2 Direction;
+        private Vector2 BulletDirection;
         //Where it shoots from
         [SerializeField] private GameObject Gun;
         //What it shoots
@@ -38,6 +39,8 @@ namespace Enemy
         private bool increasing = true;
         private Color srColor;
         private Color maxAlpha;
+
+        private bool check = false;
 
         //Wait time to shoot the player
         private float nextTimeToFire = 0;
@@ -80,41 +83,47 @@ namespace Enemy
         {
 
             Vector2 targetPos = Target.transform.position;
-            Direction = targetPos - (Vector2)transform.position;
+            Direction = (targetPos - (Vector2)transform.position).normalized;
+            BulletDirection = targetPos - (Vector2)transform.position;
             RaycastHit2D rayInfo = Physics2D.Raycast(transform.position, Direction, Range, LayerMask.GetMask("Player", "Terrain"));
 
-            StartCoroutine("KnockedTime");
+            if (swapped)
+            {
+                if (check == true)
+                {
+                    StopCoroutine("KnockedTime");
+                    check = false;
+                }
+                StartCoroutine("KnockedTime");                
+            }
 
             if (rayInfo)
             {
                 if (rayInfo.collider.gameObject.tag == "Player")
                 {
+                    
                     if (Detected == false)
                     {
                         Alarm1.GetComponent<SpriteRenderer>().color = alphaM;
                         Alarm2.GetComponent<SpriteRenderer>().color = alphaM;
                         Detected = true;
                     }
-                }
-                else
-                {
-                    if (Detected == true)
+                    if (Detected && !swapped)
                     {
-                        Detected = false;
-                        Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
-                        Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
+                        Gun.transform.up = Direction;
+                        if (Time.time > nextTimeToFire)
+                        {
+                            nextTimeToFire = Time.time + 1 / FireRate;
+                            StartCoroutine("WaitToShoot");
+                        }
                     }
-                }
+                }                
             }
-            if (Detected && !swapped)
-            {
-
-                Gun.transform.up = Direction;
-                if (Time.time > nextTimeToFire)
-                {
-                    nextTimeToFire = Time.time + 1 / FireRate;
-                    StartCoroutine("WaitToShoot");
-                }
+            else if (Detected)
+            {                
+                Detected = false;
+                Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
+                Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
             }
             Blink();
         }
@@ -122,10 +131,12 @@ namespace Enemy
         #region Shoot
         void Shoot()
         {
+            if (!Detected)
+                return;
             CinemachineShake.Instance.ShakeCamera(5f, .1f);
             AudioManager.instance.EnemyShootSFX();
             GameObject BulletIns = Instantiate(bullet, Shootpoint.position, Quaternion.identity);
-            BulletIns.GetComponent<Rigidbody2D>().AddForce(Direction * Force);
+            BulletIns.GetComponent<Rigidbody2D>().AddForce(BulletDirection * Force);
         }
 
         private void OnDrawGizmosSelected()
@@ -136,9 +147,11 @@ namespace Enemy
         IEnumerator WaitToShoot()
         {
             transform.DOScale(scaleTo, 0.5f);
-            yield return new WaitForSeconds(waitTime);  ////fer un yield waituntil swapped o algo similar
+            yield return new WaitForSeconds(waitTime); 
             transform.DOScale(originalScale, 0.5f);
-            Shoot();
+            if (!swapped)            
+                Shoot();              
+            
         }
         #endregion
 
@@ -161,19 +174,19 @@ namespace Enemy
         {
             Debug.Log("knocked");
             swapped = true;
+            check = true;
         }
 
         IEnumerator KnockedTime()
-        {
-            yield return new WaitUntil(() => swapped);
+        {                      
             yield return new WaitForSeconds(knockedTime);
+            
             if (swapped)
             {
                 swapped = false;
                 Debug.Log("finish knocked");
                 sr.color = maxAlpha;
             }
-
         }
 
         void Blink()
@@ -188,6 +201,12 @@ namespace Enemy
                 sr.color = srColor;
             }
         }
+
         #endregion
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawLine(transform.position, transform.position + (Vector3)Direction * Range);
+        }
     }
 }
