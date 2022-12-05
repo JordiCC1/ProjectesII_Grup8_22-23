@@ -11,8 +11,7 @@ namespace Player
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(Movement))]
-    [RequireComponent(typeof(BulletTime))]
-    [RequireComponent(typeof(PlayerCamera))]
+    [RequireComponent(typeof(BulletTime))]    
 
     public class Player : MonoBehaviour
     {
@@ -100,11 +99,6 @@ namespace Player
         }
         #endregion
 
-        #region Camera
-        public void WarpCamera(Vector3 positionDelta)
-        {
-            PlayerCamera.instance.UpdateCamera(this.transform, positionDelta);
-        }
-        #endregion
+        
     }
 }
