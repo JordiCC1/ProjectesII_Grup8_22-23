@@ -49,7 +49,7 @@ namespace Player
                 this.gameObject.GetComponentInChildren<Gun>().Shoot();
             }
             if (canBT)
-            {
+            { 
                 if (StaminaController.instance.stamina >= 0.0f)
                 {
                     if (inputs.BulletTimeDown)
@@ -71,6 +71,7 @@ namespace Player
             }
             else
             {
+                FinishBulletTime();
                 StaminaController.instance.StopStamina();
             }
             Time.timeScale = actualTimeScale;

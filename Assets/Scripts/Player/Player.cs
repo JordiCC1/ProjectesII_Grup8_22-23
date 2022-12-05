@@ -63,10 +63,7 @@ namespace Player
         
         private bool CanBT()
         {
-            if (!movement.isGrounded && StaminaController.instance.stamina >= 0)
-                return true;
-            else
-                return false;
+            return (!(movement.isGrounded) && StaminaController.instance.stamina >= 0);
         }
 
         #endregion
