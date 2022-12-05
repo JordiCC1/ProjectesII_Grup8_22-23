@@ -22,7 +22,7 @@ namespace Player
 
         public static BulletTime instance;
 
-        public float timeToNormal=3.0f;
+        public float timeToNormal=.75f;
 
         [Header("Interpolation")]
         Interpolator lerp;
