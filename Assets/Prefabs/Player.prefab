@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 27149512573143968}
   - component: {fileID: 27149512573143974}
   - component: {fileID: 2112402464}
-  - component: {fileID: 5752446759194604814}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -210,6 +209,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownFactor: 0.25
   isActive: 0
+  timeToNormal: 0.75
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &2112402464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,19 +232,6 @@ MonoBehaviour:
   <stamina>k__BackingField: 0
   staminaDrain: 1
   staminaBar: {fileID: 7609031435354373264}
---- !u!114 &5752446759194604814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27149512573143903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0e32b706f6151e44b432065bf3fa16b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vCam1: {fileID: 0}
 --- !u!1 &6860530578194479861
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,13 +469,35 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7609031435567466267, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
 --- !u!1 &7609031435354373264 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7609031436530988387, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
   m_PrefabInstance: {fileID: 1579567603}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7609031436340940517 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7609031435567466262, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
+  m_PrefabInstance: {fileID: 1579567603}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3067467012068268974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7609031436340940517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f695a396af99a145921fefe49616012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStamina: 2
+  <stamina>k__BackingField: 20
+  staminaDrain: 1
+  staminaBar: {fileID: 7609031435354373264}
 --- !u!224 &7609031436340940521 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7609031435567466266, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
