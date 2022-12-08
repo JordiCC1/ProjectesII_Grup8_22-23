@@ -36,6 +36,7 @@ public class PauseMenu : MonoBehaviour
                 PauseGame();
             }
         }
+        Debug.Log((float)Time.time);
     }
 
     public void PauseGame()
@@ -51,9 +52,12 @@ public class PauseMenu : MonoBehaviour
         {
             part.SetActive(false);
         }
-        Time.timeScale = 0f;
+
+        Time.timeScale = 0;
         isPaused = true;
     }
+
+    
 
     public void ResumeGame()
     {
@@ -68,7 +72,7 @@ public class PauseMenu : MonoBehaviour
         {
             part.SetActive(true);
         }
-        Time.timeScale = 1f;
+        Time.timeScale = 1;
         isPaused = false;
     }
 
@@ -86,6 +90,6 @@ public class PauseMenu : MonoBehaviour
     private IEnumerator BackToMenu()
     {        
         yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
     }
 }

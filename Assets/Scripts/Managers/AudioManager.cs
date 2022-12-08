@@ -33,6 +33,11 @@ public class AudioManager : MonoBehaviour
         audioSource.pitch = pitch;
     }
 
+    public void ChangeVolume(float sliderValue)
+    {
+        audioSource.volume = sliderValue;
+    }
+
     public void PBulletWallCollisionSFX()
     {
         audioSource.PlayOneShot(pBulletWallSFX);
