@@ -25,8 +25,6 @@ namespace Player
         [HideInInspector] public bool isInvincible = false;
         [HideInInspector] public bool isBulletTimeActive = false;
 
-        private bool isBulletTimeActive;
-
         private void Start()
         {
             movement = GetComponent<Movement>();
