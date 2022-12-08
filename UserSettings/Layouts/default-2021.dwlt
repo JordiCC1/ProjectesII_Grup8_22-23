@@ -14,16 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
+<<<<<<< develop
     x: 8
     y: 51
     width: 1904
     height: 973
   m_ShowMode: 4
   m_Title: Hierarchy
+=======
+    x: 0
+    y: 43
+    width: 1920
+    height: 989
+  m_ShowMode: 4
+  m_Title: Scene
+>>>>>>> Creat el menu de pause
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
-  m_Maximized: 0
+  m_Maximized: 1
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -43,12 +52,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
+<<<<<<< develop
     width: 1904
     height: 923
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
   controlID: 17
+=======
+    width: 1920
+    height: 939
+  m_MinSize: {x: 300, y: 200}
+  m_MaxSize: {x: 24288, y: 16192}
+  vertical: 0
+  controlID: 15
+>>>>>>> Creat el menu de pause
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -64,10 +82,17 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< develop
     x: 1451
     y: 0
     width: 453
     height: 923
+=======
+    x: 1466
+    y: 0
+    width: 454
+    height: 939
+>>>>>>> Creat el menu de pause
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
@@ -92,8 +117,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< develop
     width: 359
     height: 545
+=======
+    width: 363
+    height: 557
+>>>>>>> Creat el menu de pause
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
@@ -117,9 +147,15 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< develop
     y: 545
     width: 1451
     height: 378
+=======
+    y: 557
+    width: 1466
+    height: 382
+>>>>>>> Creat el menu de pause
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 12}
@@ -148,8 +184,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< develop
     width: 1904
     height: 973
+=======
+    width: 1920
+    height: 989
+>>>>>>> Creat el menu de pause
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
@@ -173,7 +214,11 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< develop
     width: 1904
+=======
+    width: 1920
+>>>>>>> Creat el menu de pause
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -194,8 +239,13 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< develop
     y: 953
     width: 1904
+=======
+    y: 969
+    width: 1920
+>>>>>>> Creat el menu de pause
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -218,12 +268,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< develop
     width: 1451
     height: 923
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
   controlID: 18
+=======
+    width: 1466
+    height: 939
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 16192, y: 16192}
+  vertical: 1
+  controlID: 16
+>>>>>>> Creat el menu de pause
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -243,12 +302,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< develop
     width: 1451
     height: 545
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
   controlID: 19
+=======
+    width: 1466
+    height: 557
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+  controlID: 17
+>>>>>>> Creat el menu de pause
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -264,10 +332,17 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< develop
     x: 359
     y: 0
     width: 1092
     height: 545
+=======
+    x: 363
+    y: 0
+    width: 1103
+    height: 557
+>>>>>>> Creat el menu de pause
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 16}
@@ -296,10 +371,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< develop
     x: 8
     y: 626
     width: 1450
     height: 357
+=======
+    x: 0
+    y: 630
+    width: 1465
+    height: 361
+>>>>>>> Creat el menu de pause
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -317,22 +399,38 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
+<<<<<<< develop
     - Assets/Scripts/Player
+=======
+    - Assets/Scenes
+>>>>>>> Creat el menu de pause
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
+<<<<<<< develop
   - Assets/Scripts/Player
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "C:\\Users\\PauAmig\xF3Arjona\\Desktop\\Repos gitkraken\\ProjectesII_Grup8_22-23"
+=======
+  - Assets/Scenes
+  m_LastFoldersGridSize: -1
+  m_LastProjectPath: C:\Users\Pau\Documents\GitKraken\ProjectesII_Grup8_22-23
+>>>>>>> Creat el menu de pause
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< develop
     m_SelectedIDs: da640000
     m_LastClickedID: 25818
     m_ExpandedIDs: 000000005a6400009264000000ca9a3bffffff7f
+=======
+    m_SelectedIDs: 8e610000
+    m_LastClickedID: 24974
+    m_ExpandedIDs: 000000005661000000ca9a3bffffff7f
+>>>>>>> Creat el menu de pause
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -360,7 +458,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< develop
     m_ExpandedIDs: 000000005a640000
+=======
+    m_ExpandedIDs: 0000000056610000
+>>>>>>> Creat el menu de pause
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -436,10 +538,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< develop
     x: 1459
     y: 81
     width: 452
     height: 902
+=======
+    x: 1466
+    y: 73
+    width: 453
+    height: 918
+>>>>>>> Creat el menu de pause
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -477,10 +586,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< develop
     x: 8
     y: 81
     width: 358
     height: 524
+=======
+    x: 0
+    y: 73
+    width: 362
+    height: 536
+>>>>>>> Creat el menu de pause
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -490,7 +606,11 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 4e080000
       m_LastClickedID: 0
+<<<<<<< develop
       m_ExpandedIDs: ecf3ffff92f5ffff52f6ffff6afaffff
+=======
+      m_ExpandedIDs: 9cf0ffffc6f0ffff52f1ffffc8f4ffffb6f6ffff6af9ffff74f9ffff12fbffff
+>>>>>>> Creat el menu de pause
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -534,10 +654,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< develop
     x: 367
     y: 81
     width: 1090
     height: 524
+=======
+    x: 363
+    y: 73
+    width: 1101
+    height: 536
+>>>>>>> Creat el menu de pause
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -602,7 +729,11 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 0
+<<<<<<< develop
       snapOffset: {x: 0, y: 25}
+=======
+      snapOffset: {x: 0, y: 0}
+>>>>>>> Creat el menu de pause
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Tilemap Focus
@@ -761,9 +892,15 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< develop
     m_Target: {x: -16.371609, y: 0.7529226, z: 5.84466}
     speed: 2
     m_Value: {x: -16.371609, y: 0.7529226, z: 5.84466}
+=======
+    m_Target: {x: 547.80994, y: 266.47168, z: 3.803537}
+    speed: 2
+    m_Value: {x: 547.80994, y: 266.47168, z: 3.803537}
+>>>>>>> Creat el menu de pause
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -814,9 +951,15 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
+<<<<<<< develop
     m_Target: 15.765384
     speed: 2
     m_Value: 15.765384
+=======
+    m_Target: 306.31158
+    speed: 2
+    m_Value: 306.31158
+>>>>>>> Creat el menu de pause
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -875,10 +1018,17 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+<<<<<<< develop
   m_TargetSize: {x: 1090, y: 503}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
+=======
+  m_TargetSize: {x: 1532, y: 769}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 0
+>>>>>>> Creat el menu de pause
   m_EnterPlayModeBehavior: 0
   m_UseMipMap: 0
   m_VSyncEnabled: 0
@@ -890,10 +1040,17 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
+<<<<<<< develop
     m_HBaseRangeMin: -545
     m_HBaseRangeMax: 545
     m_VBaseRangeMin: -251.5
     m_VBaseRangeMax: 251.5
+=======
+    m_HBaseRangeMin: -766
+    m_HBaseRangeMax: 766
+    m_VBaseRangeMin: -384.5
+    m_VBaseRangeMax: 384.5
+>>>>>>> Creat el menu de pause
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -911,20 +1068,34 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
+<<<<<<< develop
       width: 1090
       height: 503
     m_Scale: {x: 1, y: 1}
     m_Translation: {x: 545, y: 251.5}
+=======
+      width: 1532
+      height: 769
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 766, y: 384.5}
+>>>>>>> Creat el menu de pause
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< develop
       x: -545
       y: -251.5
       width: 1090
       height: 503
+=======
+      x: -766
+      y: -384.5
+      width: 1532
+      height: 769
+>>>>>>> Creat el menu de pause
     m_MinimalGUI: 1
   m_defaultScale: 1
   m_LastWindowPixelSize: {x: 1090, y: 524}
@@ -953,10 +1124,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< develop
     x: 8
     y: 842
     width: 1942
     height: 502
+=======
+    x: 0
+    y: 630
+    width: 1465
+    height: 361
+>>>>>>> Creat el menu de pause
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
