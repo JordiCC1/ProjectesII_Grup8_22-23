@@ -6,24 +6,41 @@ public class NPC_Interaction : MonoBehaviour
 {
     public GameObject textBox;
 
+    public bool canInteract = false;
+
     void Update()
     {
-       // if(Input.GetKeyDown(KeyCode.F) && IsActive())
-       //     textBox.SetActive(false);
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && Input.GetKeyDown(KeyCode.F))
+        if(canInteract)
         {
-            Interact();
+            HandleInput();
         }
     }
 
-    void Interact()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!IsActive())
-            textBox.SetActive(true);
+        if (collision.CompareTag("Player"))
+        {
+            canInteract = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            canInteract = false;
+        }
+    }
+
+    private void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            if(IsActive())
+                textBox.SetActive(false);
+            else
+                textBox.SetActive(true);
+        }
     }
 
     bool IsActive()
