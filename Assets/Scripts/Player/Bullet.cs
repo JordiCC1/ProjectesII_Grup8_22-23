@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 using Enemy;
 
 namespace Player
@@ -45,9 +44,11 @@ namespace Player
         {
             Vector3 lastPos = this.gameObject.transform.parent.position;
             Vector3 newPos = Objective.transform.position;
-            this.gameObject.transform.parent.position = newPos;
+            //this.gameObject.transform.parent.position = newPos;            
             Objective.transform.position = lastPos;
             this.gameObject.GetComponentInParent<Player>().isInvincible = true;
+            this.gameObject.GetComponentInParent<Player>().isSwapped = true;
+            this.gameObject.GetComponentInParent<Player>().targetPosition = newPos;
             StaminaController.instance.ResetStamina();
             BulletTime.instance.BackToNormal();            
         }
