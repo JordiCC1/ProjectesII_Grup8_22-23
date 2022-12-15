@@ -61,6 +61,8 @@ namespace Enemy
         private Vector3 originalScale;
         private Vector3 scaleTo;
 
+        [HideInInspector] public Vector3 swapPosition;
+
 
         void Start()
         {
@@ -176,7 +178,21 @@ namespace Enemy
             swapped = true;
             check = true;
         }
+        public void SwapAnimation(Vector3 target)
+        {
+            Tween t;           
+            gameObject.GetComponent<Collider2D>().enabled = false;
+            t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, target, 0.2f).SetEase(Ease.InOutQuad);               
+            StartCoroutine("ReturnCollider");        
 
+        }
+        
+        IEnumerator ReturnCollider()
+        {
+            yield return new WaitForSeconds(0.1f);
+            gameObject.GetComponent<Collider2D>().enabled = true;
+        }
+    
         IEnumerator KnockedTime()
         {                      
             yield return new WaitForSeconds(knockedTime);
@@ -201,7 +217,6 @@ namespace Enemy
                 sr.color = srColor;
             }
         }
-
         #endregion
 
         private void OnDrawGizmos()

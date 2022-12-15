@@ -43,9 +43,8 @@ namespace Player
         public void SwapGameObject(GameObject Objective)
         {
             Vector3 lastPos = this.gameObject.transform.parent.position;
-            Vector3 newPos = Objective.transform.position;
-            //this.gameObject.transform.parent.position = newPos;            
-            Objective.transform.position = lastPos;
+            Vector3 newPos = Objective.transform.position;            
+            Objective.GetComponent<Controller>().SwapAnimation(lastPos);            
             this.gameObject.GetComponentInParent<Player>().isInvincible = true;
             this.gameObject.GetComponentInParent<Player>().isSwapped = true;
             this.gameObject.GetComponentInParent<Player>().targetPosition = newPos;

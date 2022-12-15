@@ -109,20 +109,12 @@ namespace Player
         {
             Tween t;            
             if (isSwapped)
-            {                
-                gameObject.GetComponent<Collider2D>().enabled = false;                  
+            {                                                 
                 t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.2f).SetEase(Ease.InOutQuad);               
-                isSwapped = false;                
-                StartCoroutine("ReturnCollider");                
+                isSwapped = false;        
             }
                 
-        }
-
-        IEnumerator ReturnCollider()
-        {
-            yield return new WaitForSeconds(0.1f);
-            gameObject.GetComponent<Collider2D>().enabled = true;            
-        }
+        }        
         #endregion
 
     }
