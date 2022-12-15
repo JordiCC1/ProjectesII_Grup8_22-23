@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 
 namespace Player
@@ -23,6 +24,9 @@ namespace Player
 
         [HideInInspector] public bool isInvincible = false;
         [HideInInspector] public bool isBulletTimeActive = false;
+        [HideInInspector] public bool isSwapped = false;
+
+        [HideInInspector] public Vector3 targetPosition;
 
 
         private void Start()
@@ -37,6 +41,7 @@ namespace Player
             movement.UpdateMovement(moveInputs);
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateInvincible();
+            UpdateSwapped();
         }
 
         #region Inputs
@@ -99,6 +104,18 @@ namespace Player
         }
         #endregion
 
-        
+        #region Swap
+        void UpdateSwapped()
+        {
+            Tween t;            
+            if (isSwapped)
+            {                                                 
+                t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.2f).SetEase(Ease.InOutQuad);               
+                isSwapped = false;        
+            }
+                
+        }        
+        #endregion
+
     }
 }
