@@ -78,17 +78,12 @@ public class PauseMenu : MonoBehaviour
     public void GoToMainMenu()
     {
         Time.timeScale = 1f;        
-        StartCoroutine(BackToMenu());
-        //gamePaused.RuntimeValue = false;
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void QuitGame()
     {
         Application.Quit();
     }
-    private IEnumerator BackToMenu()
-    {        
-        yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene("Main Menu");
-    }
+
 }
