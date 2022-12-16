@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPC_Interaction : MonoBehaviour
+public class Interactable_Base : MonoBehaviour
 {
-    public GameObject textBox;
-
+    public GameObject interactable;
     public bool canInteract = false;
 
     void Update()
     {
-        if(canInteract)
+        if (canInteract)
         {
             HandleInput();
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -23,7 +21,6 @@ public class NPC_Interaction : MonoBehaviour
             canInteract = true;
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -31,20 +28,18 @@ public class NPC_Interaction : MonoBehaviour
             canInteract = false;
         }
     }
-
     private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if(IsActive())
-                textBox.SetActive(false);
+            if (IsActive())
+                interactable.SetActive(false);
             else
-                textBox.SetActive(true);
+                interactable.SetActive(true);
         }
     }
-
     bool IsActive()
     {
-        return textBox.activeInHierarchy;
+        return interactable.activeInHierarchy;
     }
 }
