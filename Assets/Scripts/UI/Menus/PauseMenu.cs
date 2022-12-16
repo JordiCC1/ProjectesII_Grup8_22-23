@@ -35,8 +35,7 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseGame();
             }
-        }
-        Debug.Log((float)Time.time);
+        }       
     }
 
     public void PauseGame()
