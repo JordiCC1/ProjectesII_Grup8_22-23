@@ -15,6 +15,8 @@ namespace Player
         private float timer;
         public float timeBetweenFire;
 
+        [SerializeField] PauseMenu pauseMenu;
+
         [SerializeField] private Transform playerTransform;
 
         void Start()
@@ -24,30 +26,32 @@ namespace Player
 
         void Update()
         {
-
-            if (playerTransform.localScale.x > 0)
+            if (!pauseMenu.isPaused)
             {
-                mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-                Vector3 rotation = mousePos - transform.position;
-                float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0, 0, rotZ);
-            }
-            else if (playerTransform.localScale.x < 0)
-            {
-                mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-                Vector3 rotation = -(mousePos - transform.position);
-                float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0, 0, rotZ);
-            }
-
-
-            if (!canFire)
-            {
-                timer += Time.deltaTime;
-                if (timer > timeBetweenFire)
+                if (playerTransform.localScale.x > 0)
                 {
-                    canFire = true;
-                    timer = 0;
+                    mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+                    Vector3 rotation = mousePos - transform.position;
+                    float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(0, 0, rotZ);
+                }
+                else if (playerTransform.localScale.x < 0)
+                {
+                    mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+                    Vector3 rotation = -(mousePos - transform.position);
+                    float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(0, 0, rotZ);
+                }
+
+
+                if (!canFire)
+                {
+                    timer += Time.deltaTime;
+                    if (timer > timeBetweenFire)
+                    {
+                        canFire = true;
+                        timer = 0;
+                    }
                 }
             }
         }
