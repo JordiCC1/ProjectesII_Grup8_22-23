@@ -30,7 +30,7 @@ public class Interactable_Base : MonoBehaviour
     }
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             if (IsActive())
                 interactable.SetActive(false);
