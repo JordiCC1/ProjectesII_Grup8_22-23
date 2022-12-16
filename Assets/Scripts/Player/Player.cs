@@ -95,7 +95,18 @@ namespace Player
             {
                 StartCoroutine("ReturnToNormalState");
             }
+            else
+            {
+
+            }
         }
+
+        public void RestartInvincibility()
+        {
+            StopCoroutine(ReturnToNormalState());
+            isInvincible = false;
+        }
+
         IEnumerator ReturnToNormalState()
         {
             yield return new WaitForSeconds(invincibilityTime);
