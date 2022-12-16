@@ -73,7 +73,6 @@ namespace Player
             }
             else
             {
-                FinishBulletTime();
                 StaminaController.instance.StopStamina();
             }
 

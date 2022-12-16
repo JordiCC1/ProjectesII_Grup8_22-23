@@ -153,9 +153,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {fileID: 27149512573143968}
   bt: {fileID: 27149512573143974}
+  spriteRenderer: {fileID: 0}
   isInvincible: 0
   isBulletTimeActive: 0
-  invincibilityTime: 1
+  isSwapped: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  invincibilityTime: 2.5
 --- !u!114 &27149512573143968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,9 +213,28 @@ MonoBehaviour:
   slowdownFactor: 0.25
   isActive: 0
   timeToNormal: 0.75
+  pauseMenu: {fileID: 0}
   curve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -231,7 +253,7 @@ MonoBehaviour:
   maxStamina: 2
   <stamina>k__BackingField: 0
   staminaDrain: 1
-  staminaBar: {fileID: 7609031435354373264}
+  staminaBar: {fileID: 7609031436340940517}
 --- !u!1 &6860530578194479861
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +303,7 @@ MonoBehaviour:
   bulletTransform: {fileID: 7569515720698804833}
   canFire: 1
   timeBetweenFire: 0
+  pauseMenu: {fileID: 0}
   playerTransform: {fileID: 27149512573143902}
 --- !u!1 &8059106899634304723
 GameObject:
@@ -307,7 +330,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8059106899634304723}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

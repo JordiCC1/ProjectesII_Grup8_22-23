@@ -17,7 +17,11 @@ namespace Player
     public class Player : MonoBehaviour
     {
         [SerializeField] private Movement movement;
-        [SerializeField] private BulletTime bt;        
+        [SerializeField] private BulletTime bt;     
+        [SerializeField] private SpriteRenderer spriteRenderer;     
+         
+        
+        
 
         public MovementInputs moveInputs;
         public BulletTimeInputs btInputs;
@@ -28,11 +32,17 @@ namespace Player
 
         [HideInInspector] public Vector3 targetPosition;
 
+        private Color originalColor;
+        private Color targetColor;
+
 
         private void Start()
         {
             movement = GetComponent<Movement>();
             bt = GetComponent<BulletTime>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            originalColor = spriteRenderer.color;
+            targetColor = new Color( 0, 0, 1,1);
         }
 
         void Update()
@@ -40,7 +50,6 @@ namespace Player
             TakeInputs();
             movement.UpdateMovement(moveInputs);
             bt.UpdateBulletTime(btInputs, CanBT());
-            UpdateInvincible();
             UpdateSwapped();
         }
 
@@ -89,28 +98,39 @@ namespace Player
 
         #region Invincibility
         public float invincibilityTime = 0.0f;
-        void UpdateInvincible()
+
+        public void Invincibility()
         {
             if (isInvincible)
             {
-                StartCoroutine("ReturnToNormalState");
+                StopInvincibility();
             }
-            else
-            {
-
-            }
+            StartInvincibility();
         }
 
-        public void RestartInvincibility()
+        void StartInvincibility()
         {
-            StopCoroutine(ReturnToNormalState());
+            isInvincible = true;
+            StartCoroutine("ReturnToNormalState");
+            //spriteRenderer.color = targetColor;
+            spriteRenderer.DOColor(targetColor, 0.6f);
+        }
+
+        void StopInvincibility()
+        {
+            StopCoroutine("ReturnToNormalState");
             isInvincible = false;
+            //spriteRenderer.color = originalColor;
+            spriteRenderer.DOColor(originalColor, 0.5f);
+
         }
 
         IEnumerator ReturnToNormalState()
         {
             yield return new WaitForSeconds(invincibilityTime);
             isInvincible = false;
+            //spriteRenderer.color = originalColor;
+            spriteRenderer.DOColor(originalColor, 0.5f);
             //Debug.Log("not Invicible");
         }
         #endregion

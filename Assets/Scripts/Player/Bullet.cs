@@ -45,12 +45,11 @@ namespace Player
             Vector3 lastPos = this.gameObject.transform.parent.position;
             Vector3 newPos = Objective.transform.position;            
             //Objective.GetComponent<Controller>().SwapAnimation(lastPos);            
-            this.gameObject.GetComponentInParent<Player>().RestartInvincibility();
-            this.gameObject.GetComponentInParent<Player>().isInvincible = true;
+            this.gameObject.GetComponentInParent<Player>().Invincibility();
             this.gameObject.GetComponentInParent<Player>().isSwapped = true;
             this.gameObject.GetComponentInParent<Player>().targetPosition = newPos;
             StaminaController.instance.ResetStamina();
-            BulletTime.instance.BackToNormal();            
+            BulletTime.instance.BackToNormal();
         }
     }
 
