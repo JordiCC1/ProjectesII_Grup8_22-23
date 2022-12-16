@@ -181,9 +181,9 @@ namespace Enemy
         public void SwapAnimation(Vector3 target)
         {
             Tween t;           
-            //gameObject.GetComponent<Collider2D>().enabled = false;
+            gameObject.GetComponent<Collider2D>().enabled = false;
             t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, target, 0.2f).SetEase(Ease.InOutQuad);               
-            //StartCoroutine("ReturnCollider");        
+            StartCoroutine("ReturnCollider");        
 
         }
         

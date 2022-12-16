@@ -133,9 +133,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb19640cd7dfc84fb4dab9f0df8766d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Range: 6
+  Range: 18
   Target: {fileID: 0}
-  waitTime: 1
+  waitTime: 0.4
   knockedTime: 2
   Shootpoint: {fileID: 5441422771340149042}
   Force: 100
