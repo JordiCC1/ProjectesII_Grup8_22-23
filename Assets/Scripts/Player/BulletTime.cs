@@ -16,13 +16,13 @@ namespace Player
         [Header("Bullet Time")]
         public float slowdownFactor = 0.2f;
         private float normalTimeScale = 1.0f;
-        private float actualTimeScale;
+        private float actualTimeScale = 1.0f;
 
         public bool isActive = false;
 
         public static BulletTime instance;
 
-        public float timeToNormal=.75f;
+        public float timeToNormal = .75f;
 
         [Header("Interpolation")]
         Interpolator lerp;
@@ -49,7 +49,7 @@ namespace Player
                 this.gameObject.GetComponentInChildren<Gun>().Shoot();
             }
             if (canBT)
-            { 
+            {
                 if (StaminaController.instance.stamina >= 0.0f)
                 {
                     if (inputs.BulletTimeDown)
@@ -88,7 +88,7 @@ namespace Player
         void FinishBulletTime()
         {
             actualTimeScale = 1.0f;
-            Time.timeScale =actualTimeScale;
+            Time.timeScale = actualTimeScale;
             isActive = false;
             StaminaController.instance.ResetStamina();
             AudioManager.instance.ChangePitch(1.0f);
