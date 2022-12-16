@@ -79,6 +79,14 @@ namespace Player
 
 		}
 
+        void BulletTimeActive()
+        {
+            Time.timeScale = slowdownFactor;
+            actualTimeScale = slowdownFactor;
+            isActive = true;
+            AudioManager.instance.ChangePitch(0.8f);
+        }
+
         void FinishBulletTime()
         {
             actualTimeScale = 1.0f;
@@ -87,15 +95,6 @@ namespace Player
             StaminaController.instance.ResetStamina();
             AudioManager.instance.ChangePitch(1.0f);
         }
-
-		void FinishBulletTime()
-		{
-			actualTimeScale = 1.0f;
-			Time.timeScale = actualTimeScale;
-			isActive = false;
-			StaminaController.instance.ResetStamina();
-			AudioManager.instance.ChangePitch(1.0f);
-		}
 
 		public void BackToNormal()
 		{
