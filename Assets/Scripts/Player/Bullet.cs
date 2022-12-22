@@ -31,20 +31,20 @@ namespace Player
             GameObject objCollided = collision.gameObject;
             if (objCollided.CompareTag("Enemy"))
             {
-                objCollided.GetComponent<Controller>().OnSwap();                
+                objCollided.GetComponent<Controller>().OnSwap();
                 SwapGameObject(objCollided);
                 AudioManager.instance.PBulletEnemyCollisionSFX();
             }
             else
                 AudioManager.instance.PBulletWallCollisionSFX();
-            Destroy(gameObject);            
+            Destroy(gameObject);
         }
 
         public void SwapGameObject(GameObject Objective)
         {
             Vector3 lastPos = this.gameObject.transform.parent.position;
-            Vector3 newPos = Objective.transform.position;            
-            Objective.GetComponent<Controller>().SwapAnimation(lastPos);            
+            Vector3 newPos = Objective.transform.position;
+            Objective.GetComponent<Controller>().SwapAnimation(lastPos);
             this.gameObject.GetComponentInParent<Player>().Invincibility();
             this.gameObject.GetComponentInParent<Player>().isSwapped = true;
             this.gameObject.GetComponentInParent<Player>().targetPosition = newPos;
