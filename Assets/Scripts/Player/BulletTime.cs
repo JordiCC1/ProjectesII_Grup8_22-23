@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 namespace Player
 {
 
@@ -56,24 +57,30 @@ namespace Player
                 {
                     if (inputs.BulletTimeDown)
                     {
+                        
                         BulletTimeActive();
                         StaminaController.instance.UseStamina();
+                        //BulletTimeEffect.instance.StartEffect();
+
                     }
                     else if (inputs.BulletTimeUp)
                     {
                         FinishBulletTime();
                         StaminaController.instance.StopStamina();
+                        //BulletTimeEffect.instance.StopEffect();
                     }
                 }
                 else
                 {
                     FinishBulletTime();
                     StaminaController.instance.StopStamina();
+                    //BulletTimeEffect.instance.StopEffect();
                 }
             }
             else
             {
                 StaminaController.instance.StopStamina();
+                //BulletTimeEffect.instance.StopEffect();
             }
 
 		}
