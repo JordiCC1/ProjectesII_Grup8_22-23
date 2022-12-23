@@ -30,6 +30,9 @@ namespace Enemy
         //What it shoots
         [SerializeField] private GameObject bullet;
 
+        //Make non Player killable enemy
+        [SerializeField] private bool nonPlayerkillable = false;
+
         //Stun Animation
         private SpriteRenderer sr;
         private float minimum = 0.3f;
@@ -160,7 +163,15 @@ namespace Enemy
         #region collisions
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Bullet")
+            if (collision.gameObject.tag == "Player" && !nonPlayerkillable)
+            {
+                AudioManager.instance.EnemyDeathSFX();
+                GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
+                ParticleIns.GetComponent<ParticleSystem>().Play();
+                CinemachineShake.Instance.ShakeCamera(5f, .1f);
+                Destroy(gameObject);
+            }
+            else if (collision.gameObject.tag == "Bullet" && nonPlayerkillable)
             {
                 AudioManager.instance.EnemyDeathSFX();
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);

@@ -8,8 +8,8 @@ namespace Player
     public class BulletTimeEffect : MonoBehaviour
     {
         [SerializeField] private Image fillImage;
-        [SerializeField] private float fillSpeed = 0.5f;
-        [SerializeField] private float deFillSpeed = 0.2f;
+        [SerializeField] private float fillSpeed = 0.4f;
+        [SerializeField] private float deFillSpeed = 0.8f;
 
         public static BulletTimeEffect instance;
         private void Awake()
@@ -23,12 +23,12 @@ namespace Player
         }
         public void StartEffect()
         {
-           
+            StopAllCoroutines();
             StartCoroutine("FillImage");
         }
         public void StopEffect()
         {
-            
+            StopAllCoroutines();
             StartCoroutine("DeFillImage");
         }
 

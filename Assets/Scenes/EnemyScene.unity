@@ -14654,10 +14654,18 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 522694420}
+    - target: {fileID: 4026634074476773082, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5097461344285961728, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 522694420}
+    - target: {fileID: 7609031436340940518, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7609031436443246149, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -19228,10 +19236,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5441422770562737945, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: FireRate
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
 --- !u!1 &1999482580
@@ -19261,7 +19265,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999482580}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
   m_LocalScale: {x: 0.020884506, y: 0.020884506, z: 0.020884506}
   m_ConstrainProportionsScale: 0
@@ -19349,8 +19353,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fillImage: {fileID: 2060367124}
-  fillSpeed: 0.1
-  deFillSpeed: 0.2
+  fillSpeed: 5.5
+  deFillSpeed: 6
 --- !u!1 &2045713877
 GameObject:
   m_ObjectHideFlags: 0
