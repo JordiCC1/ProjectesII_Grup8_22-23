@@ -20,6 +20,7 @@ namespace Player
         private float actualTimeScale = 1.0f;
 
 		public bool isActive = false;
+        bool hasStopped=false;
 
 		public static BulletTime instance;
 
@@ -60,8 +61,6 @@ namespace Player
                         BulletTimeEffect.instance.StartEffect();
                         BulletTimeActive();
                         StaminaController.instance.UseStamina();
-                        
-
                     }
                     else if (inputs.BulletTimeUp)
                     {
@@ -80,6 +79,12 @@ namespace Player
             }
             else
             {
+                if (!hasStopped)
+                {
+                    FinishBulletTime();
+                    BulletTimeEffect.instance.StopEffect();
+
+                }
                 StaminaController.instance.StopStamina();
             }
 
@@ -91,6 +96,7 @@ namespace Player
             actualTimeScale = slowdownFactor;
             isActive = true;
             AudioManager.instance.ChangePitch(0.8f);
+            hasStopped = false;
         }
 
         void FinishBulletTime()
@@ -99,6 +105,7 @@ namespace Player
             Time.timeScale = actualTimeScale;
             isActive = false;
             StaminaController.instance.ResetStamina();
+            hasStopped = true;
             AudioManager.instance.ChangePitch(1.0f);
         }
 
