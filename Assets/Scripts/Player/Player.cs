@@ -11,15 +11,13 @@ namespace Player
 
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
-    [RequireComponent(typeof(Movement))]
-    [RequireComponent(typeof(BulletTime))]    
 
     public class Player : MonoBehaviour
     {
 
         [SerializeField] private Movement movement;
-        [SerializeField] private BulletTime bt;     
-        [SerializeField] private SpriteRenderer spriteRenderer;       
+        [SerializeField] private BulletTime bt;
+        [SerializeField] private SpriteRenderer spriteRenderer;
 
         public MovementInputs moveInputs;
         public BulletTimeInputs btInputs;
@@ -35,19 +33,23 @@ namespace Player
         private Color originalColor;
         private Color targetColor;
 
+        [SerializeField] PauseMenu pauseMenu;
+
+
 
         private void Start()
         {
-            movement = GetComponent<Movement>();
-            bt = GetComponent<BulletTime>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            movement = GetComponentInChildren<Movement>();
+            bt = GetComponentInChildren<BulletTime>();
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             originalColor = spriteRenderer.color;
-            targetColor = new Color( 0, 0, 1,1);
+            targetColor = new Color(0, 0, 1, 1);
         }
 
         void Update()
         {
-            TakeInputs();
+            if (!pauseMenu.isPaused)
+                TakeInputs();
             movement.UpdateMovement(moveInputs);
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateSwapped();
@@ -63,7 +65,7 @@ namespace Player
                 JumpUp = Input.GetButtonUp("Jump")
             };
             if (moveInputs.JumpDown)
-                 movement.lastJumpInput = Time.time;
+                movement.lastJumpInput = Time.time;
 
 
             btInputs = new BulletTimeInputs
@@ -72,7 +74,7 @@ namespace Player
                 BulletTimeUp = Input.GetMouseButtonUp(0)
             };
         }
-        
+
         private bool CanBT()
         {
             return (!(movement.isGrounded) && StaminaController.instance.stamina >= 0);
@@ -138,14 +140,14 @@ namespace Player
         #region Swap
         void UpdateSwapped()
         {
-            Tween t;            
+            Tween t;
             if (isSwapped)
-            {                                                 
-                t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.2f).SetEase(Ease.InOutQuad);               
-                isSwapped = false;        
+            {
+                t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.2f).SetEase(Ease.InOutQuad);
+                isSwapped = false;
             }
-                
-        }        
+
+        }
         #endregion
 
     }

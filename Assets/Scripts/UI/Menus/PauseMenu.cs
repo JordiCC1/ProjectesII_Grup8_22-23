@@ -72,7 +72,7 @@ public class PauseMenu : MonoBehaviour
             part.SetActive(true);
         }
         Time.timeScale = 1;
-        isPaused = false;
+        StartCoroutine("SetPauseFalse");
     }
 
     public void GoToMainMenu()
@@ -86,4 +86,9 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    IEnumerator SetPauseFalse()
+    {
+        yield return new WaitForEndOfFrame();
+        isPaused = false;
+    }
 }

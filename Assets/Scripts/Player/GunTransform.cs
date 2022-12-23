@@ -24,21 +24,10 @@ public class GunTransform : MonoBehaviour
     {
         if (!pauseMenu.isPaused)
         {
-            if (playerTransform.localScale.x > 0)
-            {
-                mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-                Vector3 rotation = mousePos - transform.position;
-                float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0, 0, rotZ);
-            }
-            else if (playerTransform.localScale.x < 0)
-            {
-                mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
-                Vector3 rotation = -(mousePos - transform.position);
-                float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0, 0, rotZ);
-            }
-
+            mousePos = mainCam.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 rotation = mousePos - transform.position;
+            float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, rotZ);
 
             if (!canFire)
             {
