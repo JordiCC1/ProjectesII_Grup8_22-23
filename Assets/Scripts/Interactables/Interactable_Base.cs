@@ -9,10 +9,7 @@ public class Interactable_Base : MonoBehaviour
 
     void Update()
     {
-        if (canInteract)
-        {
-            HandleInput();
-        }
+        HandleInput();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -30,11 +27,11 @@ public class Interactable_Base : MonoBehaviour
     }
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetButtonDown("Interact"))
         {
             if (IsActive())
                 interactable.SetActive(false);
-            else
+            else if (canInteract)
                 interactable.SetActive(true);
         }
     }
