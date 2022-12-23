@@ -704,11 +704,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5441422770562737944, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
   m_PrefabInstance: {fileID: 1879739864}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &599659698 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7569515720698804833, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
-  m_PrefabInstance: {fileID: 2145972362}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &612233661 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5441422770562737944, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
@@ -978,22 +973,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &747990760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 747990757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa71932817444aa46bb0d0d9a709398a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayDist: 100
-  laserFirePoint: {fileID: 599659698}
-  lineRenderer: {fileID: 747990759}
-  gT: {fileID: 0}
 --- !u!1 &763873396
 GameObject:
   m_ObjectHideFlags: 0
