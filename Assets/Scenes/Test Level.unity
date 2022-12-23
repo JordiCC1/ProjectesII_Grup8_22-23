@@ -14280,6 +14280,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 27149512573143969, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 340156792}
     - target: {fileID: 1972475465151807903, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
       propertyPath: m_RootOrder
       value: 0
