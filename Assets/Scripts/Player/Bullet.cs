@@ -31,13 +31,13 @@ namespace Player
             GameObject objCollided = collision.gameObject;
             if (objCollided.CompareTag("Enemy"))
             {
-                objCollided.GetComponent<Controller>().OnSwap();                
+                objCollided.GetComponent<Controller>().OnSwap();
                 SwapGameObject(objCollided);
                 AudioManager.instance.PBulletEnemyCollisionSFX();
             }
             else
                 AudioManager.instance.PBulletWallCollisionSFX();
-            Destroy(gameObject);            
+            Destroy(gameObject);
         }
 
         public void SwapGameObject(GameObject Objective)
