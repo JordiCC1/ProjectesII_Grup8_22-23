@@ -16,12 +16,10 @@ namespace Player
 
     public class Player : MonoBehaviour
     {
+
         [SerializeField] private Movement movement;
         [SerializeField] private BulletTime bt;     
-        [SerializeField] private SpriteRenderer spriteRenderer;     
-         
-        
-        
+        [SerializeField] private SpriteRenderer spriteRenderer;       
 
         public MovementInputs moveInputs;
         public BulletTimeInputs btInputs;
@@ -29,6 +27,8 @@ namespace Player
         [HideInInspector] public bool isInvincible = false;
         [HideInInspector] public bool isBulletTimeActive = false;
         [HideInInspector] public bool isSwapped = false;
+
+        public bool alternative;
 
         [HideInInspector] public Vector3 targetPosition;
 
@@ -54,7 +54,6 @@ namespace Player
         }
 
         #region Inputs
-
         private void TakeInputs()
         {
             moveInputs = new MovementInputs
@@ -97,6 +96,7 @@ namespace Player
         #endregion
 
         #region Invincibility
+
         public float invincibilityTime = 0.0f;
 
         public void Invincibility()

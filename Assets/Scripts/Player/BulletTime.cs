@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 namespace Player
 {
 
@@ -56,19 +57,25 @@ namespace Player
                 {
                     if (inputs.BulletTimeDown)
                     {
+                        BulletTimeEffect.instance.StartEffect();
                         BulletTimeActive();
                         StaminaController.instance.UseStamina();
+                        
+
                     }
                     else if (inputs.BulletTimeUp)
                     {
+                        BulletTimeEffect.instance.StopEffect();
                         FinishBulletTime();
-                        StaminaController.instance.StopStamina();
+                        StaminaController.instance.StopStamina();                        
                     }
                 }
                 else
                 {
+                    BulletTimeEffect.instance.StopEffect();
                     FinishBulletTime();
                     StaminaController.instance.StopStamina();
+                    
                 }
             }
             else
@@ -79,7 +86,7 @@ namespace Player
 		}
 
         void BulletTimeActive()
-        {
+        {            
             Time.timeScale = slowdownFactor;
             actualTimeScale = slowdownFactor;
             isActive = true;
@@ -89,7 +96,7 @@ namespace Player
         void FinishBulletTime()
         {
             actualTimeScale = 1.0f;
-            Time.timeScale =actualTimeScale;
+            Time.timeScale = actualTimeScale;
             isActive = false;
             StaminaController.instance.ResetStamina();
             AudioManager.instance.ChangePitch(1.0f);
