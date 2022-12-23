@@ -459,8 +459,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8497246183552514453}
   - component: {fileID: 5097461344285961728}
-  - component: {fileID: 9207040399652059394}
   - component: {fileID: 6129945191507767511}
+  - component: {fileID: 747990759}
+  - component: {fileID: 747990760}
   m_Layer: 10
   m_Name: Rotate Point
   m_TagString: Untagged
@@ -499,7 +500,23 @@ MonoBehaviour:
   bullet: {fileID: 3939820252754042392, guid: a6cfae6f65e16844687b66c14e05c2a8, type: 3}
   bulletTransform: {fileID: 7569515720698804833}
   gT: {fileID: 6129945191507767511}
---- !u!120 &9207040399652059394
+--- !u!114 &6129945191507767511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860530578194479861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4325fe987a4255749bf3883d429e8390, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBetweenFire: 0.5
+  canFire: 0
+  pauseMenu: {fileID: 0}
+  playerTransform: {fileID: 27149512573143902}
+--- !u!120 &747990759
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -519,7 +536,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -551,13 +568,22 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
+        value: 0
+        inSlope: 0.28503242
+        outSlope: 0.28503242
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.0970696
+      - serializedVersion: 3
+        time: 1
+        value: 0.24726707
+        inSlope: 0.22878747
+        outSlope: 0.22878747
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.078754604
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -598,7 +624,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &6129945191507767511
+--- !u!114 &747990760
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -607,13 +633,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6860530578194479861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4325fe987a4255749bf3883d429e8390, type: 3}
+  m_Script: {fileID: 11500000, guid: aa71932817444aa46bb0d0d9a709398a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenFire: 0
-  canFire: 0
-  pauseMenu: {fileID: 0}
-  playerTransform: {fileID: 27149512573143902}
+  rayDist: 100
+  laserFirePoint: {fileID: 7569515720698804833}
+  lineRenderer: {fileID: 747990759}
+  gT: {fileID: 6129945191507767511}
 --- !u!1 &8059106899634304723
 GameObject:
   m_ObjectHideFlags: 0
