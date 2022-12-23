@@ -171,7 +171,7 @@ namespace Enemy
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
                 Destroy(gameObject);
             }
-            else if (collision.gameObject.tag == "Bullet" && nonPlayerkillable)
+            else if (collision.gameObject.tag == "Bullet")
             {
                 AudioManager.instance.EnemyDeathSFX();
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
