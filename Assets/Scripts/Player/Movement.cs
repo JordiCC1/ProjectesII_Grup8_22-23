@@ -21,7 +21,8 @@ namespace Player
 
         private void Start()
         {
-            boxCol = GetComponent<BoxCollider2D>();
+            rb = GetComponentInParent<Rigidbody2D>();
+            boxCol = GetComponentInParent<BoxCollider2D>();
             normalGravity = rb.gravityScale;
             startDrag = rb.drag;
         }

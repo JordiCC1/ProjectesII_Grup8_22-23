@@ -11,8 +11,6 @@ namespace Player
 
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
-    [RequireComponent(typeof(Movement))]
-    [RequireComponent(typeof(BulletTime))]    
 
     public class Player : MonoBehaviour
     {
@@ -38,9 +36,9 @@ namespace Player
 
         private void Start()
         {
-            movement = GetComponent<Movement>();
-            bt = GetComponent<BulletTime>();
-            spriteRenderer = GetComponent<SpriteRenderer>();
+            movement = GetComponentInChildren<Movement>();
+            bt = GetComponentInChildren<BulletTime>();
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             originalColor = spriteRenderer.color;
             targetColor = new Color( 0, 0, 1,1);
         }
