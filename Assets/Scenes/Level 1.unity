@@ -597,7 +597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 27149512573143902, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -31.2
+      value: -33.87
       objectReference: {fileID: 0}
     - target: {fileID: 27149512573143902, guid: c84bcdb6dce05904d9d7e2770acaa1d8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -29359,6 +29359,7 @@ GameObject:
   - component: {fileID: 1035193217}
   - component: {fileID: 1035193216}
   - component: {fileID: 1035193215}
+  - component: {fileID: 1035193219}
   m_Layer: 2
   m_Name: MessageSquare
   m_TagString: Untagged
@@ -29381,7 +29382,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3.5
 --- !u!114 &1035193216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29456,13 +29457,26 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1035193214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -33.31, y: -10.74, z: 0}
+  m_LocalPosition: {x: -35.9, y: -10.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1035193219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035193214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2156d381b51884489f8ae502322083e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1444766180}
 --- !u!1 &1060029633
 GameObject:
   m_ObjectHideFlags: 0
