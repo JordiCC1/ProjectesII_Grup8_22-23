@@ -17,7 +17,7 @@ namespace Player {
         [Header("Stamina UI")]
         public GameObject staminaBar;
         public static StaminaController instance;
-
+        
 
         private void Awake()
         {
