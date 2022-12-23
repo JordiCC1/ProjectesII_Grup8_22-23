@@ -460,8 +460,8 @@ GameObject:
   - component: {fileID: 8497246183552514453}
   - component: {fileID: 5097461344285961728}
   - component: {fileID: 6129945191507767511}
-  - component: {fileID: 747990759}
   - component: {fileID: 747990760}
+  - component: {fileID: 747990759}
   m_Layer: 10
   m_Name: Rotate Point
   m_TagString: Untagged
@@ -516,6 +516,22 @@ MonoBehaviour:
   canFire: 0
   pauseMenu: {fileID: 0}
   playerTransform: {fileID: 27149512573143902}
+--- !u!114 &747990760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860530578194479861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa71932817444aa46bb0d0d9a709398a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDist: 100
+  laserFirePoint: {fileID: 7569515720698804833}
+  lineRenderer: {fileID: 747990759}
+  gT: {fileID: 6129945191507767511}
 --- !u!120 &747990759
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -624,22 +640,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &747990760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6860530578194479861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa71932817444aa46bb0d0d9a709398a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayDist: 100
-  laserFirePoint: {fileID: 7569515720698804833}
-  lineRenderer: {fileID: 747990759}
-  gT: {fileID: 6129945191507767511}
 --- !u!1 &8059106899634304723
 GameObject:
   m_ObjectHideFlags: 0
