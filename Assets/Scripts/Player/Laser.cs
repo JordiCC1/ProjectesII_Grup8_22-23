@@ -2,45 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Enemy;
+using UnityEngine.EventSystems;
 
 namespace Player
 {
 
     public class Laser : MonoBehaviour
     {
+        [SerializeField] float rayDist = 100;
         public Transform laserFirePoint;
         public LineRenderer lineRenderer;
         Transform _transform;
+        [SerializeField] private GunTransform gT;
+        RaycastHit2D hit;
 
         private void Awake()
         {
             _transform = GetComponent<Transform>();
         }
-        private void Update()
-        {
-            Draw2DRay(laserFirePoint.position, laserFirePoint.transform.right);
-        }
+
         public void Shoot()
         {
-            if (Physics2D.Raycast(_transform.position, transform.right))
+            hit = Physics2D.Raycast(laserFirePoint.position, transform.right, Mathf.Infinity);
+            
+
+            if (hit.rigidbody == null)
+                return;
+
+            if (hit.collider.CompareTag("Enemy"))
             {
-                RaycastHit2D hit = Physics2D.Raycast(laserFirePoint.position, transform.right);
-                Draw2DRay(laserFirePoint.position, hit.point);
-                if (hit.collider.CompareTag("Enemy"))
-                {
-                    hit.collider.GetComponent<Controller>().OnSwap();
-                    SwapGameObject(hit.collider.gameObject);
-                    AudioManager.instance.PBulletEnemyCollisionSFX();
-                }
+                hit.collider.GetComponent<Controller>().OnSwap();
+                SwapGameObject(hit.collider.gameObject);
+                AudioManager.instance.PBulletEnemyCollisionSFX();
+                lineRenderer.positionCount = 2;
+                lineRenderer.SetPosition(0, laserFirePoint.position);
+                lineRenderer.SetPosition(1, hit.point);
+                Invoke("ClearLaser", 0.2f);
             }
-            Draw2DRay(laserFirePoint.position, laserFirePoint.transform.right);
 
         }
-
-        private void Draw2DRay(Vector2 startPos, Vector2 endPos)
+        private void ClearLaser()
         {
-            lineRenderer.SetPosition(0, startPos);
-            lineRenderer.SetPosition(1, endPos);
+            lineRenderer.positionCount = 0;
+        }
+        private void OnDrawGizmos()
+        {
+            if (hit.rigidbody != null)
+                Gizmos.DrawLine(laserFirePoint.position, hit.point);
+            Gizmos.DrawLine(laserFirePoint.position, laserFirePoint.transform.right * rayDist);
         }
 
         public void SwapGameObject(GameObject Objective)

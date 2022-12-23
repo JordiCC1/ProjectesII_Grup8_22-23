@@ -48,7 +48,7 @@ namespace Player
         {
             if (inputs.BulletTimeUp)
             {
-                this.gameObject.GetComponentInChildren<Gun>().Shoot();
+                this.gameObject.GetComponentInChildren<Laser>().Shoot();
             }
             if (canBT)
             { 
