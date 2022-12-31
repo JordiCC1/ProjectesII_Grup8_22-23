@@ -29590,11 +29590,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 27149512573143902, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -34.323944
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 27149512573143902, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.54176
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 27149512573143902, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -29636,46 +29636,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1599319450}
-    - target: {fileID: 27149512573143970, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 27149512573143970, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 27149512573143970, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3629615420995898998, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -641862308, guid: e525c7996ba115a42a524867468ee49e, type: 3}
-    - target: {fileID: 3629615420995898998, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3629615420995898998, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3629615420995898998, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6129945191507767511, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1599319450}
-    - target: {fileID: 6601838273386720702, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6601838273386720702, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7609031436443246149, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -29752,46 +29716,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5441422770562737944, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
   m_PrefabInstance: {fileID: 1984366948}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1231203407 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 641939426508958520, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
-  m_PrefabInstance: {fileID: 1117479356}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1231203411
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231203407}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 790ec4a640ec8e9448c750aed6f2c99e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1231203412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231203407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 212b2afa1f4e6a043aec597716edc580, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  animator: {fileID: 0}
-  sprite: {fileID: 0}
 --- !u!1001 &1233757514
 PrefabInstance:
   m_ObjectHideFlags: 0
