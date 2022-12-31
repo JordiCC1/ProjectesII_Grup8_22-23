@@ -15,9 +15,9 @@ namespace Player
     public class Movement : MonoBehaviour
     {
         [Header("Physics")]
-        private BoxCollider2D boxCol;
-        [SerializeField] private Rigidbody2D rb;
         [SerializeField] private LayerMask groundLayer;
+        public Rigidbody2D rb { get; private set; }
+        private BoxCollider2D boxCol;
 
         private void Start()
         {
@@ -49,10 +49,10 @@ namespace Player
         #region Collisions
         [Header("Collisions")]
         [SerializeField] private float rayLength = 0.3f;
-        [SerializeField] private bool colFront;
-        [SerializeField] private bool colDown;
-        [SerializeField] private bool colBack;
-        private bool landingThisFrame;
+        public bool colFront { get; private set; }
+        public bool colDown { get; private set; }
+        public bool colBack { get; private set; }
+        public bool landingThisFrame { get; private set; }
 
         public bool isGrounded =>
            Physics2D.Raycast(transform.position,
@@ -63,6 +63,9 @@ namespace Player
            Physics2D.Raycast(new Vector3
                (transform.position.x + 0.01f, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
                -Vector3.up, rayLength * 10, groundLayer);
+
+        public bool isHanging =>
+            !colDown && colFront && movementScale != 0; // this line might have to change
 
         private void CheckCollisions()
         {
@@ -128,7 +131,7 @@ namespace Player
         [SerializeField] private float deceleration = 5.0f;
         [SerializeField] private float velPower = 10.5f;
 
-        private float movementScale;
+        public float movementScale { get; private set; }
         private float targetSpeed;
         private float speedDif;
         private float accelRate;
@@ -153,7 +156,7 @@ namespace Player
         [SerializeField] private float wallDrag = 20f;
         [SerializeField] private float airControl = 0.5f;
         [SerializeField] private float earlyJumpModifier = 2.5f;
-        private bool shouldJump;
+        public bool shouldJump { get; private set; }
         private float startDrag;
         private bool jumpDown;
         private bool jumpReleased;
@@ -164,9 +167,7 @@ namespace Player
         [Header("Wall Jump")]
         [SerializeField] private float forceOfSideJumpSide = 0.5f;
         [SerializeField] private float forceOfSideJumpUp = 2.0f;
-        [SerializeField] private bool shouldWallJump;
-        private bool isHanging =>
-            !colDown && colFront && movementScale != 0; // this line might have to change
+        public bool shouldWallJump { get; private set; }
 
         [Header("Buffer and Coyote Time")]
         [SerializeField] private float jumpBuffer = 0.1f;
@@ -222,16 +223,15 @@ namespace Player
 
         #endregion
 
-        #region Dash
+        /*#region Dash
         [Header("Dash")]
         [SerializeField] private float dashDistance;
 
 
-        #endregion
+        #endregion*/        
 
         #region Move
-
-        public bool isFacingRight { get; private set; } = true;
+        public bool isFacingRight = true;
 
         private void MoveCharacterPhysics()
         {
