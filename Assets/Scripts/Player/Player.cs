@@ -20,7 +20,7 @@ namespace Player
         [SerializeField] private SpriteRenderer spriteRenderer;
 
         public MovementInputs moveInputs;
-        public BulletTimeInputs btInputs;
+        public BulletTimeInputs btInputs;        
 
         [HideInInspector] public bool isInvincible = false;
         [HideInInspector] public bool isBulletTimeActive = false;
@@ -52,7 +52,7 @@ namespace Player
                 TakeInputs();
             movement.UpdateMovement(moveInputs);
             bt.UpdateBulletTime(btInputs, CanBT());
-            UpdateSwapped();
+            UpdateSwapped();           
         }
 
         #region Inputs
@@ -73,6 +73,11 @@ namespace Player
                 BulletTimeDown = Input.GetMouseButtonDown(0),
                 BulletTimeUp = Input.GetMouseButtonUp(0)
             };
+
+            if (Input.GetButtonDown("Restart"))
+            {
+                RestartScene();
+            }
         }
 
         private bool CanBT()
@@ -150,5 +155,9 @@ namespace Player
         }
         #endregion
 
+        private void RestartScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

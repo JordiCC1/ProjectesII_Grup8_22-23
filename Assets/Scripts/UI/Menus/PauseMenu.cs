@@ -86,6 +86,13 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void RestartScene()
+    {
+        Time.timeScale = 1;
+        StartCoroutine("SetPauseFalse");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     IEnumerator SetPauseFalse()
     {
         yield return new WaitForEndOfFrame();
