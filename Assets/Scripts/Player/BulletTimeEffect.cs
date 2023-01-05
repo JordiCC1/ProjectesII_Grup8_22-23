@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace Player
 {
     public class BulletTimeEffect : MonoBehaviour
     {
-        [SerializeField] private Image fillImage;
+        [SerializeField] private GameObject fillImage;
         [SerializeField] private float fillSpeed = 0.4f;
         [SerializeField] private float deFillSpeed = 0.8f;
+
+
+        private Vector3 originalScale;
+        private Vector3 scaleTo;
 
         public static BulletTimeEffect instance;
         private void Awake()
@@ -19,7 +24,8 @@ namespace Player
 
         private void Start()
         {
-            fillImage.fillAmount = 0;
+            originalScale = fillImage.transform.localScale;
+            scaleTo = originalScale * 100f;
         }
         public void StartEffect()
         {
@@ -34,20 +40,15 @@ namespace Player
 
         IEnumerator FillImage()
         {
-            while (fillImage.fillAmount < 1)
-            {
-                fillImage.fillAmount += fillSpeed * Time.deltaTime;
-                yield return null;
-            }
+            fillImage.transform.DOScale(scaleTo, fillSpeed);
+            yield return null;
+            
         }
 
         IEnumerator DeFillImage()
         {
-            while (fillImage.fillAmount > 0)
-            {
-                fillImage.fillAmount -= deFillSpeed * Time.deltaTime;
-                yield return null;
-            }
+            transform.DOScale(originalScale, deFillSpeed);
+            yield return null;            
         }
     }
 }

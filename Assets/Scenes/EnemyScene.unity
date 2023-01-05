@@ -374,6 +374,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5441422770562737944, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
   m_PrefabInstance: {fileID: 58630739}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &100610601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1232927840802904534, guid: 083b830f6239c36499247c96674c2d3e, type: 3}
+  m_PrefabInstance: {fileID: 1043782883}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &140049828
 GameObject:
   m_ObjectHideFlags: 0
@@ -15307,6 +15312,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4665422050204572167, guid: 083b830f6239c36499247c96674c2d3e, type: 3}
+      propertyPath: menuParts.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4665422050204572167, guid: 083b830f6239c36499247c96674c2d3e, type: 3}
+      propertyPath: menuParts.Array.data[5]
+      value: 
+      objectReference: {fileID: 100610601}
     - target: {fileID: 4665422050204572218, guid: 083b830f6239c36499247c96674c2d3e, type: 3}
       propertyPath: m_Name
       value: PauseMenu
