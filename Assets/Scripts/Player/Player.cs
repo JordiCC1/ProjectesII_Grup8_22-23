@@ -43,7 +43,7 @@ namespace Player
             bt = GetComponentInChildren<BulletTime>();
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             originalColor = spriteRenderer.color;
-            targetColor = new Color(0, 0, 1, 1);
+            targetColor = new Color(1f, 1f, 1f, 1);
         }
 
         void Update()
