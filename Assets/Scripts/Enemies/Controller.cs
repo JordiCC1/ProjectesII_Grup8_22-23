@@ -47,8 +47,8 @@ namespace Enemy
 
         //Shows when the player is visible        
         /// Esto al tener enemigos hechos lo eliminaremos porque es el interrogante        
-        [SerializeField] private GameObject Alarm1;
-        [SerializeField] private GameObject Alarm2;
+        //[SerializeField] private GameObject Alarm1;
+        //[SerializeField] private GameObject Alarm2;
         //Alpha Zero
         private Color alphaZ;
         //Max alpha
@@ -69,10 +69,10 @@ namespace Enemy
         {
             target = GameObject.FindGameObjectWithTag("Player");
 
-            alphaM = Alarm1.GetComponent<SpriteRenderer>().color;
-            alphaZ.a = 0f;
-            Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
-            Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
+            //alphaM = Alarm1.GetComponent<SpriteRenderer>().color;
+            //alphaZ.a = 0f;
+            //Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
+            //Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
 
             originalScale = transform.localScale;
             scaleTo = originalScale * 1.35f;
@@ -162,8 +162,8 @@ namespace Enemy
 
                     if (isDetected == false)
                     {
-                        Alarm1.GetComponent<SpriteRenderer>().color = alphaM;
-                        Alarm2.GetComponent<SpriteRenderer>().color = alphaM;
+                        //Alarm1.GetComponent<SpriteRenderer>().color = alphaM;
+                        //Alarm2.GetComponent<SpriteRenderer>().color = alphaM;
                         isDetected = true;
                     }
                     if (isDetected && !isSwapped)
@@ -180,8 +180,8 @@ namespace Enemy
             else if (isDetected)
             {
                 isDetected = false;
-                Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
-                Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
+                //Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
+                //Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
             }
         }
 
