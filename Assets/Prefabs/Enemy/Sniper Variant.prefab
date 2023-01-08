@@ -1,39 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7236569042176214950
+--- !u!1001 &1368953155092396053
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4207204493532087609, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207204493532087609, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 0.5882353
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207204493532087609, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.r
-      value: 0.76470596
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207204493532087609, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207204493532087609, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0.5882353
-      objectReference: {fileID: 0}
-    - target: {fileID: 4207204493532087609, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.r
-      value: 0.76470596
-      objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737927, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
       propertyPath: m_Name
-      value: Dummy Variant
+      value: Sniper
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737944, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
       propertyPath: m_RootOrder
@@ -41,15 +17,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737944, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 121.91
+      value: 118.7
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737944, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.74
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737944, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.027552458
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737944, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
       propertyPath: m_LocalRotation.w
@@ -80,36 +56,32 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737945, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: Range
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 5441422770562737945, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
       propertyPath: range
-      value: 0
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737945, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: FireRate
-      value: 0
+      propertyPath: Alarm1
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737945, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: fireRate
-      value: 0
+      propertyPath: Alarm2
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737945, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
-      propertyPath: nonPlayerkillable
+      propertyPath: waitTime
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737946, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.6226415
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737946, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
       propertyPath: m_Color.g
-      value: 0.71440893
+      value: 0.39061943
       objectReference: {fileID: 0}
     - target: {fileID: 5441422770562737946, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.40109208
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}

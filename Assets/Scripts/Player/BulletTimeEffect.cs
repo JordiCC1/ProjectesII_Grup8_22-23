@@ -25,7 +25,7 @@ namespace Player
         private void Start()
         {
             originalScale = fillImage.transform.localScale;
-            scaleTo = originalScale * 100f;
+            scaleTo = originalScale * 1000f;
         }
         public void StartEffect()
         {
