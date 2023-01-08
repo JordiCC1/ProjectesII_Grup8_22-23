@@ -13,6 +13,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip enemyDeathSFX;
     [SerializeField] AudioClip playerDeathSFX;
     [SerializeField] AudioClip enemyShoot;
+    [SerializeField] AudioClip enterBT;
+    [SerializeField] AudioClip exitBT;
 
 
     private void Awake()
@@ -64,5 +66,13 @@ public class AudioManager : MonoBehaviour
     public void EnemyShootSFX()
     {        
         audioSource.PlayOneShot(enemyShoot,0.2f);        
+    } 
+    public void EnterBTSFX()
+    {        
+        audioSource.PlayOneShot(enterBT,0.2f);        
+    }
+    public void ExitBTSFX()
+    {        
+        audioSource.PlayOneShot(exitBT,0.2f);        
     }
 }

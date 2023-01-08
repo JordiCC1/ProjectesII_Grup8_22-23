@@ -96,6 +96,7 @@ namespace Player
             actualTimeScale = slowdownFactor;
             isActive = true;
             AudioManager.instance.ChangePitch(0.8f);
+            AudioManager.instance.ExitBTSFX();
             hasStopped = false;
         }
 
@@ -107,9 +108,10 @@ namespace Player
             StaminaController.instance.ResetStamina();
             hasStopped = true;
             AudioManager.instance.ChangePitch(1.0f);
+            AudioManager.instance.EnterBTSFX();
         }
 
-		public void BackToNormal()
+        public void BackToNormal()
 		{
 			lerp.Update(Time.deltaTime);
 
