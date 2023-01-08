@@ -45,6 +45,8 @@ namespace Enemy
             //enemy stunned
             if (enemy.isSwapped)
                 Blink();
+            else
+                sprite.color = maxAlpha;
 
             //sprite
             sprite.flipX = enemy.target.transform.position.x > transform.position.x ? true : false;
