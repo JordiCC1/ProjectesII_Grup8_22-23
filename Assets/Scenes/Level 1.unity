@@ -1062,7 +1062,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1104,7 +1104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 264}
+  m_AnchoredPosition: {x: -0.000030517578, y: 301}
   m_SizeDelta: {x: 360, y: -414}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &272713310
@@ -40858,7 +40858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -40900,7 +40900,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 264}
+  m_AnchoredPosition: {x: -0.000030517578, y: 301}
   m_SizeDelta: {x: 360, y: -414}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1001 &1140867663
@@ -41746,7 +41746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -41788,7 +41788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: 264}
+  m_AnchoredPosition: {x: -0.000030517578, y: 301}
   m_SizeDelta: {x: 360, y: -414}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1497224205
@@ -43805,6 +43805,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1060029634}
     m_Modifications:
+    - target: {fileID: 2900464694704357822, guid: 083b830f6239c36499247c96674c2d3e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 232
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900464694704357822, guid: 083b830f6239c36499247c96674c2d3e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 284
+      objectReference: {fileID: 0}
     - target: {fileID: 4665422050204572166, guid: 083b830f6239c36499247c96674c2d3e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
