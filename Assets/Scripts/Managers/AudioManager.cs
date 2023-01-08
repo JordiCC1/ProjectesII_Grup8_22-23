@@ -90,12 +90,14 @@ public class AudioManager : MonoBehaviour
     public void EnterBTSFX()
     {        
         audioSource.PlayOneShot(enterBT,0.2f);
+        //Temporal
         audioSource.pitch = 1f;
         
     }
     public void ExitBTSFX()
     {        
         audioSource.PlayOneShot(exitBT,0.2f);
+        //Temporal
         audioSource.pitch = 0.38f;
     }
 }
