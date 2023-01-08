@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
+
 
 namespace Player
 {
@@ -8,52 +11,148 @@ namespace Player
 
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
-    [RequireComponent(typeof(PlayerMovement))]
-    [RequireComponent(typeof(BulletTime))]
 
     public class Player : MonoBehaviour
     {
-        [SerializeField] private PlayerMovement movement;
+        [SerializeField] private Movement movement;
         [SerializeField] private BulletTime bt;
+        [SerializeField] private SpriteRenderer sprite;
 
-        public MovementInputs inputs;
+        public MovementInputs moveInputs;
+        public BulletTimeInputs btInputs;
 
+        [HideInInspector] public bool isInvincible = false;
+        [HideInInspector] public bool isBulletTimeActive = false;
+        [HideInInspector] public bool isSwapped = false;
 
-        public bool isBulletTimeActive;
+        public bool alternative;
+
+        [HideInInspector] public Vector3 targetPosition;
+
+        private Color originalColor;
+        private Color targetColor;
+
+        [SerializeField] PauseMenu pauseMenu;
+
 
 
         private void Start()
         {
-            movement = GetComponent<PlayerMovement>();
-            bt = GetComponent<BulletTime>();
-
-            isBulletTimeActive = false;
+            movement = GetComponentInChildren<Movement>();
+            bt = GetComponentInChildren<BulletTime>();
+            sprite = GetComponentInChildren<SpriteRenderer>();
+            originalColor = sprite.color;
+            targetColor = new Color(1f, 1f, 0.7f, 1);
         }
 
         void Update()
         {
-            TakeInputs();
-            movement.UpdateMovement(inputs, isBulletTimeActive);
-            bt.UpdateBulletTime(Input.GetMouseButtonDown(0), isBulletTimeActive,Input.GetMouseButtonUp(0), !movement.isGrounded);
+            if (!pauseMenu.isPaused)
+                TakeInputs();
+            movement.UpdateMovement(moveInputs);
+            bt.UpdateBulletTime(btInputs, CanBT());
+            UpdateSwapped();
+
+           
         }
 
         #region Inputs
-
         private void TakeInputs()
         {
-            inputs = new MovementInputs
+            moveInputs = new MovementInputs
             {
                 walk = Input.GetAxisRaw("Horizontal"), //Raw makes it more snappy
-                JumpDown = UnityEngine.Input.GetButtonDown("Jump"),
-                JumpUp = UnityEngine.Input.GetButtonUp("Jump")
+                JumpDown = Input.GetButtonDown("Jump"),
+                JumpUp = Input.GetButtonUp("Jump")
             };
-            if (inputs.JumpDown == true)
-            {
+            if (moveInputs.JumpDown)
                 movement.lastJumpInput = Time.time;
-            }
 
+
+            btInputs = new BulletTimeInputs
+            {
+                BulletTimeDown = Input.GetMouseButtonDown(0),
+                BulletTimeUp = Input.GetMouseButtonUp(0)
+            };
+
+            if (Input.GetButtonDown("Restart"))
+            {
+                RestartScene();
+            }
+        }
+
+        private bool CanBT()
+        {
+            return (!(movement.isGrounded) && StaminaController.instance.stamina >= 0);
         }
 
         #endregion
+
+        #region Collisions
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Bullet") && !isInvincible)
+            {
+                AudioManager.instance.PlayerDeathSFX();
+                Destroy(gameObject);
+                int scene = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(scene, LoadSceneMode.Single);
+                //StartCoroutine(WaitAndDie());
+            }
+        }
+
+        #endregion
+
+        #region Invincibility
+
+        public float invincibilityTime = 0.0f;
+
+        public void Invincibility()
+        {
+            if (isInvincible)
+            {
+                StopInvincibility();
+            }
+            StartInvincibility();
+        }
+
+        void StartInvincibility()
+        {
+            isInvincible = true;
+            StartCoroutine("ReturnToNormalState");
+        }
+
+        void StopInvincibility()
+        {
+            StopCoroutine("ReturnToNormalState");
+            isInvincible = false;
+        }
+
+        IEnumerator ReturnToNormalState()
+        {
+            yield return new WaitForSeconds(invincibilityTime);
+            isInvincible = false;
+            sprite.DOColor(originalColor, 0.5f);
+        }
+
+        #endregion
+
+        #region Swap
+        void UpdateSwapped()
+        {
+            Tween t;
+            if (isSwapped)
+            {
+                t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.2f).SetEase(Ease.InOutQuad);
+                isSwapped = false;
+            }
+
+        }
+        #endregion
+
+        private void RestartScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

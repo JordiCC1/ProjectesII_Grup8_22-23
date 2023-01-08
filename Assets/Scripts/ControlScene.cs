@@ -19,7 +19,7 @@ public class ControlScene : MonoBehaviour
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
 
         SceneManager.LoadScene(index);
     }
