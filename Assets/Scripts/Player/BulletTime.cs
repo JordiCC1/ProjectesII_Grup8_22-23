@@ -95,7 +95,7 @@ namespace Player
             Time.timeScale = slowdownFactor;
             actualTimeScale = slowdownFactor;
             isActive = true;
-            AudioManager.instance.ChangePitch(0.8f);
+            AudioManager.instance.ChangePitch(0.5f);
             AudioManager.instance.ExitBTSFX();
             hasStopped = false;
         }
