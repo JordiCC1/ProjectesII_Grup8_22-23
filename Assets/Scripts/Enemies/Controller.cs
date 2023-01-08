@@ -30,30 +30,10 @@ namespace Enemy
         //Make non Player killable enemy
         [SerializeField] private bool nonPlayerkillable = false;
 
-        //Stun Animation
-        private SpriteRenderer sr;
-        private float minimum = 0.3f;
-        private float maximum = 1.0f;
-        private float cyclesPerSecond = 2.0f;
-        private float alpha;
-        private bool increasing = true;
-        private Color srColor;
-        private Color maxAlpha;
-
         private bool check = false;
 
         //Wait time to shoot the player
-        private float nextTimeToFire = 0;
-
-        //Shows when the player is visible        
-        /// Esto al tener enemigos hechos lo eliminaremos porque es el interrogante        
-        //[SerializeField] private GameObject Alarm1;
-        //[SerializeField] private GameObject Alarm2;
-        //Alpha Zero
-        private Color alphaZ;
-        //Max alpha
-        private Color alphaM;
-        /// Hasta aqui se podra borrar        
+        private float nextTimeToFire = 0;     
 
         public bool isDetected { get; private set; } = false;
         public bool isSwapped { get; private set; } = false;
@@ -69,17 +49,8 @@ namespace Enemy
         {
             target = GameObject.FindGameObjectWithTag("Player");
 
-            //alphaM = Alarm1.GetComponent<SpriteRenderer>().color;
-            //alphaZ.a = 0f;
-            //Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
-            //Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
-
             originalScale = transform.localScale;
             scaleTo = originalScale * 1.35f;
-            sr = gameObject.GetComponent<SpriteRenderer>();
-            maxAlpha = sr.color;
-            srColor = sr.color;
-            alpha = maximum;
         }
 
         void Update()
@@ -101,8 +72,6 @@ namespace Enemy
             }
 
             BulletCollision(rayInfo);
-
-            Blink();
         }
 
         #region Shoot
@@ -190,7 +159,6 @@ namespace Enemy
         #region Swap
         public void OnSwap()
         {
-            Debug.Log("knocked");
             isSwapped = true;
             check = true;
         }
@@ -216,21 +184,6 @@ namespace Enemy
             if (isSwapped)
             {
                 isSwapped = false;
-                Debug.Log("finish knocked");
-                sr.color = maxAlpha;
-            }
-        }
-
-        void Blink()
-        {
-            if (isSwapped)
-            {
-                float t = Time.deltaTime;
-                if (alpha >= maximum) increasing = false;
-                if (alpha <= minimum) increasing = true;
-                alpha = increasing ? alpha += t * cyclesPerSecond * 2 : alpha -= t * cyclesPerSecond;
-                srColor.a = alpha;
-                sr.color = srColor;
             }
         }
         #endregion
