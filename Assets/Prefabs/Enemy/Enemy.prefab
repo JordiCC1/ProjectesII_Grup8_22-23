@@ -138,7 +138,7 @@ MonoBehaviour:
   gun: {fileID: 726880447222749748}
   shootPoint: {fileID: 5441422771340149042}
   range: 17
-  waitTime: 0.4
+  waitTime: 0.6
   knockedTime: 2
   bulletForce: 100
   fireRate: 1
