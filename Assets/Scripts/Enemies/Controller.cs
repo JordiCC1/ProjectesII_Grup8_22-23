@@ -173,7 +173,7 @@ namespace Enemy
 
         IEnumerator ReturnCollider()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             gameObject.GetComponent<Collider2D>().enabled = true;
         }
 
