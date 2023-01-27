@@ -398,7 +398,7 @@ RectTransform:
   m_Children:
   - {fileID: 1770383147}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -880,7 +880,6 @@ GameObject:
   m_Component:
   - component: {fileID: 272713311}
   - component: {fileID: 272713312}
-  - component: {fileID: 272713314}
   - component: {fileID: 272713313}
   m_Layer: 2
   m_Name: Room2
@@ -949,27 +948,6 @@ PolygonCollider2D:
       - {x: 7.7673326, y: -59.294804}
       - {x: 25.10747, y: -59.114483}
       - {x: 24.950203, y: 14.797592}
---- !u!50 &272713314
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 272713310}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &293886631
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,7 +1790,7 @@ MonoBehaviour:
   m_Priority: 20
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_Follow: {fileID: 468434926}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 12
@@ -116635,7 +116613,8 @@ Transform:
   m_LocalPosition: {x: -71.33617, y: -0.8177709, z: 0.84736663}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1976118199}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -116727,7 +116706,7 @@ MonoBehaviour:
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.2
+  m_ScreenY: 0.4
   m_CameraDistance: 10
   m_DeadZoneWidth: 0.05
   m_DeadZoneHeight: 0
@@ -121620,7 +121599,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1549573075}
     m_Modifications:
     - target: {fileID: 2297821690233562444, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
       propertyPath: target
@@ -121628,19 +121607,19 @@ PrefabInstance:
       objectReference: {fileID: 1770383146}
     - target: {fileID: 2297821690233562445, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2297821690233562445, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 118.4
+      value: 189.73618
       objectReference: {fileID: 0}
     - target: {fileID: 2297821690233562445, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19.1
+      value: -18.28223
       objectReference: {fileID: 0}
     - target: {fileID: 2297821690233562445, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.84736663
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2297821690233562445, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
       propertyPath: m_LocalRotation.w
@@ -121680,6 +121659,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
+--- !u!4 &1976118199 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2297821690233562445, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
+  m_PrefabInstance: {fileID: 1976118198}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2045713877
 GameObject:
   m_ObjectHideFlags: 0
