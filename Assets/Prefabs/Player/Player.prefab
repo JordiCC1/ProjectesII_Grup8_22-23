@@ -105,7 +105,7 @@ MonoBehaviour:
   alternative: 0
   targetPosition: {x: 0, y: 0, z: 0}
   pauseMenu: {fileID: 0}
-  invincibilityTime: 2.5
+  invincibilityTime: 1.5
 --- !u!1 &479827148551063457
 GameObject:
   m_ObjectHideFlags: 0
