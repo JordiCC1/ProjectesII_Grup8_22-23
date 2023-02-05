@@ -11,7 +11,6 @@ public class PauseMenu : MonoBehaviour
     public bool isPaused;
     public string pauseButton = "Pause";
     public GameObject[] UI;
-    [SerializeField] bool gamePaused;
 
     void Start()
     {
@@ -40,9 +39,6 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
-        gamePaused = true;
-
-        //pauseMenu.SetActive(true);
         foreach (GameObject part in menuParts)
         {
             part.SetActive(true);
@@ -60,9 +56,6 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        gamePaused = false;
-
-        //pauseMenu.SetActive(false);
         foreach (GameObject part in menuParts)
         {
             part.SetActive(false);

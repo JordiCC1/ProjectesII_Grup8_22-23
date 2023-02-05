@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip enemyShoot;
     [SerializeField] AudioClip enterBT;
     [SerializeField] AudioClip exitBT;
+    [SerializeField] AudioClip enemyAlert;
 
     [Header("Interpolation")]
     Interpolator lerp;
@@ -99,5 +100,10 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(exitBT,0.2f);
         //Temporal
         audioSource.pitch = 0.38f;
+    }
+
+    public void EnemyAlertSFX()
+    {
+        audioSource.PlayOneShot(enemyAlert, 0.2f);
     }
 }
