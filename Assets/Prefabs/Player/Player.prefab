@@ -103,9 +103,13 @@ MonoBehaviour:
   isInvincible: 0
   isBulletTimeActive: 0
   isSwapped: 0
+  swaping: 0
   alternative: 0
   targetPosition: {x: 0, y: 0, z: 0}
   pauseMenu: {fileID: 0}
+  echo: {fileID: 4124855048286717127, guid: 7d2d37d53b23ff24aa9f561057db22f7, type: 3}
+  echo_L: {fileID: 2794069138574640386, guid: 4a2307fdb81594b439937db70d3da5bf, type: 3}
+  startTimeBetweenSpawns: 0.05
   invincibilityTime: 1.5
 --- !u!1 &479827148551063457
 GameObject:
@@ -414,6 +418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowdownFactor: 0.25
   isActive: 0
+  trailOn: 0
   timeToNormal: 0.75
   pauseMenu: {fileID: 0}
   curve:

@@ -24,6 +24,7 @@ namespace Player
         [HideInInspector] public bool isInvincible = false;
         [HideInInspector] public bool isBulletTimeActive = false;
         [HideInInspector] public bool isSwapped = false;
+        [HideInInspector] public bool swaping = false;
 
         public bool alternative;
 
@@ -35,6 +36,7 @@ namespace Player
         [SerializeField] PauseMenu pauseMenu;
 
         [SerializeField] private GameObject echo;
+        [SerializeField] private GameObject echo_L;
         [SerializeField] private float startTimeBetweenSpawns;
         private float timeBetweenSpawns;       
 
@@ -56,7 +58,7 @@ namespace Player
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateSwapped();
             if (bt.trailOn)
-                UpdateTrail();
+                UpdateTrail();            
            
         }
 
@@ -149,7 +151,7 @@ namespace Player
             {
                 t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.2f).SetEase(Ease.InOutQuad);
 
-                isSwapped = false;
+                isSwapped = false;                
             }
 
         }
@@ -162,9 +164,18 @@ namespace Player
         {
             if (timeBetweenSpawns <= 0)
             {
-                GameObject instance = Instantiate(echo, transform.position, Quaternion.identity);
-                Destroy(instance, 3f);
+                if (movement.isFacingRight)
+                {
+                    GameObject instance = Instantiate(echo, transform.position, Quaternion.identity);
+                    Destroy(instance, 2f);
+                }
+                else if(movement.isFacingRight == false)
+                {
+                    GameObject instance = Instantiate(echo_L, transform.position, Quaternion.identity);
+                    Destroy(instance, 2f);                   
+                }
                 timeBetweenSpawns = startTimeBetweenSpawns;
+                
             }
             else
             {                
