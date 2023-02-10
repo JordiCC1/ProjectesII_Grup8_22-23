@@ -45,12 +45,15 @@ namespace Player
         {
             lineRenderer.positionCount = 0;
         }
-        private void OnDrawGizmos()
-        {
-            if (hit.rigidbody != null)
-                Gizmos.DrawLine(laserFirePoint.position, hit.point);
-            Gizmos.DrawLine(laserFirePoint.position, laserFirePoint.transform.right * rayDist);
-        }
+        
+        //TODO: check if this actually works
+
+        //private void OnDrawGizmos()
+        //{
+        //    if (hit.rigidbody != null)
+        //        Gizmos.DrawLine(laserFirePoint.position, hit.point);
+        //    Gizmos.DrawLine(laserFirePoint.position, laserFirePoint.transform.right * rayDist);
+        //}
 
         public void SwapGameObject(GameObject Objective)
         {

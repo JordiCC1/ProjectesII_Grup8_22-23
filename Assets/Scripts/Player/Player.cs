@@ -18,6 +18,9 @@ namespace Player
         [SerializeField] private BulletTime bt;
         [SerializeField] private SpriteRenderer sprite;
 
+        public Rigidbody2D rb { get; private set; }
+        public BoxCollider2D boxCollider { get; private set; }
+
         public MovementInputs moveInputs;
         public BulletTimeInputs btInputs;
 
@@ -33,8 +36,6 @@ namespace Player
         private Color targetColor;
 
         [SerializeField] PauseMenu pauseMenu;
-
-
 
         private void Start()
         {
@@ -53,7 +54,7 @@ namespace Player
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateSwapped();
 
-           
+
         }
 
         #region Inputs
@@ -62,8 +63,12 @@ namespace Player
             moveInputs = new MovementInputs
             {
                 walk = Input.GetAxisRaw("Horizontal"), //Raw makes it more snappy
-                JumpDown = Input.GetButtonDown("Jump"),
-                JumpUp = Input.GetButtonUp("Jump")
+                JumpDown = Input.GetButtonDown("Jump") ||
+                    Input.GetKeyDown(KeyCode.W) ||
+                    Input.GetKeyDown(KeyCode.UpArrow),
+                JumpUp = Input.GetButtonUp("Jump") || 
+                    Input.GetKeyUp(KeyCode.W) || 
+                    Input.GetKeyUp(KeyCode.UpArrow)
             };
             if (moveInputs.JumpDown)
                 movement.lastJumpInput = Time.time;

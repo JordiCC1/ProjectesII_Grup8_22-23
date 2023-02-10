@@ -77,7 +77,8 @@ namespace Player
             if (movement.shouldJump || movement.shouldWallJump) return Jump;
 
             if (movement.colDown) return movement.movementScale == 0 ? Idle : Walk;
-            return movement.rb.velocity.y > 0.5f ? Jump : Fall;
+            return player.rb.velocity.y > 0.5f ? Jump : Fall;
+
 
             int LockState(int s, float t)
             {
