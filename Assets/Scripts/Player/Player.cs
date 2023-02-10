@@ -34,6 +34,9 @@ namespace Player
 
         [SerializeField] PauseMenu pauseMenu;
 
+        [SerializeField] private GameObject echo;
+        [SerializeField] private float startTimeBetweenSpawns;
+        private float timeBetweenSpawns;       
 
 
         private void Start()
@@ -52,7 +55,8 @@ namespace Player
             movement.UpdateMovement(moveInputs);
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateSwapped();
-
+            if (bt.trailOn)
+                UpdateTrail();
            
         }
 
@@ -144,12 +148,31 @@ namespace Player
             if (isSwapped)
             {
                 t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.2f).SetEase(Ease.InOutQuad);
+
                 isSwapped = false;
             }
 
         }
+
+        
         #endregion
 
+        #region trail
+        void UpdateTrail()
+        {
+            if (timeBetweenSpawns <= 0)
+            {
+                GameObject instance = Instantiate(echo, transform.position, Quaternion.identity);
+                Destroy(instance, 3f);
+                timeBetweenSpawns = startTimeBetweenSpawns;
+            }
+            else
+            {                
+                timeBetweenSpawns -= Time.deltaTime;                
+            }
+        }
+        
+        #endregion
         private void RestartScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
