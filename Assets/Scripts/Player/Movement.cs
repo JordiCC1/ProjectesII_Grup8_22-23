@@ -14,6 +14,8 @@ namespace Player
 
     public class Movement : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem dust;
+
         [Header("Physics")]
         [SerializeField] private LayerMask groundLayer;
         public Rigidbody2D rb { get; private set; }
@@ -240,6 +242,7 @@ namespace Player
             {
                 if (!colDown)
                     rb.velocity = Vector3.zero;
+                CreateDust();
                 rb.AddForce(jumpHeight * Vector2.up, ForceMode2D.Impulse);
 
                 shouldJump = false;
@@ -289,7 +292,7 @@ namespace Player
         private void Flip()
         {
             var scale = transform.localScale;
-
+            CreateDust();
             transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
             isFacingRight = !isFacingRight;
         }
@@ -311,6 +314,13 @@ namespace Player
         {
             yield return new WaitForSeconds(2);
             SceneManager.LoadScene(0);
+        }
+        #endregion
+
+        #region DustAnimation
+        void CreateDust()
+        {
+            dust.Play();
         }
         #endregion
     }

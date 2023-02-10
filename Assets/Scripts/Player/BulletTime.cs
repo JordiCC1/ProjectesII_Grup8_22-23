@@ -22,6 +22,8 @@ namespace Player
 		public bool isActive = false;
         bool hasStopped=false;
 
+        [HideInInspector]public bool trailOn = false ;
+
 		public static BulletTime instance;
 
         public float timeToNormal=.75f;
@@ -31,8 +33,9 @@ namespace Player
         [Header("Interpolation")]
 		Interpolator lerp;
 		public AnimationCurve curve;
+        
 
-		private void Awake()
+        private void Awake()
 		{
 			if (instance == null)
 			{
@@ -60,7 +63,7 @@ namespace Player
                     {
                         BulletTimeEffect.instance.StartEffect();
                         BulletTimeActive();
-                        StaminaController.instance.UseStamina();
+                        StaminaController.instance.UseStamina();                        
                     }
                     else if (inputs.BulletTimeUp)
                     {
@@ -73,8 +76,7 @@ namespace Player
                 {
                     BulletTimeEffect.instance.StopEffect();
                     FinishBulletTime();
-                    StaminaController.instance.StopStamina();
-                    
+                    StaminaController.instance.StopStamina();            
                 }
             }
             else
@@ -82,8 +84,7 @@ namespace Player
                 if (!hasStopped)
                 {
                     FinishBulletTime();
-                    BulletTimeEffect.instance.StopEffect();
-
+                    BulletTimeEffect.instance.StopEffect();                   
                 }
                 StaminaController.instance.StopStamina();
             }
@@ -91,17 +92,19 @@ namespace Player
 		}
 
         void BulletTimeActive()
-        {            
+        {
+            trailOn = true;
             Time.timeScale = slowdownFactor;
             actualTimeScale = slowdownFactor;
             isActive = true;
             AudioManager.instance.ChangePitch(0.5f);
             AudioManager.instance.ExitBTSFX();
-            hasStopped = false;
+            hasStopped = false;           
         }
 
         void FinishBulletTime()
         {
+            trailOn = false;
             actualTimeScale = 1.0f;
             Time.timeScale = actualTimeScale;
             isActive = false;
