@@ -320,7 +320,8 @@ namespace Player
         #region DustAnimation
         void CreateDust()
         {
-            dust.Play();
+            if(isGrounded)
+                dust.Play();
         }
         #endregion
     }
