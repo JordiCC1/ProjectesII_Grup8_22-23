@@ -149,7 +149,7 @@ namespace Player
             Tween t;
             if (isSwapped)
             {
-                t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.2f).SetEase(Ease.InOutQuad);
+                t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.15f).SetEase(Ease.InOutQuad);
 
                 isSwapped = false;                
             }
