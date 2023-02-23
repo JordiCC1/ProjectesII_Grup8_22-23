@@ -19,7 +19,7 @@ namespace Player
         [Header("Physics")]
         [SerializeField] private LayerMask groundLayer;
         public Rigidbody2D rb { get; private set; }
-        private BoxCollider2D boxCol;
+        [SerializeField] private BoxCollider2D boxCol;
 
         private void Start()
         {
@@ -57,14 +57,12 @@ namespace Player
         public bool landingThisFrame { get; private set; }
 
         public bool isGrounded =>
-           Physics2D.Raycast(transform.position,
-               -Vector3.up, rayLength * 10, groundLayer) ||
-           Physics2D.Raycast(new Vector3
-               (transform.position.x + 0.01f, transform.position.y + boxCol.bounds.extents.y, transform.position.z),
-               -Vector3.up, rayLength * 10, groundLayer) ||
-           Physics2D.Raycast(new Vector3
-               (transform.position.x + 0.01f, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
-               -Vector3.up, rayLength * 10, groundLayer);
+           Physics2D.Raycast(transform.position - new Vector3(0, boxCol.bounds.extents.y, 0),
+               -Vector3.up, rayLength, groundLayer) ||
+           Physics2D.Raycast(transform.position - new Vector3(boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+               -Vector3.up, rayLength, groundLayer) ||
+           Physics2D.Raycast(transform.position - new Vector3(-boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+               -Vector3.up, rayLength, groundLayer);
 
         public bool isHanging =>
             !colDown && colFront && movementScale != 0; // this line might have to change
@@ -95,13 +93,15 @@ namespace Player
 
             if (isFacingRight)
             {
-                colFront = Physics2D.Raycast(pos, Vector3.right, rayLength, groundLayer) ||
+                colFront = Physics2D.Raycast(pos, 
+                    Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer);
 
-                colBack = Physics2D.Raycast(pos, -Vector3.right, rayLength, groundLayer) ||
+                colBack = Physics2D.Raycast(pos, 
+                    -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
@@ -109,19 +109,41 @@ namespace Player
             }
             else
             {
-                colFront = Physics2D.Raycast(pos, -Vector3.right, rayLength, groundLayer) ||
+                colFront = Physics2D.Raycast(pos, 
+                    -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer);
 
-                colBack = Physics2D.Raycast(pos, Vector3.right, rayLength, groundLayer) ||
+                colBack = Physics2D.Raycast(pos, 
+                    Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer);
             }
 
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+
+            var pos = transform.position;
+            var extent = boxCol.bounds.extents;
+
+            for (int i = -1; i <= 1; i++)
+                Gizmos.DrawRay(pos + new Vector3(extent.x, extent.y * i, 0),
+                    extent * Vector2.right * rayLength);
+
+            for (int i = -1; i <= 1; i++)
+                Gizmos.DrawRay(pos - new Vector3(extent.x, extent.y * i, 0),
+                    extent * -Vector2.right * rayLength);
+
+            for (int i = -1; i <= 1; i++)
+                Gizmos.DrawRay(pos - new Vector3(extent.x * i, extent.y, 0),
+                    extent * -Vector2.up * rayLength);
         }
 
         #endregion
