@@ -126,7 +126,8 @@ namespace Player
 
         }
 
-        private void OnDrawGizmos()
+        //draw lines
+        /*private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
 
@@ -144,7 +145,7 @@ namespace Player
             for (int i = -1; i <= 1; i++)
                 Gizmos.DrawRay(pos - new Vector3(extent.x * i, extent.y, 0),
                     extent * -Vector2.up * rayLength);
-        }
+        }*/
 
         #endregion
 

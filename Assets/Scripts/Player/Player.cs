@@ -68,8 +68,12 @@ namespace Player
             moveInputs = new MovementInputs
             {
                 walk = Input.GetAxisRaw("Horizontal"), //Raw makes it more snappy
-                JumpDown = Input.GetButtonDown("Jump"),
-                JumpUp = Input.GetButtonUp("Jump")
+                JumpDown = Input.GetButtonDown("Jump") ||
+                    Input.GetKeyDown(KeyCode.W) ||
+                    Input.GetKeyDown(KeyCode.UpArrow),
+                JumpUp = Input.GetButtonUp("Jump") ||
+                    Input.GetKeyUp(KeyCode.W) ||
+                    Input.GetKeyUp(KeyCode.UpArrow)
             };
             if (moveInputs.JumpDown)
                 movement.lastJumpInput = Time.time;
