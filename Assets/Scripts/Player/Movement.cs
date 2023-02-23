@@ -55,12 +55,13 @@ namespace Player
         public bool landingThisFrame { get; private set; }
 
         public bool isGrounded =>
-           Physics2D.Raycast(transform.position + new Vector3(0, boxCol.bounds.extents.y, 0),
-               boxCol.bounds.extents * - Vector2.up, rayLength, groundLayer) ||
-           Physics2D.Raycast(transform.position + new Vector3(-boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
-               boxCol.bounds.extents * - Vector2.up, rayLength, groundLayer) ||
-           Physics2D.Raycast(transform.position + new Vector3(boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
-               boxCol.bounds.extents * - Vector2.up, rayLength, groundLayer);
+            Physics2D.Raycast(transform.position + new Vector3(0, boxCol.bounds.extents.y, 0),
+                -Vector2.up, rayLength, groundLayer) ||
+            Physics2D.Raycast(transform.position + new Vector3(-boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+                -Vector2.up, rayLength, groundLayer) ||
+            Physics2D.Raycast(transform.position + new Vector3(boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+                -Vector2.up, rayLength, groundLayer);
+
 
         public bool isHanging =>
             !colDown && colFront && movementScale != 0; // this line might have to change
@@ -133,11 +134,16 @@ namespace Player
 
             for (int i = -1; i <= 1; i++)
                 Gizmos.DrawRay(pos + new Vector3(extent.x, extent.y * i, 0),
-                    extent * Vector2.right * 2);
+                    extent * Vector2.right * rayLength);
 
             for (int i = -1; i <= 1; i++)
                 Gizmos.DrawRay(pos - new Vector3(extent.x, extent.y * i, 0),
-                    extent * -Vector2.right * 2);
+                    extent * -Vector2.right * rayLength);
+
+            for (int i = -1; i <= 1; i++)
+                Gizmos.DrawRay(pos - new Vector3(extent.x * i, extent.y, 0),
+                    extent * -Vector2.up * rayLength);
+
         }
 
         #endregion
