@@ -20,7 +20,7 @@ namespace Player
         private float actualTimeScale = 1.0f;
 
 		public bool isActive = false;
-        bool hasStopped = true;
+        bool hasStopped = false;
 
         [HideInInspector]public bool trailOn = false ;
 
@@ -29,6 +29,7 @@ namespace Player
         public float timeToNormal=.75f;
 
         [SerializeField] PauseMenu pauseMenu;
+        [SerializeField] StaminaController staminaController;
 
         [Header("Interpolation")]
 		Interpolator lerp;
@@ -59,36 +60,38 @@ namespace Player
             }
             if (canBT)
             { 
-                if (StaminaController.instance.stamina >= 0.0f)
+                if (staminaController.stamina >= 0.0f)
                 {
                     if (inputs.BulletTimeDown)
                     {
                         BulletTimeEffect.instance.StartEffect();
                         BulletTimeActive();
-                        StaminaController.instance.UseStamina();                        
+                        staminaController.UseStamina();                        
                     }
                     else if (inputs.BulletTimeUp)
                     {
                         BulletTimeEffect.instance.StopEffect();
                         FinishBulletTime();
-                        StaminaController.instance.StopStamina();                        
+                        staminaController.StopStamina();                        
                     }
                 }
                 else
                 {
                     BulletTimeEffect.instance.StopEffect();
                     FinishBulletTime();
-                    StaminaController.instance.StopStamina();            
+                    staminaController.StopStamina();            
                 }
             }
             else
             {
+                Debug.Log(hasStopped);
                 if (!hasStopped)
                 {
                     FinishBulletTime();
                     BulletTimeEffect.instance.StopEffect();                   
                 }
-                StaminaController.instance.StopStamina();
+                staminaController.StopStamina();
+
             }
 
 		}
@@ -110,7 +113,7 @@ namespace Player
             actualTimeScale = 1.0f;
             Time.timeScale = actualTimeScale;
             isActive = false;
-            StaminaController.instance.ResetStamina();
+            staminaController.ResetStamina();
             hasStopped = true;
             AudioManager.instance.ChangePitch(1.0f);
             AudioManager.instance.EnterBTSFX();

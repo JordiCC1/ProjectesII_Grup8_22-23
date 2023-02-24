@@ -34,6 +34,7 @@ namespace Player
         private Color targetColor;
 
         [SerializeField] PauseMenu pauseMenu;
+        [SerializeField] StaminaController staminaController;
 
         [SerializeField] private GameObject echo;
         [SerializeField] private GameObject echo_L;
@@ -56,6 +57,7 @@ namespace Player
                 TakeInputs();
             movement.UpdateMovement(moveInputs);
             bt.UpdateBulletTime(btInputs, CanBT());
+          //  Debug.Log(CanBT());
             UpdateSwapped();
             if (bt.trailOn)
                 UpdateTrail();            
@@ -93,7 +95,7 @@ namespace Player
 
         private bool CanBT()
         {
-            return (!(movement.isGrounded) && StaminaController.instance.stamina >= 0);
+            return (!(movement.isGrounded) && staminaController.stamina > 0.0f);
         }
 
         #endregion

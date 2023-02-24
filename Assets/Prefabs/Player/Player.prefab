@@ -107,6 +107,7 @@ MonoBehaviour:
   alternative: 0
   targetPosition: {x: 0, y: 0, z: 0}
   pauseMenu: {fileID: 0}
+  staminaController: {fileID: 6431102767742483729}
   echo: {fileID: 4124855048286717127, guid: 7d2d37d53b23ff24aa9f561057db22f7, type: 3}
   echo_L: {fileID: 2794069138574640386, guid: 4a2307fdb81594b439937db70d3da5bf, type: 3}
   startTimeBetweenSpawns: 0.05
@@ -422,6 +423,7 @@ MonoBehaviour:
   trailOn: 0
   timeToNormal: 0.75
   pauseMenu: {fileID: 0}
+  staminaController: {fileID: 6431102767742483729}
   curve:
     serializedVersion: 2
     m_Curve:
@@ -458,10 +460,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f695a396af99a145921fefe49616012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxStamina: 2
+  maxStamina: 1
   <stamina>k__BackingField: 0
   staminaDrain: 1
-  staminaBar: {fileID: 7609031436340940517}
+  staminaBar: {fileID: 7609031435354373266}
 --- !u!1 &6860530578194479861
 GameObject:
   m_ObjectHideFlags: 0
@@ -5663,11 +5665,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7609031435567466267, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
---- !u!1 &7609031435354373264 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7609031436530988387, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
+--- !u!114 &7609031435354373266 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7609031436530988385, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
   m_PrefabInstance: {fileID: 1579567603}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9164270f2d29d6442a039432ffd83265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7609031436252405103 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7609031435617080476, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
@@ -5679,27 +5687,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7609031436340940517 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7609031435567466262, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
-  m_PrefabInstance: {fileID: 1579567603}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3067467012068268974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7609031436340940517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f695a396af99a145921fefe49616012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxStamina: 2
-  <stamina>k__BackingField: 20
-  staminaDrain: 1
-  staminaBar: {fileID: 7609031435354373264}
 --- !u!224 &7609031436340940521 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7609031435567466266, guid: 9b430e230b5bc724e9c34d5241a6c0f7, type: 3}
