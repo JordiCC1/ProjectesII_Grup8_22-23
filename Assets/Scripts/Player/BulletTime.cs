@@ -20,7 +20,7 @@ namespace Player
         private float actualTimeScale = 1.0f;
 
 		public bool isActive = false;
-        bool hasStopped=false;
+        bool hasStopped = true;
 
         [HideInInspector]public bool trailOn = false ;
 
@@ -45,6 +45,8 @@ namespace Player
 			{
 				Destroy(gameObject);
 			}
+
+            FinishBulletTime();
 
 			lerp = new Interpolator(timeToNormal);
 		}
