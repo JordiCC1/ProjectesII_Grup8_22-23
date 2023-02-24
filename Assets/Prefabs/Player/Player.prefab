@@ -314,7 +314,8 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 2048
-  rayLength: 0.025
+  boxCol: {fileID: 27149512573143970}
+  rayLength: 0.25
   maxSpeed: 135
   acceleration: 23
   deceleration: 6
