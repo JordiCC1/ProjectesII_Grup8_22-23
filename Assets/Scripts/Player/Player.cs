@@ -39,16 +39,20 @@ namespace Player
         [SerializeField] private GameObject echo;
         [SerializeField] private GameObject echo_L;
         [SerializeField] private float startTimeBetweenSpawns;
-        private float timeBetweenSpawns;       
+        private float timeBetweenSpawns;  
+        
+        private CheckpointMaster cm;
 
 
         private void Start()
         {
+            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
             movement = GetComponentInChildren<Movement>();
             bt = GetComponentInChildren<BulletTime>();
             sprite = GetComponentInChildren<SpriteRenderer>();
             originalColor = sprite.color;
             targetColor = new Color(1f, 1f, 0.7f, 1);
+            transform.position = cm.lastCheckPointPos;
         }
 
         void Update()
