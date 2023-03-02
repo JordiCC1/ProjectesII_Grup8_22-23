@@ -84,7 +84,6 @@ namespace Player
             }
             else
             {
-                Debug.Log(hasStopped);
                 if (!hasStopped)
                 {
                     FinishBulletTime();

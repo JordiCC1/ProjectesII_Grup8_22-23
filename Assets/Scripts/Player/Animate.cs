@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 namespace Player
 {
@@ -10,6 +12,7 @@ namespace Player
         [SerializeField] private Movement movement;
         [SerializeField] private Animator animator;
         [SerializeField] private SpriteRenderer sprite;
+        [SerializeField] private GameObject deathParticles;
 
         private static readonly int Idle = Animator.StringToHash("Idle");
         private static readonly int Walk = Animator.StringToHash("Walk");
@@ -56,6 +59,14 @@ namespace Player
             if (state == currentState) return;
             animator.CrossFade(state, 0, 0);
             currentState = state;
+            
+        }
+        private void Update()
+        {
+            if (player.isDead)
+            {
+                DeathAnimation();
+            }
         }
 
         private int GetState()
@@ -86,7 +97,38 @@ namespace Player
             }
         }
 
-        void Blink()
+
+        public void DeathAnimation()
+        {            
+            GameObject ParticleIns = Instantiate(deathParticles, transform.position, Quaternion.identity);
+            ParticleIns.GetComponent<ParticleSystem>().Play();
+            
+            StartCoroutine("WaitAndMove");
+            //player.GetComponent<Collider2D>().enabled = false;
+            player.isDead = false;
+        }
+
+        IEnumerator WaitAndMove()
+        {
+            Debug.Log("DIE");
+            GameObject ParticleIns = Instantiate(deathParticles, transform.position, Quaternion.identity);
+            ParticleIns.GetComponent<ParticleSystem>().Play();            
+            //Seconds to wait after player death
+            yield return new WaitForSeconds(1.5f);
+            Tween t;
+            //player.GetComponent<Collider2D>().enabled = false;
+            t = DOTween.To(() => player.transform.position, x => player.transform.position = x, (Vector3)player.cm.lastCheckPointPos, 0.3f).SetEase(Ease.InOutQuad);
+            // player.GetComponent<Collider2D>().enabled = true;
+            StartCoroutine("WaitAndRestart");
+        }
+        IEnumerator WaitAndRestart()
+        {
+            sprite.DOColor(player.originalColor, 0.2f);
+            yield return new WaitForSeconds(1);
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        }
+            void Blink()
         {
             float t = Time.deltaTime;
             if (alpha >= maximum) increasing = false;

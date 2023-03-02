@@ -25,6 +25,7 @@ namespace Player
         [HideInInspector] public bool isBulletTimeActive = false;
         [HideInInspector] public bool isSwapped = false;
         [HideInInspector] public bool swaping = false;
+        [HideInInspector] public bool isDead = false;
 
         public bool alternative;
 
@@ -39,19 +40,20 @@ namespace Player
         [SerializeField] private GameObject echo;
         [SerializeField] private GameObject echo_L;
         [SerializeField] private float startTimeBetweenSpawns;
-        private float timeBetweenSpawns;  
-        
-        private CheckpointMaster cm;
+        private float timeBetweenSpawns;
+
+        [HideInInspector] public CheckpointMaster cm;
 
 
         private void Start()
         {
+            
             cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
             movement = GetComponentInChildren<Movement>();
             bt = GetComponentInChildren<BulletTime>();
             sprite = GetComponentInChildren<SpriteRenderer>();
             originalColor = sprite.color;
-            targetColor = new Color(1f, 1f, 0.7f, 1);
+            targetColor = new Color(1f, 1f, 1f, 0);
             transform.position = cm.lastCheckPointPos;
         }
 
@@ -61,7 +63,6 @@ namespace Player
                 TakeInputs();
             movement.UpdateMovement(moveInputs);
             bt.UpdateBulletTime(btInputs, CanBT());
-          //  Debug.Log(CanBT());
             UpdateSwapped();
             if (bt.trailOn)
                 UpdateTrail();            
@@ -110,13 +111,13 @@ namespace Player
             if (collision.gameObject.CompareTag("Bullet") && !isInvincible)
             {
                 AudioManager.instance.PlayerDeathSFX();
-                Destroy(gameObject);
-                int scene = SceneManager.GetActiveScene().buildIndex;
-                SceneManager.LoadScene(scene, LoadSceneMode.Single);
-                //StartCoroutine(WaitAndDie());
+                //Destroy(gameObject);
+                sprite.DOColor(targetColor, 0.2f);
+                isDead = true;
+                this.gameObject.tag = "aPlayer";
+                //StartCoroutine("WaitAndMove");
             }
-        }
-
+        }        
         #endregion
 
         #region Invincibility
