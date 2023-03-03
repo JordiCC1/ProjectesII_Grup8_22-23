@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/EnemyScene.unity
     guid: 991ad6cf7cdd6044faf89118e466594f
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: d4d28b64bb2bf564ab9cf51cf6257f65
   m_configObjects: {}
