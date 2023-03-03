@@ -122,7 +122,7 @@ namespace Player
         }
         IEnumerator WaitAndRestart()
         {
-            sprite.DOColor(player.originalColor, 0.2f);
+            sprite.DOColor(player.originalColor, 1f);
             yield return new WaitForSeconds(1f);
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
