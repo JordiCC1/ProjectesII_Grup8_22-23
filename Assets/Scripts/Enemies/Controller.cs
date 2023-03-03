@@ -121,6 +121,14 @@ namespace Enemy
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
                 Destroy(gameObject);
             }
+            else if (col.gameObject.tag == "Trap")
+            {
+                AudioManager.instance.EnemyDeathSFX();
+                GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
+                ParticleIns.GetComponent<ParticleSystem>().Play();
+                CinemachineShake.Instance.ShakeCamera(5f, .1f);
+                Destroy(gameObject);
+            }
         }
 
         void BulletCollision(RaycastHit2D rayInfo)

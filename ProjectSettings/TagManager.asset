@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - CM
   - aPlayer
+  - Trap
   layers:
   - Default
   - TransparentFX

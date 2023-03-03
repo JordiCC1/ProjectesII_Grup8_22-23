@@ -31,7 +31,7 @@ namespace Player
 
         [HideInInspector] public Vector3 targetPosition;
 
-        private Color originalColor;
+        [HideInInspector] public Color originalColor;
         private Color targetColor;
 
         [SerializeField] PauseMenu pauseMenu;
@@ -109,6 +109,14 @@ namespace Player
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Bullet") && !isInvincible)
+            {
+                AudioManager.instance.PlayerDeathSFX();
+                //Destroy(gameObject);
+                sprite.DOColor(targetColor, 0.2f);
+                isDead = true;
+                this.gameObject.tag = "aPlayer";
+                //StartCoroutine("WaitAndMove");
+            }else if (collision.gameObject.CompareTag("Trap") )
             {
                 AudioManager.instance.PlayerDeathSFX();
                 //Destroy(gameObject);
