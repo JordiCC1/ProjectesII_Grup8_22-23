@@ -59,9 +59,9 @@ namespace Player
         {
             if (!pauseMenu.isPaused)
                 TakeInputs();
-            movement.UpdateMovement(moveInputs);
-            bt.UpdateBulletTime(btInputs, CanBT());
-          //  Debug.Log(CanBT());
+            movement.UpdateMovement(moveInputs, CanActMidAir());
+            bt.UpdateBulletTime(btInputs, CanActMidAir());
+          //  Debug.Log(CanActMidAir());
             UpdateSwapped();
             if (bt.trailOn)
                 UpdateTrail();            
@@ -97,7 +97,7 @@ namespace Player
             }
         }
 
-        private bool CanBT()
+        private bool CanActMidAir()
         {
             return (!(movement.isGrounded) && staminaController.stamina > 0.0f);
         }
