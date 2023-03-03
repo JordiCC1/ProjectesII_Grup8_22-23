@@ -44,21 +44,21 @@ namespace Player
 
         [HideInInspector] public CheckpointMaster cm;
 
-
         private void Start()
         {
-            
-            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
+            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();            
             movement = GetComponentInChildren<Movement>();
             bt = GetComponentInChildren<BulletTime>();
             sprite = GetComponentInChildren<SpriteRenderer>();
             originalColor = sprite.color;
             targetColor = new Color(1f, 1f, 1f, 0);
-            transform.position = cm.lastCheckPointPos;
+            Vector2 lastCheckPointPos = cm.lastCheckPointPos;
+            transform.position = lastCheckPointPos;
         }
 
         void Update()
         {
+            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
             if (!pauseMenu.isPaused)
                 TakeInputs();
             movement.UpdateMovement(moveInputs);
@@ -111,21 +111,27 @@ namespace Player
             if (collision.gameObject.CompareTag("Bullet") && !isInvincible)
             {
                 AudioManager.instance.PlayerDeathSFX();
-                //Destroy(gameObject);
                 sprite.DOColor(targetColor, 0.2f);
                 isDead = true;
-                this.gameObject.tag = "aPlayer";
-                //StartCoroutine("WaitAndMove");
+                //StartCoroutine("WaitThenDie");
+                this.gameObject.tag = "aPlayer";               
             }else if (collision.gameObject.CompareTag("Trap") )
             {
                 AudioManager.instance.PlayerDeathSFX();
                 //Destroy(gameObject);
                 sprite.DOColor(targetColor, 0.2f);
                 isDead = true;
+                //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";
-                //StartCoroutine("WaitAndMove");
             }
         }        
+        IEnumerator WaitThenDie()
+        {
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
+        }
         #endregion
 
         #region Invincibility

@@ -101,16 +101,15 @@ namespace Player
         public void DeathAnimation()
         {            
             GameObject ParticleIns = Instantiate(deathParticles, transform.position, Quaternion.identity);
-            ParticleIns.GetComponent<ParticleSystem>().Play();
-            
+            ParticleIns.GetComponent<ParticleSystem>().Play();            
             StartCoroutine("WaitAndMove");
             //player.GetComponent<Collider2D>().enabled = false;
             player.isDead = false;
+            
         }
 
         IEnumerator WaitAndMove()
         {
-            Debug.Log("DIE");
             GameObject ParticleIns = Instantiate(deathParticles, transform.position, Quaternion.identity);
             ParticleIns.GetComponent<ParticleSystem>().Play();            
             //Seconds to wait after player death
@@ -123,8 +122,8 @@ namespace Player
         }
         IEnumerator WaitAndRestart()
         {
-            //sprite.DOColor(player.originalColor, 0.2f);
-            yield return new WaitForSeconds(1);
+            sprite.DOColor(player.originalColor, 0.2f);
+            yield return new WaitForSeconds(1f);
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }

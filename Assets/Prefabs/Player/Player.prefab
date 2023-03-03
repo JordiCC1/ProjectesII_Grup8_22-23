@@ -104,13 +104,16 @@ MonoBehaviour:
   isBulletTimeActive: 0
   isSwapped: 0
   swaping: 0
+  isDead: 0
   alternative: 0
   targetPosition: {x: 0, y: 0, z: 0}
+  originalColor: {r: 0, g: 0, b: 0, a: 0}
   pauseMenu: {fileID: 0}
   staminaController: {fileID: 6431102767742483729}
   echo: {fileID: 4124855048286717127, guid: 7d2d37d53b23ff24aa9f561057db22f7, type: 3}
   echo_L: {fileID: 2794069138574640386, guid: 4a2307fdb81594b439937db70d3da5bf, type: 3}
   startTimeBetweenSpawns: 0.05
+  cm: {fileID: 0}
   invincibilityTime: 1.5
 --- !u!1 &479827148551063457
 GameObject:
@@ -371,6 +374,7 @@ MonoBehaviour:
   movement: {fileID: 0}
   animator: {fileID: 0}
   sprite: {fileID: 0}
+  deathParticles: {fileID: 3934082505798368739, guid: f1a3c6424ed681e4abdfc0fdbbf13e39, type: 3}
 --- !u!1 &5202932575752996480
 GameObject:
   m_ObjectHideFlags: 0
