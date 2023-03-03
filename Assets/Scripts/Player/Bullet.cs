@@ -46,6 +46,7 @@ namespace Player
             Vector3 newPos = Objective.transform.position;
             if (this.gameObject.GetComponentInParent<Player>().alternative == false)
             {
+                Debug.Log("A");
                 Objective.GetComponent<Controller>().SwapAnimation(lastPos);
             }
             this.gameObject.GetComponentInParent<Player>().Invincibility();
