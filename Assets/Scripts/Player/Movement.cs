@@ -65,7 +65,7 @@ namespace Player
                -Vector3.up, rayLength, groundLayer);
 
         public bool isHanging =>
-            !colDown && colFront && movementScale != 0; // this line might have to change
+            !colDown && colFront && movementScale != 0 && rb.velocity.y <= 0; // this line might have to change
 
         private void CheckCollisions()
         {
