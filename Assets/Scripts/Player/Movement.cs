@@ -37,6 +37,20 @@ namespace Player
             jumpReleased |= inputs.JumpUp;
         }
 
+        public void MoveCharacterInPlayer(bool isAlive)
+        {
+            if (isAlive)
+            {
+                CheckCollisions();
+
+                CalculateJumpApex();
+                CalculateWalk();
+                CalculateJump();
+
+                MoveCharacterPhysics();
+            }
+        }
+
         public void FixedUpdate()
         {
             CheckCollisions();
@@ -65,7 +79,7 @@ namespace Player
                -Vector3.up, rayLength, groundLayer);
 
         public bool isHanging =>
-            !colDown && colFront && movementScale != 0; // this line might have to change
+            !colDown && colFront && movementScale != 0 && rb.velocity.y <= 0; // this line might have to change
 
         private void CheckCollisions()
         {
@@ -248,13 +262,6 @@ namespace Player
 
         #endregion
 
-        /*#region Dash
-        [Header("Dash")]
-        [SerializeField] private float dashDistance;
-
-
-        #endregion*/        
-
         #region Move
         public bool isFacingRight = true;
 
@@ -330,14 +337,6 @@ namespace Player
                 AudioManager.instance.LandingSFX();
         }
 
-        #endregion
-
-        #region Death
-        IEnumerator WaitAndDie()
-        {
-            yield return new WaitForSeconds(2);
-            //SceneManager.LoadScene(0);
-        }
         #endregion
 
         #region DustAnimation
