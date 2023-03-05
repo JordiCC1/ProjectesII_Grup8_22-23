@@ -99,9 +99,9 @@ namespace Player
 
 
         public void DeathAnimation()
-        {            
+        {
             GameObject ParticleIns = Instantiate(deathParticles, transform.position, Quaternion.identity);
-            ParticleIns.GetComponent<ParticleSystem>().Play();            
+            ParticleIns.GetComponent<ParticleSystem>().Play();
             StartCoroutine("WaitAndMove");
             //player.GetComponent<Collider2D>().enabled = false;
             player.isDead = false;

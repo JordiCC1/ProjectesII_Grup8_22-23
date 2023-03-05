@@ -38,28 +38,27 @@ namespace Player
         }
 
         public void MoveCharacterInPlayer(bool isAlive)
-        {
+        {            
             if (isAlive)
             {
+                
                 CheckCollisions();
 
                 CalculateJumpApex();
                 CalculateWalk();
                 CalculateJump();
 
-                MoveCharacterPhysics();
-            }
+                MoveCharacterPhysics();                
+            }           
         }
 
         public void FixedUpdate()
         {
-            CheckCollisions();
-
-            CalculateJumpApex();
-            CalculateWalk();
-            CalculateJump();
-
-            MoveCharacterPhysics();
+            //CheckCollisions();
+            //CalculateJumpApex();
+            //CalculateWalk();
+            //CalculateJump();
+            //MoveCharacterPhysics();
         }
 
         #region Collisions

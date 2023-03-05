@@ -26,6 +26,7 @@ namespace Player
         [HideInInspector] public bool isSwapped = false;
         [HideInInspector] public bool swaping = false;
         [HideInInspector] public bool isDead = false;
+        [HideInInspector] public bool isAlive = true;
 
         public bool alternative;
 
@@ -62,13 +63,17 @@ namespace Player
             if (!pauseMenu.isPaused)
                 TakeInputs();
             movement.UpdateMovement(moveInputs);
+            
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateSwapped();
             if (bt.trailOn)
                 UpdateTrail();            
            
         }
-
+        private void FixedUpdate()
+        {
+            movement.MoveCharacterInPlayer(isAlive);
+        }
         #region Inputs
         private void TakeInputs()
         {
@@ -110,17 +115,19 @@ namespace Player
         {
             if (collision.gameObject.CompareTag("Bullet") && !isInvincible)
             {
+                isDead = true;
+                isAlive = false;
                 AudioManager.instance.PlayerDeathSFX();
                 sprite.DOColor(targetColor, 0.2f);
-                isDead = true;
                 //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";               
             }else if (collision.gameObject.CompareTag("Trap") )
             {
+                isDead = true;
+                isAlive = false;
                 AudioManager.instance.PlayerDeathSFX();
                 //Destroy(gameObject);
                 sprite.DOColor(targetColor, 0.2f);
-                isDead = true;
                 //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";
             }

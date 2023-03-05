@@ -14,8 +14,7 @@ public class ControlScene : MonoBehaviour
     {
         cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
         if (other.CompareTag("Player")|| other.CompareTag("aPlayer"))
-        {
-            Debug.Log("destroyed");
+        {            
             cm.DestroyThis();
             StartCoroutine("Wait");
         }
