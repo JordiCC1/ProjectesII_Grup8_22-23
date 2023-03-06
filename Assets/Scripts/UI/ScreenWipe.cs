@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class ScreenWipe : MonoBehaviour
 {
+
+    public static ScreenWipe instance;
+
     [SerializeField][Range(0.1f, 3f)] private float wipeSpeed = 1f;
     private Image image;
 
@@ -16,12 +19,21 @@ public class ScreenWipe : MonoBehaviour
 
     public bool isDone { get; private set; }
 
-    [HideInInspector]public bool isBlocked = false;
+    [HideInInspector] public bool isBlocked = false;
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         image = GetComponentInChildren<Image>();
-        DontDestroyOnLoad(gameObject);
+
     }
 
     public void ToggleWipe(bool blockScreen)
@@ -39,12 +51,12 @@ public class ScreenWipe : MonoBehaviour
 
     private void Update()
     {
-        if(wipeMode == WipeMode.Blocked)
+        if (wipeMode == WipeMode.Blocked)
         {
             isBlocked = true;
         }
-        else if(wipeMode != WipeMode.Blocked)
-        { 
+        else if (wipeMode != WipeMode.Blocked)
+        {
             isBlocked = false;
         }
 
@@ -83,7 +95,7 @@ public class ScreenWipe : MonoBehaviour
         }
     }
 
-    [ContextMenu ("Block")]
+    [ContextMenu("Block")]
     private void Block()
     {
         ToggleWipe(true);
@@ -93,5 +105,10 @@ public class ScreenWipe : MonoBehaviour
     private void Clear()
     {
         ToggleWipe(false);
+    }
+
+    public void DestroyThis()
+    {
+        Destroy(gameObject);
     }
 }
