@@ -61,8 +61,7 @@ namespace Player
             if(screenWipe.isBlocked)
             {
                 screenWipe.ToggleWipe(false);
-            }
-            Debug.Log(screenWipe.isBlocked);
+            }            
         }
 
         void Update()
