@@ -44,10 +44,12 @@ namespace Player
         private float timeBetweenSpawns;
 
         [HideInInspector] public CheckpointMaster cm;
+        private ScreenWipe screenWipe;
 
         private void Start()
         {
-            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();            
+            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
+            screenWipe = FindObjectOfType<ScreenWipe>();
             movement = GetComponentInChildren<Movement>();
             bt = GetComponentInChildren<BulletTime>();
             sprite = GetComponentInChildren<SpriteRenderer>();
@@ -55,6 +57,12 @@ namespace Player
             targetColor = new Color(1f, 1f, 1f, 0);
             Vector2 lastCheckPointPos = cm.lastCheckPointPos;
             transform.position = lastCheckPointPos;
+
+            if(screenWipe.isBlocked)
+            {
+                screenWipe.ToggleWipe(false);
+            }
+            Debug.Log(screenWipe.isBlocked);
         }
 
         void Update()
