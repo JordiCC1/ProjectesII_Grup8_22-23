@@ -15,25 +15,19 @@ namespace Player {
         [Range(0, 50)] [SerializeField] private float staminaDrain = 1f;
 
         [Header("Stamina UI")]
-        public GameObject staminaBar;
-        public static StaminaController instance;
-        
-
-        private void Awake()
-        {
-            instance = this;
-        }
+        public StaminaBar staminaBar;
 
         private void Start()
         {
             stamina = maxStamina;
+            staminaBar.SetMaxStamina(maxStamina);
             //staminaBar.GetComponentInChildren<StaminaBar>().SetMaxStamina(stamina-1);
             //staminaBar.SetActive(false);
         }
 
         private void Update()
         {
-            staminaBar.GetComponentInChildren<StaminaBar>().SetStamina(stamina - 1);
+            staminaBar.SetStamina(stamina);
             //if (stamina == maxStamina && staminaBar.activeInHierarchy)
             //    staminaBar.SetActive(false);
         }
@@ -57,10 +51,10 @@ namespace Player {
         {
             while (stamina>=0.0f)
             {
-                if (stamina - staminaDrain >= 0.0f)
-                {
+                //if (stamina - staminaDrain >= 1.0f)
+               // {
                     stamina -= staminaDrain*Time.deltaTime;                    
-                }
+               // }
                 yield return new WaitForEndOfFrame();
             }
         }
@@ -69,7 +63,7 @@ namespace Player {
         {
             StopAllCoroutines();
             coroutineActive = false;
-            //Debug.Log("sTOP");
+
         }
         #endregion
 
