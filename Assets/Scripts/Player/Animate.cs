@@ -32,6 +32,8 @@ namespace Player
         private bool increasing = true;
         private Color srColor;
 
+        //Wipe
+        private ScreenWipe screenWipe;
         private void Start()
         {
             player = GetComponentInParent<Player>();
@@ -44,6 +46,8 @@ namespace Player
             //blink
             srColor = sprite.color;
             alpha = maximum;
+
+            screenWipe = FindObjectOfType<ScreenWipe>();
         }
 
         private void FixedUpdate()
@@ -99,9 +103,9 @@ namespace Player
 
 
         public void DeathAnimation()
-        {            
+        {
             GameObject ParticleIns = Instantiate(deathParticles, transform.position, Quaternion.identity);
-            ParticleIns.GetComponent<ParticleSystem>().Play();            
+            ParticleIns.GetComponent<ParticleSystem>().Play();
             StartCoroutine("WaitAndMove");
             //player.GetComponent<Collider2D>().enabled = false;
             player.isDead = false;
@@ -113,7 +117,7 @@ namespace Player
             GameObject ParticleIns = Instantiate(deathParticles, transform.position, Quaternion.identity);
             ParticleIns.GetComponent<ParticleSystem>().Play();            
             //Seconds to wait after player death
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.5f);
             Tween t;
             //player.GetComponent<Collider2D>().enabled = false;
             t = DOTween.To(() => player.transform.position, x => player.transform.position = x, (Vector3)player.cm.lastCheckPointPos, 0.3f).SetEase(Ease.InOutQuad);
@@ -122,8 +126,9 @@ namespace Player
         }
         IEnumerator WaitAndRestart()
         {
-            sprite.DOColor(player.originalColor, 1f);
-            yield return new WaitForSeconds(1f);
+            //sprite.DOColor(player.originalColor, 1f);
+            screenWipe.ToggleWipe(true);
+            yield return new WaitForSeconds(3f);
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
