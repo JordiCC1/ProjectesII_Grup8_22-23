@@ -14,10 +14,12 @@ namespace Player
 
     public class Movement : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem dust;
+
         [Header("Physics")]
         [SerializeField] private LayerMask groundLayer;
         public Rigidbody2D rb { get; private set; }
-        private BoxCollider2D boxCol;
+        [SerializeField] private BoxCollider2D boxCol;
 
         private void Start()
         {
@@ -35,15 +37,28 @@ namespace Player
             jumpReleased |= inputs.JumpUp;
         }
 
+        public void MoveCharacterInPlayer(bool isAlive)
+        {            
+            if (isAlive)
+            {
+                
+                CheckCollisions();
+
+                CalculateJumpApex();
+                CalculateWalk();
+                CalculateJump();
+
+                MoveCharacterPhysics();                
+            }           
+        }
+
         public void FixedUpdate()
         {
-            CheckCollisions();
-
-            CalculateJumpApex();
-            CalculateWalk();
-            CalculateJump();
-
-            MoveCharacterPhysics();
+            //CheckCollisions();
+            //CalculateJumpApex();
+            //CalculateWalk();
+            //CalculateJump();
+            //MoveCharacterPhysics();
         }
 
         #region Collisions
@@ -55,17 +70,15 @@ namespace Player
         public bool landingThisFrame { get; private set; }
 
         public bool isGrounded =>
-           Physics2D.Raycast(transform.position,
-               -Vector3.up, rayLength * 10, groundLayer) ||
-           Physics2D.Raycast(new Vector3
-               (transform.position.x + 0.01f, transform.position.y + boxCol.bounds.extents.y, transform.position.z),
-               -Vector3.up, rayLength * 10, groundLayer) ||
-           Physics2D.Raycast(new Vector3
-               (transform.position.x + 0.01f, transform.position.y - boxCol.bounds.extents.y, transform.position.z),
-               -Vector3.up, rayLength * 10, groundLayer);
+           Physics2D.Raycast(transform.position - new Vector3(0, boxCol.bounds.extents.y, 0),
+               -Vector3.up, rayLength, groundLayer) ||
+           Physics2D.Raycast(transform.position - new Vector3(boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+               -Vector3.up, rayLength, groundLayer) ||
+           Physics2D.Raycast(transform.position - new Vector3(-boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+               -Vector3.up, rayLength, groundLayer);
 
         public bool isHanging =>
-            !colDown && colFront && movementScale != 0; // this line might have to change
+            !colDown && colFront && movementScale != 0 && rb.velocity.y <= 0; // this line might have to change
 
         private void CheckCollisions()
         {
@@ -93,13 +106,15 @@ namespace Player
 
             if (isFacingRight)
             {
-                colFront = Physics2D.Raycast(pos, Vector3.right, rayLength, groundLayer) ||
+                colFront = Physics2D.Raycast(pos, 
+                    Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer);
 
-                colBack = Physics2D.Raycast(pos, -Vector3.right, rayLength, groundLayer) ||
+                colBack = Physics2D.Raycast(pos, 
+                    -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
@@ -107,13 +122,15 @@ namespace Player
             }
             else
             {
-                colFront = Physics2D.Raycast(pos, -Vector3.right, rayLength, groundLayer) ||
+                colFront = Physics2D.Raycast(pos, 
+                    -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer);
 
-                colBack = Physics2D.Raycast(pos, Vector3.right, rayLength, groundLayer) ||
+                colBack = Physics2D.Raycast(pos, 
+                    Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
@@ -121,6 +138,27 @@ namespace Player
             }
 
         }
+
+        //draw lines
+        /*private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+
+            var pos = transform.position;
+            var extent = boxCol.bounds.extents;
+
+            for (int i = -1; i <= 1; i++)
+                Gizmos.DrawRay(pos + new Vector3(extent.x, extent.y * i, 0),
+                    extent * Vector2.right * rayLength);
+
+            for (int i = -1; i <= 1; i++)
+                Gizmos.DrawRay(pos - new Vector3(extent.x, extent.y * i, 0),
+                    extent * -Vector2.right * rayLength);
+
+            for (int i = -1; i <= 1; i++)
+                Gizmos.DrawRay(pos - new Vector3(extent.x * i, extent.y, 0),
+                    extent * -Vector2.up * rayLength);
+        }*/
 
         #endregion
 
@@ -223,13 +261,6 @@ namespace Player
 
         #endregion
 
-        /*#region Dash
-        [Header("Dash")]
-        [SerializeField] private float dashDistance;
-
-
-        #endregion*/        
-
         #region Move
         public bool isFacingRight = true;
 
@@ -240,6 +271,7 @@ namespace Player
             {
                 if (!colDown)
                     rb.velocity = Vector3.zero;
+                CreateDust();
                 rb.AddForce(jumpHeight * Vector2.up, ForceMode2D.Impulse);
 
                 shouldJump = false;
@@ -289,7 +321,7 @@ namespace Player
         private void Flip()
         {
             var scale = transform.localScale;
-
+            CreateDust();
             transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
             isFacingRight = !isFacingRight;
         }
@@ -306,11 +338,11 @@ namespace Player
 
         #endregion
 
-        #region Death
-        IEnumerator WaitAndDie()
+        #region DustAnimation
+        void CreateDust()
         {
-            yield return new WaitForSeconds(2);
-            SceneManager.LoadScene(0);
+            if(isGrounded)
+                dust.Play();
         }
         #endregion
     }

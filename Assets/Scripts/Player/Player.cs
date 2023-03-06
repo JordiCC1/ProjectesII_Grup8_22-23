@@ -24,46 +24,71 @@ namespace Player
         [HideInInspector] public bool isInvincible = false;
         [HideInInspector] public bool isBulletTimeActive = false;
         [HideInInspector] public bool isSwapped = false;
+        [HideInInspector] public bool swaping = false;
+        [HideInInspector] public bool isDead = false;
+        [HideInInspector] public bool isAlive = true;
 
         public bool alternative;
 
         [HideInInspector] public Vector3 targetPosition;
 
-        private Color originalColor;
+        [HideInInspector] public Color originalColor;
         private Color targetColor;
 
         [SerializeField] PauseMenu pauseMenu;
+        [SerializeField] StaminaController staminaController;
 
+        [SerializeField] private GameObject echo;
+        [SerializeField] private GameObject echo_L;
+        [SerializeField] private float startTimeBetweenSpawns;
+        private float timeBetweenSpawns;
 
+        [HideInInspector] public CheckpointMaster cm;
+        private ScreenWipe screenWipe;
 
         private void Start()
         {
+            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
+            screenWipe = FindObjectOfType<ScreenWipe>();
             movement = GetComponentInChildren<Movement>();
             bt = GetComponentInChildren<BulletTime>();
             sprite = GetComponentInChildren<SpriteRenderer>();
             originalColor = sprite.color;
-            targetColor = new Color(1f, 1f, 0.7f, 1);
+            targetColor = new Color(1f, 1f, 1f, 0);
+            Vector2 lastCheckPointPos = cm.lastCheckPointPos;
+            transform.position = lastCheckPointPos;          
+            
         }
 
         void Update()
         {
+            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
             if (!pauseMenu.isPaused)
                 TakeInputs();
             movement.UpdateMovement(moveInputs);
+            
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateSwapped();
-
+            if (bt.trailOn)
+                UpdateTrail();            
            
         }
-
+        private void FixedUpdate()
+        {
+            movement.MoveCharacterInPlayer(isAlive);
+        }
         #region Inputs
         private void TakeInputs()
         {
             moveInputs = new MovementInputs
             {
                 walk = Input.GetAxisRaw("Horizontal"), //Raw makes it more snappy
-                JumpDown = Input.GetButtonDown("Jump"),
-                JumpUp = Input.GetButtonUp("Jump")
+                JumpDown = Input.GetButtonDown("Jump") ||
+                    Input.GetKeyDown(KeyCode.W) ||
+                    Input.GetKeyDown(KeyCode.UpArrow),
+                JumpUp = Input.GetButtonUp("Jump") ||
+                    Input.GetKeyUp(KeyCode.W) ||
+                    Input.GetKeyUp(KeyCode.UpArrow)
             };
             if (moveInputs.JumpDown)
                 movement.lastJumpInput = Time.time;
@@ -83,7 +108,7 @@ namespace Player
 
         private bool CanBT()
         {
-            return (!(movement.isGrounded) && StaminaController.instance.stamina >= 0);
+            return (!(movement.isGrounded) && staminaController.stamina > 0.0f);
         }
 
         #endregion
@@ -93,14 +118,30 @@ namespace Player
         {
             if (collision.gameObject.CompareTag("Bullet") && !isInvincible)
             {
+                isDead = true;
+                isAlive = false;
                 AudioManager.instance.PlayerDeathSFX();
-                Destroy(gameObject);
-                int scene = SceneManager.GetActiveScene().buildIndex;
-                SceneManager.LoadScene(scene, LoadSceneMode.Single);
-                //StartCoroutine(WaitAndDie());
+                sprite.DOColor(targetColor, 0.2f);
+                //StartCoroutine("WaitThenDie");
+                this.gameObject.tag = "aPlayer";               
+            }else if (collision.gameObject.CompareTag("Trap") )
+            {
+                isDead = true;
+                isAlive = false;
+                AudioManager.instance.PlayerDeathSFX();
+                //Destroy(gameObject);
+                sprite.DOColor(targetColor, 0.2f);
+                //StartCoroutine("WaitThenDie");
+                this.gameObject.tag = "aPlayer";
             }
+        }        
+        IEnumerator WaitThenDie()
+        {
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
-
         #endregion
 
         #region Invincibility
@@ -143,13 +184,41 @@ namespace Player
             Tween t;
             if (isSwapped)
             {
-                t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.2f).SetEase(Ease.InOutQuad);
-                isSwapped = false;
+                t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.15f).SetEase(Ease.InOutQuad);
+
+                isSwapped = false;                
             }
 
         }
+
+        
         #endregion
 
+        #region trail
+        void UpdateTrail()
+        {
+            if (timeBetweenSpawns <= 0)
+            {
+                if (movement.isFacingRight)
+                {
+                    GameObject instance = Instantiate(echo, transform.position, Quaternion.identity);
+                    Destroy(instance, 2f);
+                }
+                else if(movement.isFacingRight == false)
+                {
+                    GameObject instance = Instantiate(echo_L, transform.position, Quaternion.identity);
+                    Destroy(instance, 2f);                   
+                }
+                timeBetweenSpawns = startTimeBetweenSpawns;
+                
+            }
+            else
+            {                
+                timeBetweenSpawns -= Time.deltaTime;                
+            }
+        }
+        
+        #endregion
         private void RestartScene()
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

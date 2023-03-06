@@ -51,7 +51,6 @@ namespace Player
             this.gameObject.GetComponentInParent<Player>().Invincibility();
             this.gameObject.GetComponentInParent<Player>().isSwapped = true;
             this.gameObject.GetComponentInParent<Player>().targetPosition = newPos;
-            StaminaController.instance.ResetStamina();
             BulletTime.instance.BackToNormal();
         }
     }
