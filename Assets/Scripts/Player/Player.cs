@@ -56,12 +56,8 @@ namespace Player
             originalColor = sprite.color;
             targetColor = new Color(1f, 1f, 1f, 0);
             Vector2 lastCheckPointPos = cm.lastCheckPointPos;
-            transform.position = lastCheckPointPos;
-
-            if(screenWipe.isBlocked)
-            {
-                screenWipe.ToggleWipe(false);
-            }            
+            transform.position = lastCheckPointPos;          
+            
         }
 
         void Update()

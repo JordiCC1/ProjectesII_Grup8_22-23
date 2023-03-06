@@ -17,9 +17,7 @@ public class ScreenWipe : MonoBehaviour
 
     private float wipeProgress;
 
-    public bool isDone { get; private set; }
-
-    [HideInInspector] public bool isBlocked = false;
+    public bool isDone { get; private set; }    
 
     private void Awake()
     {
@@ -50,15 +48,7 @@ public class ScreenWipe : MonoBehaviour
     }
 
     private void Update()
-    {
-        if (wipeMode == WipeMode.Blocked)
-        {
-            isBlocked = true;
-        }
-        else if (wipeMode != WipeMode.Blocked)
-        {
-            isBlocked = false;
-        }
+    {       
 
         switch (wipeMode)
         {
@@ -68,7 +58,11 @@ public class ScreenWipe : MonoBehaviour
             case WipeMode.WipingToNotBlocked:
                 WipeToNotBlocked();
                 break;
+            case WipeMode.Blocked:
+                StartCoroutine("WaitAndWipe");
+                break;
         }
+        
     }
 
     private void WipeToBlocked()
@@ -93,6 +87,12 @@ public class ScreenWipe : MonoBehaviour
             isDone = true;
             wipeMode = WipeMode.NotBlocked;
         }
+    }
+
+    private IEnumerator WaitAndWipe() 
+    {
+        yield return new WaitForSeconds(3f);
+        wipeMode = WipeMode.WipingToNotBlocked;
     }
 
     [ContextMenu("Block")]
