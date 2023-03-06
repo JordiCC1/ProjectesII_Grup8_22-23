@@ -9,7 +9,6 @@ public class CheckpointMaster : MonoBehaviour
 
     public Vector2 lastCheckPointPos;
 
-    private Vector2[] firstCheckPoints;
     private void Awake()
     {
         if(instance == null) 
@@ -22,5 +21,9 @@ public class CheckpointMaster : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
+    public void DestroyThis()
+    {
+        Destroy(gameObject);
+    }
+
 }

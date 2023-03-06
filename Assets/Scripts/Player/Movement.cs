@@ -336,7 +336,7 @@ namespace Player
         IEnumerator WaitAndDie()
         {
             yield return new WaitForSeconds(2);
-            SceneManager.LoadScene(0);
+            //SceneManager.LoadScene(0);
         }
         #endregion
 

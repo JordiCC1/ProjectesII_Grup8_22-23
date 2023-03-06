@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Bullet
   - CM
+  - aPlayer
+  - Trap
   layers:
   - Default
   - TransparentFX

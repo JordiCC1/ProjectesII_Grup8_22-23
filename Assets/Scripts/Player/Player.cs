@@ -25,12 +25,13 @@ namespace Player
         [HideInInspector] public bool isBulletTimeActive = false;
         [HideInInspector] public bool isSwapped = false;
         [HideInInspector] public bool swaping = false;
+        [HideInInspector] public bool isDead = false;
 
         public bool alternative;
 
         [HideInInspector] public Vector3 targetPosition;
 
-        private Color originalColor;
+        [HideInInspector] public Color originalColor;
         private Color targetColor;
 
         [SerializeField] PauseMenu pauseMenu;
@@ -39,29 +40,29 @@ namespace Player
         [SerializeField] private GameObject echo;
         [SerializeField] private GameObject echo_L;
         [SerializeField] private float startTimeBetweenSpawns;
-        private float timeBetweenSpawns;  
-        
-        private CheckpointMaster cm;
+        private float timeBetweenSpawns;
 
+        [HideInInspector] public CheckpointMaster cm;
 
         private void Start()
         {
-            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
+            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();            
             movement = GetComponentInChildren<Movement>();
             bt = GetComponentInChildren<BulletTime>();
             sprite = GetComponentInChildren<SpriteRenderer>();
             originalColor = sprite.color;
-            targetColor = new Color(1f, 1f, 0.7f, 1);
-            transform.position = cm.lastCheckPointPos;
+            targetColor = new Color(1f, 1f, 1f, 0);
+            Vector2 lastCheckPointPos = cm.lastCheckPointPos;
+            transform.position = lastCheckPointPos;
         }
 
         void Update()
         {
+            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
             if (!pauseMenu.isPaused)
                 TakeInputs();
             movement.UpdateMovement(moveInputs);
             bt.UpdateBulletTime(btInputs, CanBT());
-          //  Debug.Log(CanBT());
             UpdateSwapped();
             if (bt.trailOn)
                 UpdateTrail();            
@@ -110,13 +111,27 @@ namespace Player
             if (collision.gameObject.CompareTag("Bullet") && !isInvincible)
             {
                 AudioManager.instance.PlayerDeathSFX();
-                Destroy(gameObject);
-                int scene = SceneManager.GetActiveScene().buildIndex;
-                SceneManager.LoadScene(scene, LoadSceneMode.Single);
-                //StartCoroutine(WaitAndDie());
+                sprite.DOColor(targetColor, 0.2f);
+                isDead = true;
+                //StartCoroutine("WaitThenDie");
+                this.gameObject.tag = "aPlayer";               
+            }else if (collision.gameObject.CompareTag("Trap") )
+            {
+                AudioManager.instance.PlayerDeathSFX();
+                //Destroy(gameObject);
+                sprite.DOColor(targetColor, 0.2f);
+                isDead = true;
+                //StartCoroutine("WaitThenDie");
+                this.gameObject.tag = "aPlayer";
             }
+        }        
+        IEnumerator WaitThenDie()
+        {
+            yield return new WaitForSeconds(1f);
+            Destroy(gameObject);
+            int scene = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
-
         #endregion
 
         #region Invincibility

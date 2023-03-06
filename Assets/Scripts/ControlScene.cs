@@ -13,15 +13,17 @@ public class ControlScene : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")|| other.CompareTag("aPlayer"))
         {
+            Debug.Log("destroyed");
+            cm.DestroyThis();
             StartCoroutine("Wait");
         }
     }
 
     IEnumerator Wait()
     {
-        Destroy(cm);
+
 
         yield return new WaitForSeconds(0.7f);
 
