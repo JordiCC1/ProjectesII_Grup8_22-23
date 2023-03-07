@@ -2275,7 +2275,6 @@ MonoBehaviour:
   isPaused: 0
   pauseButton: Pause
   UI: []
-  gamePaused: 0
 --- !u!1 &7181596289948127835
 GameObject:
   m_ObjectHideFlags: 0
