@@ -12,6 +12,9 @@ public class PauseMenu : MonoBehaviour
     public string pauseButton = "Pause";
     public GameObject[] UI;
 
+    private CheckpointMaster cm;
+    private ScreenWipe sw;
+
     void Start()
     {
         //pauseMenu.SetActive(false);
@@ -70,6 +73,8 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMainMenu()
     {
+        cm.DestroyThis();
+        sw.DestroyThis();
         Time.timeScale = 1f;        
         SceneManager.LoadScene("Main Menu");
     }
