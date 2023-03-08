@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour
 
     private CheckpointMaster cm;
     private ScreenWipe sw;
-
+    private Scene currentScene;
     void Start()
     {
         //pauseMenu.SetActive(false);
@@ -27,6 +27,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetButtonDown(pauseButton))
         {
             if (isPaused)
@@ -37,7 +38,8 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseGame();
             }
-        }       
+        }     
+        
     }
 
     public void PauseGame()
@@ -73,9 +75,7 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        cm.DestroyThis();
-        sw.DestroyThis();
-        Time.timeScale = 1f;        
+        Time.timeScale = 1f;                
         SceneManager.LoadScene("Main Menu");
     }
 
