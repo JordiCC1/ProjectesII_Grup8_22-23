@@ -75,7 +75,7 @@ namespace Player
         }
         private void FixedUpdate()
         {
-            movement.MoveCharacterInPlayer(isAlive);
+            movement.MoveCharacterInPlayer(isAlive,screenWipe.isDone);
         }
         #region Inputs
         private void TakeInputs()
