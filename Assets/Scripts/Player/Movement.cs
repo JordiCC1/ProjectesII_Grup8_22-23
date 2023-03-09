@@ -37,12 +37,12 @@ namespace Player
             jumpReleased |= inputs.JumpUp;
         }
 
-        public void MoveCharacterInPlayer(bool isAlive)
+        public void MoveCharacterInPlayer(bool isAlive, bool isDoneRestarting)
         {            
-            if (isAlive)
-            {
-                
                 CheckCollisions();
+
+            if (isAlive && isDoneRestarting)
+            {
 
                 CalculateJumpApex();
                 CalculateWalk();
