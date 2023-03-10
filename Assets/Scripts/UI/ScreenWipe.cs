@@ -91,7 +91,7 @@ public class ScreenWipe : MonoBehaviour
 
     private IEnumerator WaitAndWipe() 
     {
-        yield return new WaitForSeconds(1.7f);
+        yield return new WaitForSeconds(1f);
         wipeMode = WipeMode.WipingToNotBlocked;
     }
 
