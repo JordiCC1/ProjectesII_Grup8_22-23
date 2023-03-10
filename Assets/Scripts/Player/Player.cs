@@ -62,7 +62,6 @@ namespace Player
 
         void Update()
         {
-            cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
             if (!pauseMenu.isPaused)
                 TakeInputs();
             movement.UpdateMovement(moveInputs);
