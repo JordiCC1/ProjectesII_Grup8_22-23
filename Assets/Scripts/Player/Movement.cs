@@ -329,7 +329,13 @@ namespace Player
         #endregion
 
         #region SFX
-
+        private void Walking()
+        {
+            if (isGrounded && targetSpeed != 0)
+                AudioManager.instance.WalkingSFX(true);
+            else
+                AudioManager.instance.WalkingSFX(false);
+        }
         private void Landing()
         {
             if (landingThisFrame)
