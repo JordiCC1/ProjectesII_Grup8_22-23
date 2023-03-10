@@ -5129,7 +5129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dust: {fileID: 8612859578363149937}
-  dust2: {fileID: 0}
+  dust2: {fileID: 1676734249339720636}
   groundLayer:
     serializedVersion: 2
     m_Bits: 2048
