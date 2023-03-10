@@ -62255,7 +62255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
-  levelName: Main Menu
+  levelName: Insanity
 --- !u!61 &1234710217
 BoxCollider2D:
   m_ObjectHideFlags: 0
