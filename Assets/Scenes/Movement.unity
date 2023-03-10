@@ -3033,7 +3033,7 @@ Transform:
   - {fileID: 1410132316}
   - {fileID: 1872228908}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &265598339
 GameObject:
@@ -4078,7 +4078,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5125186793838858019, guid: adbe0294e0899244da713a278ff6e401, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adbe0294e0899244da713a278ff6e401, type: 3}
@@ -4975,7 +4975,7 @@ Transform:
   - {fileID: 1599319449}
   - {fileID: 1864642621}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1110184225
 GameObject:
@@ -68945,7 +68945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35a8187d2867104382283971d666acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 8
+  index: 7
   levelName: Level 2
 --- !u!61 &1410132318
 BoxCollider2D:
