@@ -11,8 +11,10 @@ public class PauseMenu : MonoBehaviour
     public bool isPaused;
     public string pauseButton = "Pause";
     public GameObject[] UI;
-    [SerializeField] bool gamePaused;
 
+    private CheckpointMaster cm;
+    private ScreenWipe sw;
+    private Scene currentScene;
     void Start()
     {
         //pauseMenu.SetActive(false);
@@ -25,6 +27,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetButtonDown(pauseButton))
         {
             if (isPaused)
@@ -35,14 +38,12 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseGame();
             }
-        }       
+        }     
+        
     }
 
     public void PauseGame()
     {
-        gamePaused = true;
-
-        //pauseMenu.SetActive(true);
         foreach (GameObject part in menuParts)
         {
             part.SetActive(true);
@@ -60,9 +61,6 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        gamePaused = false;
-
-        //pauseMenu.SetActive(false);
         foreach (GameObject part in menuParts)
         {
             part.SetActive(false);
@@ -77,7 +75,7 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        Time.timeScale = 1f;        
+        Time.timeScale = 1f;                
         SceneManager.LoadScene("Main Menu");
     }
 

@@ -54,6 +54,7 @@ MonoBehaviour:
   enemyShoot: {fileID: 8300000, guid: 45f54b0b43ce01c49bb5b90849236aaf, type: 3}
   enterBT: {fileID: 8300000, guid: 9adee2e5d0f85834aa655357e29ecce2, type: 3}
   exitBT: {fileID: 8300000, guid: 12f018321aea652458c05c6bda729558, type: 3}
+  enemyAlert: {fileID: 8300000, guid: 05bb98dc8bfaaa5449a6b59328485a05, type: 3}
   curve:
     serializedVersion: 2
     m_Curve: []

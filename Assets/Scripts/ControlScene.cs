@@ -9,14 +9,16 @@ public class ControlScene : MonoBehaviour
     public string levelName;
 
     private CheckpointMaster cm;
+    private ScreenWipe sw;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
+        sw = FindObjectOfType<ScreenWipe>();
         if (other.CompareTag("Player")|| other.CompareTag("aPlayer"))
-        {
-            Debug.Log("destroyed");
+        {            
             cm.DestroyThis();
+            sw.DestroyThis();
             StartCoroutine("Wait");
         }
     }
