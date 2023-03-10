@@ -339,7 +339,10 @@ namespace Player
         private void Landing()
         {
             if (landingThisFrame)
+            {
                 AudioManager.instance.LandingSFX();
+                CreateDust();
+            }
         }
 
         #endregion
