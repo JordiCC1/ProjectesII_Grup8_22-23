@@ -111160,7 +111160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 2
-  levelName: Level 2
+  levelName: Movement
 --- !u!61 &1234710217
 BoxCollider2D:
   m_ObjectHideFlags: 0

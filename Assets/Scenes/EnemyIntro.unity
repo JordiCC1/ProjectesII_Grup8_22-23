@@ -62010,7 +62010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 9
-  levelName: SniperIntro
+  levelName: BulletTimeTutorial
 --- !u!61 &1410132318
 BoxCollider2D:
   m_ObjectHideFlags: 0
