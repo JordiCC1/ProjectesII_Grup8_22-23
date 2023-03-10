@@ -23,10 +23,17 @@ public class ControlScene : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.KeypadEnter))
+        {
+
+            SceneManager.LoadScene(1);
+        }
+    }
+
     IEnumerator Wait()
     {
-
-
         yield return new WaitForSeconds(0.7f);
 
         SceneManager.LoadScene(index);

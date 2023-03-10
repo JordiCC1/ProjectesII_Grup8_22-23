@@ -31,7 +31,7 @@ public class ScreenWipe : MonoBehaviour
             Destroy(gameObject);
         }
         image = GetComponentInChildren<Image>();
-
+        isDone = true;
     }
 
     public void ToggleWipe(bool blockScreen)
@@ -72,7 +72,7 @@ public class ScreenWipe : MonoBehaviour
 
         if (wipeProgress >= 1f)
         {
-            isDone = true;
+            //isDone = true;
             wipeMode = WipeMode.Blocked;
         }
     }
