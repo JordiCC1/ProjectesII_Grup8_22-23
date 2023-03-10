@@ -117,7 +117,7 @@ namespace Player
             GameObject ParticleIns = Instantiate(deathParticles, transform.position, Quaternion.identity);
             ParticleIns.GetComponent<ParticleSystem>().Play();            
             //Seconds to wait after player death
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.7f);
             Tween t;
             //player.GetComponent<Collider2D>().enabled = false;
             t = DOTween.To(() => player.transform.position, x => player.transform.position = x, (Vector3)player.cm.lastCheckPointPos, 0.3f).SetEase(Ease.InOutQuad);
@@ -128,7 +128,7 @@ namespace Player
         {
             //sprite.DOColor(player.originalColor, 1f);
             screenWipe.ToggleWipe(true);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
