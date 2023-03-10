@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     //public GameObject pauseMenu;
     public GameObject[] menuParts;
+    public GameObject[] settingsMenuParts;
     public bool isPaused;
     public string pauseButton = "Pause";
     public GameObject[] UI;
@@ -65,6 +66,10 @@ public class PauseMenu : MonoBehaviour
         {
             part.SetActive(false);
         }
+        foreach (GameObject part in settingsMenuParts)
+        {
+            part.SetActive(false);
+        }
         foreach (GameObject part in UI)
         {
             part.SetActive(true);
@@ -75,7 +80,8 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        Time.timeScale = 1f;                
+        Time.timeScale = 1f;
+        StartCoroutine("SetPauseFalse");
         SceneManager.LoadScene("Main Menu");
     }
 
@@ -89,6 +95,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         StartCoroutine("SetPauseFalse");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        isPaused = false;
     }
 
     IEnumerator SetPauseFalse()
