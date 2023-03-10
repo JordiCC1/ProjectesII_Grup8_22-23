@@ -181,7 +181,6 @@ namespace Player
             speedDif = targetSpeed - rb.velocity.x;
             accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deceleration;
             movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPower) * Mathf.Sign(speedDif);
-            Walking();
         }
 
         #endregion
@@ -330,13 +329,6 @@ namespace Player
         #endregion
 
         #region SFX
-        private void Walking()
-        {
-            if (isGrounded && targetSpeed != 0)
-                AudioManager.instance.WalkingSFX(true);
-            else
-                AudioManager.instance.WalkingSFX(false);
-        }
 
         private void Landing()
         {
