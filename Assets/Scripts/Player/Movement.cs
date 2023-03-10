@@ -15,6 +15,7 @@ namespace Player
     public class Movement : MonoBehaviour
     {
         [SerializeField] private ParticleSystem dust;
+        [SerializeField] private ParticleSystem dust2;
 
         [Header("Physics")]
         [SerializeField] private LayerMask groundLayer;
@@ -271,7 +272,7 @@ namespace Player
             {
                 if (!colDown)
                     rb.velocity = Vector3.zero;
-                CreateDust();
+                CreateDust2();
                 rb.AddForce(jumpHeight * Vector2.up, ForceMode2D.Impulse);
 
                 shouldJump = false;
@@ -352,6 +353,10 @@ namespace Player
         {
             if(isGrounded)
                 dust.Play();
+        }void CreateDust2()
+        {
+            if(isGrounded)
+                dust2.Play();
         }
         #endregion
     }
