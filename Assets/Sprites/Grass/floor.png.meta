@@ -36,9 +36,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -1111,7 +1111,7 @@ TextureImporter:
     nameFileIdTable:
       floor_21: 1351016807
       floor_27: 1679997495
-      floor_37: -1364026610
+      floor_0: 1350537526
       floor_29: -251985085
       floor_38: 1355971676
       floor_18: -1430948551
@@ -1147,7 +1147,7 @@ TextureImporter:
       floor_34: -1277830774
       floor_30: 1303289137
       floor_35: 134543782
-      floor_0: 1350537526
+      floor_37: -1364026610
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
