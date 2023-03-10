@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource audioSourceStep;
     [SerializeField] AudioClip pBulletWallSFX;
     [SerializeField] AudioClip pBulletEnemySFX;
     [SerializeField] AudioClip landingSFX;
@@ -67,6 +68,11 @@ public class AudioManager : MonoBehaviour
     public void PBulletEnemyCollisionSFX()
     {
         audioSource.PlayOneShot(pBulletEnemySFX);
+    }
+
+    public void WalkingSFX(bool moving)
+    {
+        audioSourceStep.enabled = moving;
     }
 
     public void LandingSFX()
