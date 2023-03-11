@@ -12,14 +12,14 @@ public class RoomManager : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !other.isTrigger)
+        if (other.CompareTag("Player") || other.CompareTag("aPlayer") && !other.isTrigger)
         {
             virtualCam.SetActive(true);
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !other.isTrigger)
+        if (other.CompareTag("Player") || other.CompareTag("aPlayer") && !other.isTrigger)
         {
             virtualCam.SetActive(false);
         }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,11 +8,14 @@ public class PauseMenu : MonoBehaviour
 {
     //public GameObject pauseMenu;
     public GameObject[] menuParts;
+    public GameObject[] settingsMenuParts;
     public bool isPaused;
     public string pauseButton = "Pause";
     public GameObject[] UI;
-    [SerializeField] bool gamePaused;
 
+    private CheckpointMaster cm;
+    private ScreenWipe sw;
+    private Scene currentScene;
     void Start()
     {
         //pauseMenu.SetActive(false);
@@ -25,6 +28,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetButtonDown(pauseButton))
         {
             if (isPaused)
@@ -35,14 +39,12 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseGame();
             }
-        }       
+        }     
+        
     }
 
     public void PauseGame()
     {
-        gamePaused = true;
-
-        //pauseMenu.SetActive(true);
         foreach (GameObject part in menuParts)
         {
             part.SetActive(true);
@@ -60,10 +62,11 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        gamePaused = false;
-
-        //pauseMenu.SetActive(false);
         foreach (GameObject part in menuParts)
+        {
+            part.SetActive(false);
+        }
+        foreach (GameObject part in settingsMenuParts)
         {
             part.SetActive(false);
         }
@@ -77,7 +80,8 @@ public class PauseMenu : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        Time.timeScale = 1f;        
+        Time.timeScale = 1f;
+        StartCoroutine("SetPauseFalse");
         SceneManager.LoadScene("Main Menu");
     }
 
@@ -91,6 +95,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         StartCoroutine("SetPauseFalse");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        isPaused = false;
     }
 
     IEnumerator SetPauseFalse()

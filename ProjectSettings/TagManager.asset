@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Bullet
+  - CM
+  - aPlayer
+  - Trap
   layers:
   - Default
   - TransparentFX

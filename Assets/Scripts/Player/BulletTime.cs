@@ -20,19 +20,23 @@ namespace Player
         private float actualTimeScale = 1.0f;
 
 		public bool isActive = false;
-        bool hasStopped=false;
+        bool hasStopped = false;
+
+        [HideInInspector]public bool trailOn = false ;
 
 		public static BulletTime instance;
 
         public float timeToNormal=.75f;
 
         [SerializeField] PauseMenu pauseMenu;
+        [SerializeField] StaminaController staminaController;
 
         [Header("Interpolation")]
 		Interpolator lerp;
 		public AnimationCurve curve;
+        
 
-		private void Awake()
+        private void Awake()
 		{
 			if (instance == null)
 			{
@@ -42,6 +46,8 @@ namespace Player
 			{
 				Destroy(gameObject);
 			}
+
+            FinishBulletTime();
 
 			lerp = new Interpolator(timeToNormal);
 		}
@@ -54,27 +60,26 @@ namespace Player
             }
             if (canBT)
             { 
-                if (StaminaController.instance.stamina >= 0.0f)
+                if (staminaController.stamina >= 0.0f)
                 {
                     if (inputs.BulletTimeDown)
                     {
                         BulletTimeEffect.instance.StartEffect();
                         BulletTimeActive();
-                        StaminaController.instance.UseStamina();
+                        staminaController.UseStamina();                        
                     }
                     else if (inputs.BulletTimeUp)
                     {
                         BulletTimeEffect.instance.StopEffect();
                         FinishBulletTime();
-                        StaminaController.instance.StopStamina();                        
+                        staminaController.StopStamina();                        
                     }
                 }
                 else
                 {
                     BulletTimeEffect.instance.StopEffect();
                     FinishBulletTime();
-                    StaminaController.instance.StopStamina();
-                    
+                    staminaController.StopStamina();            
                 }
             }
             else
@@ -82,30 +87,32 @@ namespace Player
                 if (!hasStopped)
                 {
                     FinishBulletTime();
-                    BulletTimeEffect.instance.StopEffect();
-
+                    BulletTimeEffect.instance.StopEffect();                   
                 }
-                StaminaController.instance.StopStamina();
+                staminaController.StopStamina();
+
             }
 
 		}
 
         void BulletTimeActive()
-        {            
+        {
+            trailOn = true;
             Time.timeScale = slowdownFactor;
             actualTimeScale = slowdownFactor;
             isActive = true;
             AudioManager.instance.ChangePitch(0.5f);
             AudioManager.instance.ExitBTSFX();
-            hasStopped = false;
+            hasStopped = false;           
         }
 
         void FinishBulletTime()
         {
+            trailOn = false;
             actualTimeScale = 1.0f;
             Time.timeScale = actualTimeScale;
             isActive = false;
-            StaminaController.instance.ResetStamina();
+            staminaController.ResetStamina();
             hasStopped = true;
             AudioManager.instance.ChangePitch(1.0f);
             AudioManager.instance.EnterBTSFX();

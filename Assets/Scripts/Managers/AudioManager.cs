@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource audioSourceStep;
     [SerializeField] AudioClip pBulletWallSFX;
     [SerializeField] AudioClip pBulletEnemySFX;
     [SerializeField] AudioClip landingSFX;
@@ -15,6 +16,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip enemyShoot;
     [SerializeField] AudioClip enterBT;
     [SerializeField] AudioClip exitBT;
+    [SerializeField] AudioClip enemyAlert;
 
     [Header("Interpolation")]
     Interpolator lerp;
@@ -72,7 +74,12 @@ public class AudioManager : MonoBehaviour
     public void LandingSFX()
     {
         audioSource.PlayOneShot(landingSFX);
-    } 
+    }
+
+    public void WalkingSFX(bool moving)
+    {
+        audioSourceStep.enabled = moving;
+    }
 
     public void EnemyDeathSFX()
     {
@@ -99,5 +106,10 @@ public class AudioManager : MonoBehaviour
         audioSource.PlayOneShot(exitBT,0.2f);
         //Temporal
         audioSource.pitch = 0.38f;
+    }
+
+    public void EnemyAlertSFX()
+    {
+        audioSource.PlayOneShot(enemyAlert, 0.2f);
     }
 }

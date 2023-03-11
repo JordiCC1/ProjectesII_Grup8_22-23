@@ -101,10 +101,11 @@ namespace Enemy
         }
         #endregion
 
-        #region Collisions
-        private void OnCollisionEnter2D(Collision2D collision)
+        #region Collisions        
+
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            if (collision.gameObject.tag == "Player" && !nonPlayerkillable)
+            if (col.gameObject.tag == "Player" && !nonPlayerkillable)
             {
                 AudioManager.instance.EnemyDeathSFX();
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
@@ -112,7 +113,15 @@ namespace Enemy
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
                 Destroy(gameObject);
             }
-            else if (collision.gameObject.tag == "Bullet")
+            else if (col.gameObject.tag == "Bullet")
+            {
+                AudioManager.instance.EnemyDeathSFX();
+                GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
+                ParticleIns.GetComponent<ParticleSystem>().Play();
+                CinemachineShake.Instance.ShakeCamera(5f, .1f);
+                Destroy(gameObject);
+            }
+            else if (col.gameObject.tag == "Trap")
             {
                 AudioManager.instance.EnemyDeathSFX();
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
@@ -173,7 +182,7 @@ namespace Enemy
 
         IEnumerator ReturnCollider()
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.2f);
             gameObject.GetComponent<Collider2D>().enabled = true;
         }
 
