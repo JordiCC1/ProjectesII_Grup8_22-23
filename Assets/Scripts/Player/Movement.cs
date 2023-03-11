@@ -52,7 +52,10 @@ namespace Player
                 MoveCharacterPhysics();                
             }           
         }
-
+        private void Update()
+        {
+            Walking();
+        }
         public void FixedUpdate()
         {
             //CheckCollisions();
@@ -332,10 +335,10 @@ namespace Player
         #region SFX
         private void Walking()
         {
-            if (isGrounded && targetSpeed != 0)
-                AudioManager.instance.WalkingSFX(true);
-            else
-                AudioManager.instance.WalkingSFX(false);
+            if (isGrounded && targetSpeed != 0)            
+                AudioManager.instance.WalkingSFX(true);                
+            else            
+                AudioManager.instance.WalkingSFX(false);            
         }
         private void Landing()
         {
