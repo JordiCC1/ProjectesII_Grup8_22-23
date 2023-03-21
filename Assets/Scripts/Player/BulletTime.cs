@@ -90,10 +90,11 @@ namespace Player
                     BulletTimeEffect.instance.StopEffect();                   
                 }
                 staminaController.StopStamina();
+                staminaController.ResetStamina();
 
             }
 
-		}
+        }
 
         void BulletTimeActive()
         {
@@ -112,7 +113,6 @@ namespace Player
             actualTimeScale = 1.0f;
             Time.timeScale = actualTimeScale;
             isActive = false;
-            staminaController.ResetStamina();
             hasStopped = true;
             AudioManager.instance.ChangePitch(1.0f);
             AudioManager.instance.EnterBTSFX();
