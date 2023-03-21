@@ -82,7 +82,7 @@ namespace Player
                -Vector3.up, rayLength, groundLayer);
 
         public bool isHanging =>
-            !colDown && colFront && movementScale != 0 && rb.velocity.y <= 0; // this line might have to change
+            !colDown && (colFront||colBack) && movementScale != 0 && rb.velocity.y <= 0; // this line might have to change
 
         private void CheckCollisions()
         {
@@ -111,34 +111,34 @@ namespace Player
             if (isFacingRight)
             {
                 colFront = Physics2D.Raycast(pos, 
-                    Vector3.right, rayLength, groundLayer) ||
+                    Vector3.right, rayLength + 0.3f, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
-                    Vector3.right, rayLength, groundLayer) ||
+                    Vector3.right, rayLength + 0.3f, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
-                    Vector3.right, rayLength, groundLayer);
+                    Vector3.right, rayLength + 0.3f, groundLayer);
 
                 colBack = Physics2D.Raycast(pos, 
-                    -Vector3.right, rayLength, groundLayer) ||
+                    -Vector3.right, rayLength + 0.3f, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
-                    -Vector3.right, rayLength, groundLayer) ||
+                    -Vector3.right, rayLength + 0.3f, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
-                    -Vector3.right, rayLength, groundLayer);
+                    -Vector3.right, rayLength + 0.3f, groundLayer);
             }
             else
             {
                 colFront = Physics2D.Raycast(pos, 
-                    -Vector3.right, rayLength, groundLayer) ||
+                    -Vector3.right, rayLength + 0.3f, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
-                    -Vector3.right, rayLength, groundLayer) ||
+                    -Vector3.right, rayLength + 0.3f, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
-                    -Vector3.right, rayLength, groundLayer);
+                    -Vector3.right, rayLength + 0.3f, groundLayer);
 
                 colBack = Physics2D.Raycast(pos, 
-                    Vector3.right, rayLength, groundLayer) ||
+                    Vector3.right, rayLength + 0.3f, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
-                    Vector3.right, rayLength, groundLayer) ||
+                    Vector3.right, rayLength + 0.3f, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
-                    Vector3.right, rayLength, groundLayer);
+                    Vector3.right, rayLength + 0.3f, groundLayer);
             }
 
         }
