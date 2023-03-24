@@ -9,6 +9,7 @@ namespace Player
 	{
 		public bool BulletTimeDown;
 		public bool BulletTimeUp;
+        public bool SwapUp;
 		public bool lastState;
 	}
 
@@ -54,7 +55,7 @@ namespace Player
 
         public void UpdateBulletTime(BulletTimeInputs inputs, bool canBT)
         {
-            if (inputs.BulletTimeUp)
+            if (inputs.SwapUp)
             {
                 this.gameObject.GetComponentInChildren<Laser>().Shoot();
             }

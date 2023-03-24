@@ -96,7 +96,8 @@ namespace Player
             btInputs = new BulletTimeInputs
             {
                 BulletTimeDown = Input.GetMouseButtonDown(0),
-                BulletTimeUp = Input.GetMouseButtonUp(0)
+                BulletTimeUp = Input.GetMouseButtonUp(0),
+                SwapUp = Input.GetMouseButtonUp(1)
             };
 
             if (Input.GetButtonDown("Restart"))
