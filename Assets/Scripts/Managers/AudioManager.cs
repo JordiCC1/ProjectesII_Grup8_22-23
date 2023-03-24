@@ -37,6 +37,16 @@ public class AudioManager : MonoBehaviour
         lerp = new Interpolator(0.5f);
     }
 
+    public static AudioSource PlayAudio2D(Transform root, AudioClip clip, bool DestroyOnFinish = true)
+    {
+        AudioSource source = Instantiate(new GameObject("AudioObject"), root).AddComponent<AudioSource>();
+        source.clip = clip;
+        source.Play();
+        if (DestroyOnFinish)
+            Destroy(source.gameObject, clip.length + 1f);
+        return source;
+    }
+
     private void Start()
     {
         audioSource.Play();
@@ -62,54 +72,4 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = sliderValue;
     }
 
-    public void PBulletWallCollisionSFX()
-    {
-        audioSource.PlayOneShot(pBulletWallSFX);
-    } 
-    public void PBulletEnemyCollisionSFX()
-    {
-        audioSource.PlayOneShot(pBulletEnemySFX);
-    }
-
-    public void LandingSFX()
-    {
-        audioSource.PlayOneShot(landingSFX);
-    }
-
-    public void WalkingSFX(bool moving)
-    {
-        audioSourceStep.enabled = moving;
-    }
-
-    public void EnemyDeathSFX()
-    {
-        audioSource.PlayOneShot(enemyDeathSFX);
-    } 
-    
-    public void PlayerDeathSFX()
-    {
-        audioSource.PlayOneShot(playerDeathSFX);
-    }
-    public void EnemyShootSFX()
-    {        
-        audioSource.PlayOneShot(enemyShoot,0.2f);        
-    } 
-    public void EnterBTSFX()
-    {        
-        audioSource.PlayOneShot(enterBT,0.2f);
-        //Temporal
-        audioSource.pitch = 1f;
-        
-    }
-    public void ExitBTSFX()
-    {        
-        audioSource.PlayOneShot(exitBT,0.2f);
-        //Temporal
-        audioSource.pitch = 0.38f;
-    }
-
-    public void EnemyAlertSFX()
-    {
-        audioSource.PlayOneShot(enemyAlert, 0.2f);
-    }
 }

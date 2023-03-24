@@ -5,13 +5,13 @@ using System.Collections;
 namespace Player
 {
 
-	public struct BulletTimeInputs
-	{
-		public bool BulletTimeDown;
-		public bool BulletTimeUp;
+    public struct BulletTimeInputs
+    {
+        public bool BulletTimeDown;
+        public bool BulletTimeUp;
         public bool SwapUp;
-		public bool lastState;
-	}
+        public bool lastState;
+    }
 
     public class BulletTime : MonoBehaviour
     {
@@ -20,83 +20,84 @@ namespace Player
         private float normalTimeScale = 1.0f;
         private float actualTimeScale = 1.0f;
 
-		public bool isActive = false;
+        public bool isActive = false;
         bool hasStopped = false;
 
-        [HideInInspector]public bool trailOn = false ;
+        [HideInInspector] public bool trailOn = false;
 
-		public static BulletTime instance;
+        public static BulletTime instance;
 
-        public float timeToNormal=.75f;
+        public float timeToNormal = .75f;
 
         [SerializeField] PauseMenu pauseMenu;
         [SerializeField] StaminaController staminaController;
 
         [Header("Interpolation")]
-		Interpolator lerp;
-		public AnimationCurve curve;
-        
+        Interpolator lerp;
+        public AnimationCurve curve;
+
+        [Header("Audio")]
+        public AudioClip enterSound;
+        public AudioClip exitSound;
+
 
         private void Awake()
-		{
-			if (instance == null)
-			{
-				instance = this;
-			}
-			else
-			{
-				Destroy(gameObject);
-			}
+        {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
 
             FinishBulletTime();
 
-			lerp = new Interpolator(timeToNormal);
-		}
+            lerp = new Interpolator(timeToNormal);
+        }
 
-        public void UpdateBulletTime(BulletTimeInputs inputs, bool canBT)
+        public void UpdateBulletTime(BulletTimeInputs inputs, bool Airborne)
         {
             if (inputs.SwapUp)
             {
                 this.gameObject.GetComponentInChildren<Laser>().Shoot();
             }
-            if (canBT)
-            { 
-                if (staminaController.stamina >= 0.0f)
+
+            if (staminaController.stamina >= 0.0f)
+            {
+                if (inputs.BulletTimeDown)
                 {
-                    if (inputs.BulletTimeDown)
-                    {
-                        BulletTimeEffect.instance.StartEffect();
-                        BulletTimeActive();
-                        staminaController.UseStamina();                        
-                    }
-                    else if (inputs.BulletTimeUp)
-                    {
-                        BulletTimeEffect.instance.StopEffect();
-                        FinishBulletTime();
-                        staminaController.StopStamina();                        
-                    }
+                    BulletTimeEffect.instance.StartEffect();
+                    BulletTimeActive();
+                    staminaController.UseStamina();
                 }
-                else
+                else if (inputs.BulletTimeUp)
                 {
                     BulletTimeEffect.instance.StopEffect();
                     FinishBulletTime();
-                    staminaController.StopStamina();            
+                    staminaController.StopStamina();
                 }
             }
             else
             {
-                if (!hasStopped)
-                {
-                    FinishBulletTime();
-                    BulletTimeEffect.instance.StopEffect();                   
-                }
+                BulletTimeEffect.instance.StopEffect();
+                FinishBulletTime();
                 staminaController.StopStamina();
-                staminaController.ResetStamina();
+            }
+
+            if (!Airborne)
+            {
+                if(hasStopped)
+                {
+                    staminaController.StopStamina();
+                    staminaController.ResetStamina();
+                }
 
             }
 
-        }
 
+        }
         void BulletTimeActive()
         {
             trailOn = true;
@@ -104,8 +105,8 @@ namespace Player
             actualTimeScale = slowdownFactor;
             isActive = true;
             AudioManager.instance.ChangePitch(0.5f);
-            AudioManager.instance.ExitBTSFX();
-            hasStopped = false;           
+            AudioManager.PlayAudio2D(this.transform, enterSound);
+            hasStopped = false;
         }
 
         void FinishBulletTime()
@@ -116,21 +117,21 @@ namespace Player
             isActive = false;
             hasStopped = true;
             AudioManager.instance.ChangePitch(1.0f);
-            AudioManager.instance.EnterBTSFX();
+            AudioManager.PlayAudio2D(this.transform, exitSound);
         }
 
         public void BackToNormal()
-		{
-			lerp.Update(Time.deltaTime);
+        {
+            lerp.Update(Time.deltaTime);
 
-			if (lerp.IsMaxPrecise)
-				lerp.ToMin();
+            if (lerp.IsMaxPrecise)
+                lerp.ToMin();
 
-			else if (lerp.IsMinPrecise)
-				lerp.ToMax();
+            else if (lerp.IsMinPrecise)
+                lerp.ToMax();
 
-			actualTimeScale = Mathf.Lerp(actualTimeScale, normalTimeScale, curve.Evaluate(lerp.Value));
-		}
+            actualTimeScale = Mathf.Lerp(actualTimeScale, normalTimeScale, curve.Evaluate(lerp.Value));
+        }
 
-	}
+    }
 }

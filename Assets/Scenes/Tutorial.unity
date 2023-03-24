@@ -78084,7 +78084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3c5f1b699b5f9408e787a7f43b80d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pM: {fileID: 0}
+  pM: {fileID: 1599319450}
 --- !u!114 &1266084654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78340,6 +78340,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: curve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: curve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: curve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: curve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: curve.m_Curve.Array.data[0].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].tangentMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7904500014058029065, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -78442,7 +78482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3c5f1b699b5f9408e787a7f43b80d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pM: {fileID: 0}
+  pM: {fileID: 1599319450}
 --- !u!114 &1363820653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78906,7 +78946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc3c5f1b699b5f9408e787a7f43b80d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pM: {fileID: 0}
+  pM: {fileID: 1599319450}
 --- !u!114 &1739050149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82580,7 +82620,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Interaction
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2297821690233562447, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
+    - {fileID: 2297821690233562444, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 619473239f6f70e4b8a6697362554d47, type: 3}
 --- !u!1001 &5125186795664695811
 PrefabInstance:
