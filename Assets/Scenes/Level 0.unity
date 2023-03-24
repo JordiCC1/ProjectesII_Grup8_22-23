@@ -107914,6 +107914,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeTile (58)
       objectReference: {fileID: 0}
+    - target: {fileID: 1741668169188229319, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
+      propertyPath: m_Size.x
+      value: 0.79698944
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741668169188229319, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.10150528
+      objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229337, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_RootOrder
       value: 4
