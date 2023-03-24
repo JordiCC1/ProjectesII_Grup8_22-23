@@ -81,7 +81,7 @@ namespace Player
            Physics2D.Raycast(transform.position - new Vector3(-boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer);
 
-        public bool isHanging =>
+        public bool isOnWall =>
             !colDown && (colFront||colBack) && !isGrounded && rb.velocity.y <= 0; // this line might have to change
 
         private void CheckCollisions()
@@ -95,7 +95,7 @@ namespace Player
                 coyoteUsable = true;
                 landingThisFrame = true;
             }
-            if ((colBack || colFront) && !isHanging)
+            if ((colBack || colFront) && !isOnWall)
                 timeLeftWall = Time.time;
 
             colDown = isGrounded;
@@ -223,9 +223,9 @@ namespace Player
         private bool CanUseCoyote =>
             coyoteUsable && !colDown && timeLeftGrounded + coyoteTimeThreshold > Time.time;
         private bool HasWallJumpBuffered =>
-            isHanging && lastJumpInput + jumpBuffer > Time.time;
+            isOnWall && lastJumpInput + jumpBuffer > Time.time;
         private bool CanUseWallCoyote =>
-            coyoteUsable && !isHanging && timeLeftWall + coyoteTimeThreshold > Time.time;
+            coyoteUsable && !isOnWall && timeLeftWall + coyoteTimeThreshold > Time.time;
 
         [Header("Bullet Time")]
         [SerializeField] private float bulletTimeControl = 1.5f;
@@ -301,7 +301,7 @@ namespace Player
             rb.gravityScale = isInApex ? apexGravity : normalGravity;
 
             // DRAG
-            if (isHanging)
+            if (isOnWall)
                 rb.drag = wallDrag;
             else if (!colDown)
                 rb.drag = airDrag;

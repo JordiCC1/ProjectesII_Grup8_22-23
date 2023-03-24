@@ -79,7 +79,7 @@ namespace Player
 
             // Priorities
             if (movement.landingThisFrame) return LockState(Land, 0.1f);
-            if (movement.isHanging)
+            if (movement.isOnWall)
             {
                 //TODO: lock flip for a while
                 sprite.flipX = true;
