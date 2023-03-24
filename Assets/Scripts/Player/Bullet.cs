@@ -13,6 +13,10 @@ namespace Player
         private Rigidbody2D rb;
         public float lifeTime;
 
+        [Header("Audio")]
+        public AudioClip enemyCollision;
+        public AudioClip wallCollision;
+
         private void Start()
         {
             mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -33,10 +37,12 @@ namespace Player
             {
                 objCollided.GetComponent<Controller>().OnSwap();
                 SwapGameObject(objCollided);
-                AudioManager.instance.PBulletEnemyCollisionSFX();
+                AudioManager.PlayAudio2D(this.transform, enemyCollision);
+
             }
             else
-                AudioManager.instance.PBulletWallCollisionSFX();
+                AudioManager.PlayAudio2D(this.transform, wallCollision);
+
             Destroy(gameObject);
         }
 

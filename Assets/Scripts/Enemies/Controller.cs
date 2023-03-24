@@ -44,6 +44,9 @@ namespace Enemy
 
         [HideInInspector] public Vector3 swapPosition;
 
+        [Header("Audio")]
+        public AudioClip enemyShoot;
+        public AudioClip enemyDeath;
 
         void Start()
         {
@@ -79,7 +82,7 @@ namespace Enemy
         {
             isReloaded = true;
             CinemachineShake.Instance.ShakeCamera(5f, .1f);
-            AudioManager.instance.EnemyShootSFX();
+            AudioManager.PlayAudio2D(this.transform, enemyShoot);
             GameObject BulletIns = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             BulletIns.GetComponent<Rigidbody2D>().AddForce(bulletDirection * bulletForce);
         }
@@ -107,7 +110,7 @@ namespace Enemy
         {
             if (col.gameObject.tag == "Player" && !nonPlayerkillable)
             {
-                AudioManager.instance.EnemyDeathSFX();
+                AudioManager.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
@@ -115,7 +118,7 @@ namespace Enemy
             }
             else if (col.gameObject.tag == "Bullet")
             {
-                AudioManager.instance.EnemyDeathSFX();
+                AudioManager.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
@@ -123,7 +126,7 @@ namespace Enemy
             }
             else if (col.gameObject.tag == "Trap")
             {
-                AudioManager.instance.EnemyDeathSFX();
+                AudioManager.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);

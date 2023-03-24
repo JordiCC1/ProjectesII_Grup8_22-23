@@ -44,6 +44,9 @@ namespace Player
         [HideInInspector] public CheckpointMaster cm;
         private ScreenWipe screenWipe;
 
+        [Header("Audio")]
+        public AudioClip deathSound;
+
         private void Start()
         {
             cm = GameObject.FindGameObjectWithTag("CM").GetComponent<CheckpointMaster>();
@@ -118,14 +121,15 @@ namespace Player
             {
                 isDead = true;
                 isAlive = false;
-                AudioManager.instance.PlayerDeathSFX();
+                AudioManager.PlayAudio2D(this.transform, deathSound);
                 sprite.DOColor(targetColor, 0.2f);
                 this.gameObject.tag = "aPlayer";               
             }else if (collision.gameObject.CompareTag("Trap") )
             {
                 isDead = true;
                 isAlive = false;
-                AudioManager.instance.PlayerDeathSFX();
+                AudioManager.PlayAudio2D(this.transform, deathSound);
+                //Destroy(gameObject);
                 sprite.DOColor(targetColor, 0.2f);
                 this.gameObject.tag = "aPlayer";
             }

@@ -3,7 +3,12 @@ guid: 3f24f6d04d2b83b41849864158110d81
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - dust: {instanceID: 0}
+  - dust2: {instanceID: 0}
+  - boxCol: {instanceID: 0}
+  - walkingSound: {fileID: 8300000, guid: bed33dc1922fbda41bc8232723415656, type: 3}
+  - landingClip: {fileID: 8300000, guid: c83680465315da34cbae8d4584fb018b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

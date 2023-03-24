@@ -3,7 +3,11 @@ guid: aa71932817444aa46bb0d0d9a709398a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - laserFirePoint: {instanceID: 0}
+  - lineRenderer: {instanceID: 0}
+  - gT: {instanceID: 0}
+  - enemyCollision: {fileID: 8300000, guid: 37b9e37f7432221468dd4b40b9dac10c, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
