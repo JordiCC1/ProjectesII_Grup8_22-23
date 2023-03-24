@@ -89,8 +89,9 @@ namespace Player
             }
             if ((colBack || colFront) && !isOnWall)
                 timeLeftWall = Time.time;
+                
 
-            colDown = isGrounded;
+                colDown = isGrounded;
 
             CheckRays();
         }
@@ -236,7 +237,8 @@ namespace Player
         #endregion
 
         #region Move
-        public bool isFacingRight = true;
+        [field: SerializeField]
+        public bool isFacingRight { get; private set; } = true;
 
         private void MoveCharacterPhysics()
         {
@@ -259,6 +261,7 @@ namespace Player
                 else
                     rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
 
+                Flip();
                 shouldWallJump = false;
             }
 
