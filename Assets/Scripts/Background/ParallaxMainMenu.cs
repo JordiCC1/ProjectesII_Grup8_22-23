@@ -19,7 +19,7 @@ public class ParallaxMainMenu : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         float xIncrease = (-1)*0.1f * parallaxMultiplier;
         float moveAmount = transform.position.x * (1 - parallaxMultiplier);
@@ -27,15 +27,15 @@ public class ParallaxMainMenu : MonoBehaviour
         transform.Translate(new Vector3(xIncrease, 0, 0));
         previousCameraPosition = cameraTransform.position;
 
-        if (transform.position.x<78.9f)
+        if (transform.position.x<-spriteWidth)
         {
             transform.Translate(new Vector3(spriteWidth, 0, 0));
             startPosition += spriteWidth;
         }
-        else if (transform.position.x > 78.9f)
-        {
-            transform.Translate(new Vector3(-spriteWidth, 0, 0));
-            startPosition -= spriteWidth;
-        }
+        //else if (transform.position.x > spriteWidth*2)
+        //{
+        //    transform.Translate(new Vector3(-spriteWidth, 0, 0));
+        //    startPosition -= spriteWidth;
+        //}
     }
 }
