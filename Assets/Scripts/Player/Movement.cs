@@ -56,14 +56,6 @@ namespace Player
         {
             Walking();
         }
-        public void FixedUpdate()
-        {
-            //CheckCollisions();
-            //CalculateJumpApex();
-            //CalculateWalk();
-            //CalculateJump();
-            //MoveCharacterPhysics();
-        }
 
         #region Collisions
         [Header("Collisions")]
@@ -142,28 +134,6 @@ namespace Player
             }
 
         }
-
-        //draw lines
-        /*private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-
-            var pos = transform.position;
-            var extent = boxCol.bounds.extents;
-
-            for (int i = -1; i <= 1; i++)
-                Gizmos.DrawRay(pos + new Vector3(extent.x, extent.y * i, 0),
-                    extent * Vector2.right * rayLength);
-
-            for (int i = -1; i <= 1; i++)
-                Gizmos.DrawRay(pos - new Vector3(extent.x, extent.y * i, 0),
-                    extent * -Vector2.right * rayLength);
-
-            for (int i = -1; i <= 1; i++)
-                Gizmos.DrawRay(pos - new Vector3(extent.x * i, extent.y, 0),
-                    extent * -Vector2.up * rayLength);
-        }*/
-
         #endregion
 
         #region Walk

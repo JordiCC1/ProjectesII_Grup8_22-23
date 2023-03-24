@@ -7,8 +7,6 @@ using DG.Tweening;
 
 namespace Player
 {
-    //AudioManager.instance.LandingSFX();
-
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
 
@@ -121,16 +119,13 @@ namespace Player
                 isAlive = false;
                 AudioManager.instance.PlayerDeathSFX();
                 sprite.DOColor(targetColor, 0.2f);
-                //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";               
             }else if (collision.gameObject.CompareTag("Trap") )
             {
                 isDead = true;
                 isAlive = false;
                 AudioManager.instance.PlayerDeathSFX();
-                //Destroy(gameObject);
                 sprite.DOColor(targetColor, 0.2f);
-                //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";
             }
         }        
