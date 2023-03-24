@@ -56,14 +56,6 @@ namespace Player
         {
             Walking();
         }
-        public void FixedUpdate()
-        {
-            //CheckCollisions();
-            //CalculateJumpApex();
-            //CalculateWalk();
-            //CalculateJump();
-            //MoveCharacterPhysics();
-        }
 
         #region Collisions
         [Header("Collisions")]
@@ -81,8 +73,8 @@ namespace Player
            Physics2D.Raycast(transform.position - new Vector3(-boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer);
 
-        public bool isHanging =>
-            !colDown && colFront && movementScale != 0 && rb.velocity.y <= 0; // this line might have to change
+        public bool isOnWall =>
+            !colDown && (colFront||colBack) && !isGrounded && rb.velocity.y <= 0; // this line might have to change
 
         private void CheckCollisions()
         {
@@ -95,10 +87,11 @@ namespace Player
                 coyoteUsable = true;
                 landingThisFrame = true;
             }
-            if ((colBack || colFront) && !isHanging)
+            if ((colBack || colFront) && !isOnWall)
                 timeLeftWall = Time.time;
+                
 
-            colDown = isGrounded;
+                colDown = isGrounded;
 
             CheckRays();
         }
@@ -142,28 +135,6 @@ namespace Player
             }
 
         }
-
-        //draw lines
-        /*private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-
-            var pos = transform.position;
-            var extent = boxCol.bounds.extents;
-
-            for (int i = -1; i <= 1; i++)
-                Gizmos.DrawRay(pos + new Vector3(extent.x, extent.y * i, 0),
-                    extent * Vector2.right * rayLength);
-
-            for (int i = -1; i <= 1; i++)
-                Gizmos.DrawRay(pos - new Vector3(extent.x, extent.y * i, 0),
-                    extent * -Vector2.right * rayLength);
-
-            for (int i = -1; i <= 1; i++)
-                Gizmos.DrawRay(pos - new Vector3(extent.x * i, extent.y, 0),
-                    extent * -Vector2.up * rayLength);
-        }*/
-
         #endregion
 
         #region Walk
@@ -223,9 +194,9 @@ namespace Player
         private bool CanUseCoyote =>
             coyoteUsable && !colDown && timeLeftGrounded + coyoteTimeThreshold > Time.time;
         private bool HasWallJumpBuffered =>
-            isHanging && lastJumpInput + jumpBuffer > Time.time;
+            isOnWall && lastJumpInput + jumpBuffer > Time.time;
         private bool CanUseWallCoyote =>
-            coyoteUsable && !isHanging && timeLeftWall + coyoteTimeThreshold > Time.time;
+            coyoteUsable && !isOnWall && timeLeftWall + coyoteTimeThreshold > Time.time;
 
         [Header("Bullet Time")]
         [SerializeField] private float bulletTimeControl = 1.5f;
@@ -266,7 +237,8 @@ namespace Player
         #endregion
 
         #region Move
-        public bool isFacingRight = true;
+        [field: SerializeField]
+        public bool isFacingRight { get; private set; } = true;
 
         private void MoveCharacterPhysics()
         {
@@ -289,6 +261,7 @@ namespace Player
                 else
                     rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
 
+                Flip();
                 shouldWallJump = false;
             }
 
@@ -301,7 +274,7 @@ namespace Player
             rb.gravityScale = isInApex ? apexGravity : normalGravity;
 
             // DRAG
-            if (isHanging)
+            if (isOnWall)
                 rb.drag = wallDrag;
             else if (!colDown)
                 rb.drag = airDrag;
