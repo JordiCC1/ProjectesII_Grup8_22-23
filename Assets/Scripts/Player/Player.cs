@@ -122,16 +122,13 @@ namespace Player
                 isAlive = false;
                 AudioManager.instance.PlayerDeathSFX();
                 sprite.DOColor(targetColor, 0.2f);
-                //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";               
             }else if (collision.gameObject.CompareTag("Trap") )
             {
                 isDead = true;
                 isAlive = false;
                 AudioManager.instance.PlayerDeathSFX();
-                //Destroy(gameObject);
                 sprite.DOColor(targetColor, 0.2f);
-                //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";
             }
         }        
