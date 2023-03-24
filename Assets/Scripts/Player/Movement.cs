@@ -22,6 +22,11 @@ namespace Player
         public Rigidbody2D rb { get; private set; }
         [SerializeField] private BoxCollider2D boxCol;
 
+        [Header("Audio")]
+        public AudioClip walkingSound;
+        public AudioClip landingClip;
+
+
         private void Start()
         {
             rb = GetComponentInParent<Rigidbody2D>();
@@ -39,8 +44,8 @@ namespace Player
         }
 
         public void MoveCharacterInPlayer(bool isAlive, bool isDoneRestarting)
-        {            
-                CheckCollisions();
+        {
+            CheckCollisions();
 
             if (isAlive && isDoneRestarting)
             {
@@ -49,8 +54,8 @@ namespace Player
                 CalculateWalk();
                 CalculateJump();
 
-                MoveCharacterPhysics();                
-            }           
+                MoveCharacterPhysics();
+            }
         }
         private void Update()
         {
@@ -110,14 +115,14 @@ namespace Player
 
             if (isFacingRight)
             {
-                colFront = Physics2D.Raycast(pos, 
+                colFront = Physics2D.Raycast(pos,
                     Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer);
 
-                colBack = Physics2D.Raycast(pos, 
+                colBack = Physics2D.Raycast(pos,
                     -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer) ||
@@ -126,14 +131,14 @@ namespace Player
             }
             else
             {
-                colFront = Physics2D.Raycast(pos, 
+                colFront = Physics2D.Raycast(pos,
                     -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer);
 
-                colBack = Physics2D.Raycast(pos, 
+                colBack = Physics2D.Raycast(pos,
                     Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer) ||
@@ -335,16 +340,17 @@ namespace Player
         #region SFX
         private void Walking()
         {
-            if (isGrounded && targetSpeed != 0)            
-                AudioManager.instance.WalkingSFX(true);                
-            else            
-                AudioManager.instance.WalkingSFX(false);            
+            if (isGrounded && targetSpeed != 0)
+                AudioManager.PlayAudio2D(this.transform, walkingSound);
+            else
+                AudioManager.PlayAudio2D(this.transform, walkingSound);
+
         }
         private void Landing()
         {
             if (landingThisFrame)
             {
-                AudioManager.instance.LandingSFX();
+                AudioManager.PlayAudio2D(this.transform, landingClip);
                 CreateDust();
             }
         }
@@ -354,11 +360,12 @@ namespace Player
         #region DustAnimation
         void CreateDust()
         {
-            if(isGrounded)
+            if (isGrounded)
                 dust.Play();
-        }void CreateDust2()
+        }
+        void CreateDust2()
         {
-            if(isGrounded)
+            if (isGrounded)
                 dust2.Play();
         }
         #endregion
