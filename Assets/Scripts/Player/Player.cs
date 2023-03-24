@@ -125,7 +125,6 @@ namespace Player
                 isAlive = false;
                 AudioManager.PlayAudio2D(this.transform, deathSound);
                 sprite.DOColor(targetColor, 0.2f);
-                //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";               
             }else if (collision.gameObject.CompareTag("Trap") )
             {
@@ -134,7 +133,6 @@ namespace Player
                 AudioManager.PlayAudio2D(this.transform, deathSound);
                 //Destroy(gameObject);
                 sprite.DOColor(targetColor, 0.2f);
-                //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";
             }
         }        
