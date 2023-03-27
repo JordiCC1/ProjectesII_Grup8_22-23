@@ -23,7 +23,6 @@ namespace Player
         [SerializeField] private BoxCollider2D boxCol;
 
         [Header("Audio")]
-        public AudioClip walkingSound;
         public AudioClip landingClip;
 
 
@@ -56,10 +55,6 @@ namespace Player
 
                 MoveCharacterPhysics();
             }
-        }
-        private void Update()
-        {
-            Walking();
         }
 
         #region Collisions
