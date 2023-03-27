@@ -20,7 +20,7 @@ namespace Player
         [Header("Physics")]
         [SerializeField] private LayerMask groundLayer;
         public Rigidbody2D rb { get; private set; }
-        [SerializeField] private BoxCollider2D boxCol;
+        [SerializeField] private CapsuleCollider2D capsuleCol;
 
         [Header("Audio")]
         public AudioClip walkingSound;
@@ -30,7 +30,7 @@ namespace Player
         private void Start()
         {
             rb = GetComponentInParent<Rigidbody2D>();
-            boxCol = GetComponentInParent<BoxCollider2D>();
+            capsuleCol = GetComponentInParent<CapsuleCollider2D>();
             normalGravity = rb.gravityScale;
             startDrag = rb.drag;
         }
@@ -71,11 +71,11 @@ namespace Player
         public bool landingThisFrame { get; private set; }
 
         public bool isGrounded =>
-           Physics2D.Raycast(transform.position - new Vector3(0, boxCol.bounds.extents.y, 0),
+           Physics2D.Raycast(transform.position - new Vector3(0, capsuleCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer) ||
-           Physics2D.Raycast(transform.position - new Vector3(boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+           Physics2D.Raycast(transform.position - new Vector3(capsuleCol.bounds.extents.x, capsuleCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer) ||
-           Physics2D.Raycast(transform.position - new Vector3(-boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+           Physics2D.Raycast(transform.position - new Vector3(-capsuleCol.bounds.extents.x, capsuleCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer);
 
         public bool isOnWall =>
@@ -104,8 +104,8 @@ namespace Player
         private void CheckRays()
         {
             var pos = transform.position;
-            var extent = boxCol.bounds.extents;
-
+            var extent = capsuleCol.bounds.extents;
+            Debug.Log(extent);
             if (isFacingRight)
             {
                 colFront = Physics2D.Raycast(pos,

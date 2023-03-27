@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 27149512573143902}
   - component: {fileID: 27149512573143900}
-  - component: {fileID: 27149512573143970}
   - component: {fileID: 27149512573143969}
+  - component: {fileID: 6206096717161104207}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -60,32 +60,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &27149512573143970
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 27149512573143903}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.125}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2}
-  m_EdgeRadius: 0
 --- !u!114 &27149512573143969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,6 +92,22 @@ MonoBehaviour:
   cm: {fileID: 0}
   deathSound: {fileID: 8300000, guid: 8f753176e097cbd49b24fb74dcdeddf5, type: 3}
   invincibilityTime: 1.5
+--- !u!70 &6206096717161104207
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27149512573143903}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.225}
+  m_Size: {x: 1, y: 1.7}
+  m_Direction: 0
 --- !u!1 &422878166530708666
 GameObject:
   m_ObjectHideFlags: 0
@@ -5134,7 +5124,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 2048
-  boxCol: {fileID: 27149512573143970}
+  capsuleCol: {fileID: 0}
   walkingSound: {fileID: 8300000, guid: bed33dc1922fbda41bc8232723415656, type: 3}
   landingClip: {fileID: 8300000, guid: c83680465315da34cbae8d4584fb018b, type: 3}
   rayLength: 0.25
@@ -5155,7 +5145,7 @@ MonoBehaviour:
   coyoteTimeThreshold: 0.15
   lastJumpInput: 0
   bulletTimeControl: 0.9
-  isFacingRight: 1
+  <isFacingRight>k__BackingField: 1
 --- !u!95 &1231203411
 Animator:
   serializedVersion: 4

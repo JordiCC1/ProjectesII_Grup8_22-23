@@ -8,7 +8,7 @@ using DG.Tweening;
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(CapsuleCollider2D))]
 
     public class Player : MonoBehaviour
     {
