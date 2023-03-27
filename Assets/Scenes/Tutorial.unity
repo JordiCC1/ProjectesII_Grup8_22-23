@@ -78271,7 +78271,6 @@ GameObject:
   - component: {fileID: 1266084652}
   - component: {fileID: 1266084655}
   - component: {fileID: 1266084654}
-  - component: {fileID: 1266084653}
   m_Layer: 6
   m_Name: Bullet Time
   m_TagString: Untagged
@@ -78301,19 +78300,6 @@ RectTransform:
   m_AnchoredPosition: {x: 20.21, y: -228.58}
   m_SizeDelta: {x: 360, y: 228}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1266084653
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1266084651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc3c5f1b699b5f9408e787a7f43b80d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pM: {fileID: 1599319450}
 --- !u!114 &1266084654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78670,7 +78656,6 @@ GameObject:
   - component: {fileID: 1363820651}
   - component: {fileID: 1363820654}
   - component: {fileID: 1363820653}
-  - component: {fileID: 1363820652}
   m_Layer: 6
   m_Name: Swap
   m_TagString: Untagged
@@ -78700,19 +78685,6 @@ RectTransform:
   m_AnchoredPosition: {x: -34.07, y: -229.29}
   m_SizeDelta: {x: 360, y: 228}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1363820652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1363820650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc3c5f1b699b5f9408e787a7f43b80d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pM: {fileID: 1599319450}
 --- !u!114 &1363820653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79135,7 +79107,6 @@ GameObject:
   - component: {fileID: 1739050147}
   - component: {fileID: 1739050150}
   - component: {fileID: 1739050149}
-  - component: {fileID: 1739050148}
   m_Layer: 6
   m_Name: Finally Awake
   m_TagString: Untagged
@@ -79165,19 +79136,6 @@ RectTransform:
   m_AnchoredPosition: {x: -76.3, y: -229.29}
   m_SizeDelta: {x: 360, y: 228}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1739050148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1739050146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc3c5f1b699b5f9408e787a7f43b80d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pM: {fileID: 1599319450}
 --- !u!114 &1739050149
 MonoBehaviour:
   m_ObjectHideFlags: 0

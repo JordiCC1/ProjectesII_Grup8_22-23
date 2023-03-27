@@ -126876,7 +126876,6 @@ GameObject:
   - component: {fileID: 1127395534}
   - component: {fileID: 1127395537}
   - component: {fileID: 1127395536}
-  - component: {fileID: 1127395535}
   m_Layer: 6
   m_Name: Bullet Jump
   m_TagString: Untagged
@@ -126906,18 +126905,6 @@ RectTransform:
   m_AnchoredPosition: {x: -74.58, y: -229.29}
   m_SizeDelta: {x: 360, y: 228}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1127395535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127395533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc3c5f1b699b5f9408e787a7f43b80d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1127395536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127411,7 +127398,6 @@ GameObject:
   - component: {fileID: 1340789871}
   - component: {fileID: 1340789874}
   - component: {fileID: 1340789873}
-  - component: {fileID: 1340789872}
   m_Layer: 6
   m_Name: Bullet Jump 2
   m_TagString: Untagged
@@ -127441,18 +127427,6 @@ RectTransform:
   m_AnchoredPosition: {x: -49.35, y: -239.88}
   m_SizeDelta: {x: 360, y: 228}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1340789872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340789870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc3c5f1b699b5f9408e787a7f43b80d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1340789873
 MonoBehaviour:
   m_ObjectHideFlags: 0

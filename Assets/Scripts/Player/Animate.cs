@@ -121,7 +121,7 @@ namespace Player
         IEnumerator WaitAndRestart()
         {
             screenWipe.ToggleWipe(true);
-            yield return new WaitForSeconds(1.4f);
+            yield return new WaitForSeconds(1.2f);
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
