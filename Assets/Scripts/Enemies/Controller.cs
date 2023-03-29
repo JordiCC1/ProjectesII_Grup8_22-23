@@ -139,7 +139,7 @@ namespace Enemy
         {
             if (rayInfo)
             {
-                if (rayInfo.collider.gameObject.tag == "Player")
+                if (rayInfo.collider.gameObject.tag == "Player" || rayInfo.collider.gameObject.tag == "Shield")
                 {
 
                     if (isDetected == false)

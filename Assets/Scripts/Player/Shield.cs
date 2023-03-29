@@ -37,5 +37,16 @@ namespace Player
             }
 
         }
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            GameObject objCollided = collision.gameObject;
+            if (objCollided.CompareTag("Bullet"))
+            {
+                Vector2 aux = objCollided.GetComponent<enemyBullet>().GetForce();
+                aux.x -= 2 * aux.x;
+                aux.y -= 2 * aux.y;
+                objCollided.GetComponent<Rigidbody2D>().AddForce(aux);
+            }
+        }
     }
 }

@@ -15,16 +15,9 @@ public class enemyBullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.rigidbody.CompareTag("Shield"))
-        {
-            rb.AddForce(2 * -force);
-        }
-        else
-        {
-            GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
-            ParticleIns.GetComponent<ParticleSystem>().Play();
-            Destroy(gameObject);
-        }
+        GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
+        ParticleIns.GetComponent<ParticleSystem>().Play();
+        Destroy(gameObject);
     }
     IEnumerator WaitThenDie()
     {
@@ -35,5 +28,10 @@ public class enemyBullet : MonoBehaviour
     public void SetForce(Vector2 f)
     {
         force = f;
+    }
+
+    public Vector2 GetForce()
+    {
+        return force;
     }
 }
