@@ -105,7 +105,6 @@ namespace Player
         {
             var pos = transform.position;
             var extent = capsuleCol.bounds.extents;
-            Debug.Log(extent);
             if (isFacingRight)
             {
                 colFront = Physics2D.Raycast(pos,
