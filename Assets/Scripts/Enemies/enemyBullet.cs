@@ -6,7 +6,8 @@ public class enemyBullet : MonoBehaviour
 {
     public float lifeTime;
     public GameObject particles;
-
+    public Rigidbody2D rb;
+    Vector2 force;
 
     void Start()
     {        
@@ -14,14 +15,25 @@ public class enemyBullet : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
-        ParticleIns.GetComponent<ParticleSystem>().Play();        
-        Destroy(gameObject);
+        if(collision.rigidbody.CompareTag("Shield"))
+        {
+            rb.AddForce(2 * -force);
+        }
+        else
+        {
+            GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
+            ParticleIns.GetComponent<ParticleSystem>().Play();
+            Destroy(gameObject);
+        }
     }
     IEnumerator WaitThenDie()
     {
         yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
+    }
+
+    public void SetForce(Vector2 f)
+    {
+        force = f;
     }
 }

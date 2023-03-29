@@ -247,3 +247,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeTime: 2
   particles: {fileID: 3934082505798368739, guid: 72fb5cf77fbaea04b8b9e5e3966db8f1, type: 3}
+  rb: {fileID: 6527301768888941309}

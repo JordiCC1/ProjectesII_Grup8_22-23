@@ -85,6 +85,7 @@ namespace Enemy
             AudioManager.PlayAudio2D(this.transform, enemyShoot);
             GameObject BulletIns = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             BulletIns.GetComponent<Rigidbody2D>().AddForce(bulletDirection * bulletForce);
+            BulletIns.GetComponent<enemyBullet>().SetForce(bulletDirection * bulletForce);
         }
 
         private void OnDrawGizmosSelected()

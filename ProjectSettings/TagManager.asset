@@ -9,6 +9,7 @@ TagManager:
   - CM
   - aPlayer
   - Trap
+  - Shield
   layers:
   - Default
   - TransparentFX

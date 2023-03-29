@@ -14,10 +14,12 @@ namespace Player
     {
         [SerializeField] private Movement movement;
         [SerializeField] private BulletTime bt;
+        [SerializeField] private Shield sh;
         [SerializeField] private SpriteRenderer sprite;
 
         public MovementInputs moveInputs;
         public BulletTimeInputs btInputs;
+        public ShieldInputs shInputs;
 
         [HideInInspector] public bool isInvincible = false;
         [HideInInspector] public bool isBulletTimeActive = false;
@@ -70,8 +72,9 @@ namespace Player
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateSwapped();
             if (bt.trailOn)
-                UpdateTrail();            
-           
+                UpdateTrail();
+
+            sh.UpdateShield(shInputs);
         }
         private void FixedUpdate()
         {
@@ -99,6 +102,12 @@ namespace Player
                 BulletTimeDown = Input.GetMouseButtonDown(0),
                 BulletTimeUp = Input.GetMouseButtonUp(0),
                 SwapUp = Input.GetMouseButtonUp(1)
+            };
+
+            shInputs = new ShieldInputs
+            {
+                ShieldDown = Input.GetKeyDown(KeyCode.E),
+                ShieldUp = Input.GetKeyUp(KeyCode.E)
             };
 
             if (Input.GetButtonDown("Restart"))
