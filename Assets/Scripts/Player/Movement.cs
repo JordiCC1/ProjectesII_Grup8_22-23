@@ -294,9 +294,9 @@ namespace Player
 
             rb.AddForce(movement * Vector2.right);
 
-            if (isFacingRight && movementScale < 0)
+            if (isFacingRight && movementScale < 0 && !isOnWall)
                 Flip();
-            else if (!isFacingRight && movementScale > 0)
+            else if (!isFacingRight && movementScale > 0 && !isOnWall)
                 Flip();
         }
 
