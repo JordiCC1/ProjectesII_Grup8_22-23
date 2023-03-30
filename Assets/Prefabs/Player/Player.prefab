@@ -5040,6 +5040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6601838273386720702}
   - component: {fileID: 3629615420995898998}
+  - component: {fileID: 3596934933465131869}
   - component: {fileID: 6828838614497820759}
   - component: {fileID: 1231203411}
   - component: {fileID: 1231203412}
@@ -5117,6 +5118,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3596934933465131869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641939426508958520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf0edb0297ce2b4591535f5d6877db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSound: {fileID: 8300000, guid: 79fb351faef525d42adba2f217d547c8, type: 3}
 --- !u!114 &6828838614497820759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5135,7 +5149,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   boxCol: {fileID: 27149512573143970}
-  walkingSound: {fileID: 8300000, guid: bed33dc1922fbda41bc8232723415656, type: 3}
   landingClip: {fileID: 8300000, guid: c83680465315da34cbae8d4584fb018b, type: 3}
   rayLength: 0.25
   maxSpeed: 135
@@ -5155,7 +5168,7 @@ MonoBehaviour:
   coyoteTimeThreshold: 0.15
   lastJumpInput: 0
   bulletTimeControl: 0.9
-  isFacingRight: 1
+  <isFacingRight>k__BackingField: 1
 --- !u!95 &1231203411
 Animator:
   serializedVersion: 4
