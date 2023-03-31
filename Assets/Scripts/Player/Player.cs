@@ -100,11 +100,7 @@ namespace Player
                 BulletTimeUp = Input.GetMouseButtonUp(0),
                 SwapUp = Input.GetMouseButtonUp(1)
             };
-
-            if (Input.GetButtonDown("Restart"))
-            {
-                RestartScene();
-            }
+            
         }
 
         private bool CanBT()
