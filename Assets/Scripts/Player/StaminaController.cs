@@ -21,15 +21,11 @@ namespace Player {
         {
             stamina = maxStamina;
             staminaBar.SetMaxStamina(maxStamina);
-            //staminaBar.GetComponentInChildren<StaminaBar>().SetMaxStamina(stamina-1);
-            //staminaBar.SetActive(false);
         }
 
         private void Update()
         {
             staminaBar.SetStamina(stamina);
-            //if (stamina == maxStamina && staminaBar.activeInHierarchy)
-            //    staminaBar.SetActive(false);
         }
 
         #region UseStamina
@@ -39,11 +35,6 @@ namespace Player {
             {
                 coroutineActive = true;
                 StartCoroutine(DrainStamina());
-                //if (!staminaBar.activeInHierarchy)
-                //{
-                //    staminaBar.SetActive(true);
-                //    Debug.Log("´---sdfasfew");
-                //}                
             }
         }
 
@@ -51,10 +42,7 @@ namespace Player {
         {
             while (stamina>=0.0f)
             {
-                //if (stamina - staminaDrain >= 1.0f)
-               // {
-                    stamina -= staminaDrain*Time.deltaTime;                    
-               // }
+                stamina -= staminaDrain*Time.deltaTime;
                 yield return new WaitForEndOfFrame();
             }
         }

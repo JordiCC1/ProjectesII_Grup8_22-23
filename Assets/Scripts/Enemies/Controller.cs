@@ -143,8 +143,6 @@ namespace Enemy
 
                     if (isDetected == false)
                     {
-                        //Alarm1.GetComponent<SpriteRenderer>().color = alphaM;
-                        //Alarm2.GetComponent<SpriteRenderer>().color = alphaM;
                         isDetected = true;
                     }
                     if (isDetected && !isSwapped)
@@ -161,8 +159,6 @@ namespace Enemy
             else if (isDetected)
             {
                 isDetected = false;
-                //Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
-                //Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
             }
         }
 

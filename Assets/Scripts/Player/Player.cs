@@ -129,7 +129,6 @@ namespace Player
                 isDead = true;
                 isAlive = false;
                 AudioManager.PlayAudio2D(this.transform, deathSound);
-                //Destroy(gameObject);
                 sprite.DOColor(targetColor, 0.2f);
                 this.gameObject.tag = "aPlayer";
             }
