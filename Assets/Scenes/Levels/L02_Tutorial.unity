@@ -78927,8 +78927,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: You'll have to understand all your abilities to continue your journey
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9c27418efbe531c4584dd171f6c390ba, type: 2}
+  m_sharedMaterial: {fileID: 435237856158199650, guid: 9c27418efbe531c4584dd171f6c390ba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -81945,8 +81945,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Keep Right Click pressed to Slow Time
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9c27418efbe531c4584dd171f6c390ba, type: 2}
+  m_sharedMaterial: {fileID: 435237856158199650, guid: 9c27418efbe531c4584dd171f6c390ba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -82730,8 +82730,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Aim and press Left Click to Swap with Enemies
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9c27418efbe531c4584dd171f6c390ba, type: 2}
+  m_sharedMaterial: {fileID: 435237856158199650, guid: 9c27418efbe531c4584dd171f6c390ba, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
