@@ -23,7 +23,6 @@ namespace Player
         [SerializeField] private CapsuleCollider2D capsuleCol;
 
         [Header("Audio")]
-        public AudioClip walkingSound;
         public AudioClip landingClip;
 
 
@@ -56,10 +55,6 @@ namespace Player
 
                 MoveCharacterPhysics();
             }
-        }
-        private void Update()
-        {
-            Walking();
         }
 
         #region Collisions
@@ -264,7 +259,6 @@ namespace Player
                     rb.AddForce(jumpHeight * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
                 else
                     rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
-
                 Flip();
                 shouldWallJump = false;
             }
@@ -279,7 +273,12 @@ namespace Player
 
             // DRAG
             if (isOnWall)
+            {
+                if(colBack)
+                    Flip();
+
                 rb.drag = wallDrag;
+            }
             else if (!colDown)
                 rb.drag = airDrag;
             else
@@ -310,14 +309,6 @@ namespace Player
         #endregion
 
         #region SFX
-        private void Walking()
-        {
-            if (isGrounded && targetSpeed != 0)
-                AudioManager.PlayAudio2D(this.transform, walkingSound);
-            else
-                AudioManager.PlayAudio2D(this.transform, walkingSound);
-
-        }
         private void Landing()
         {
             if (landingThisFrame)
