@@ -264,7 +264,6 @@ namespace Player
                     rb.AddForce(jumpHeight * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
                 else
                     rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
-
                 Flip();
                 shouldWallJump = false;
             }
@@ -279,7 +278,12 @@ namespace Player
 
             // DRAG
             if (isOnWall)
+            {
+                if(colBack)
+                    Flip();
+
                 rb.drag = wallDrag;
+            }
             else if (!colDown)
                 rb.drag = airDrag;
             else
