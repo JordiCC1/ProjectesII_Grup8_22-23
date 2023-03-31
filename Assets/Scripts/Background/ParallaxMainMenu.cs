@@ -32,10 +32,5 @@ public class ParallaxMainMenu : MonoBehaviour
             transform.Translate(new Vector3(spriteWidth, 0, 0));
             startPosition += spriteWidth;
         }
-        //else if (transform.position.x > spriteWidth*2)
-        //{
-        //    transform.Translate(new Vector3(-spriteWidth, 0, 0));
-        //    startPosition -= spriteWidth;
-        //}
     }
 }
