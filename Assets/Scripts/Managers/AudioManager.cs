@@ -1,22 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
     [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioSource audioSourceStep;
-    [SerializeField] AudioClip pBulletWallSFX;
-    [SerializeField] AudioClip pBulletEnemySFX;
-    [SerializeField] AudioClip landingSFX;
-    [SerializeField] AudioClip enemyDeathSFX;
-    [SerializeField] AudioClip playerDeathSFX;
-    [SerializeField] AudioClip enemyShoot;
-    [SerializeField] AudioClip enterBT;
-    [SerializeField] AudioClip exitBT;
-    [SerializeField] AudioClip enemyAlert;
+    [SerializeField] Slider slider;
 
     [Header("Interpolation")]
     Interpolator lerp;
@@ -67,9 +59,14 @@ public class AudioManager : MonoBehaviour
         audioSource.pitch = Mathf.Lerp(prevPitch, pitch, curve.Evaluate(lerp.Value));
     }
 
-    public void ChangeVolume(float sliderValue)
+    public void ChangeVolume()
     {
-        audioSource.volume = sliderValue;
+        audioSource.volume = slider.value;
+    }
+
+    public float GetVolume()
+    {
+        return audioSource.volume;
     }
 
 }

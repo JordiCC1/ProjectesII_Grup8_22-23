@@ -23,7 +23,6 @@ namespace Player
         [SerializeField] private BoxCollider2D boxCol;
 
         [Header("Audio")]
-        public AudioClip walkingSound;
         public AudioClip landingClip;
 
 
@@ -56,10 +55,6 @@ namespace Player
 
                 MoveCharacterPhysics();
             }
-        }
-        private void Update()
-        {
-            Walking();
         }
 
         #region Collisions
@@ -311,14 +306,6 @@ namespace Player
         #endregion
 
         #region SFX
-        private void Walking()
-        {
-            if (isGrounded && targetSpeed != 0)
-                AudioManager.PlayAudio2D(this.transform, walkingSound);
-            else
-                AudioManager.PlayAudio2D(this.transform, walkingSound);
-
-        }
         private void Landing()
         {
             if (landingThisFrame)
