@@ -268,6 +268,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1599319450}
+    - target: {fileID: 6194041137657433774, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 7609031435354373266, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
       propertyPath: barBorder
       value: 
@@ -5219,6 +5223,7 @@ Transform:
   m_Children:
   - {fileID: 178640590}
   - {fileID: 1410132316}
+  - {fileID: 158634482656774917}
   - {fileID: 1872228908}
   m_Father: {fileID: 0}
   m_RootOrder: 8
@@ -61874,14 +61879,13 @@ GameObject:
   - component: {fileID: 1410132316}
   - component: {fileID: 1410132319}
   - component: {fileID: 1410132318}
-  - component: {fileID: 1410132317}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1410132316
 Transform:
   m_ObjectHideFlags: 0
@@ -61901,20 +61905,6 @@ Transform:
   m_Father: {fileID: 233951540}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1410132317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410132315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b35a8187d2867104382283971d666acd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  index: 4
-  levelName: BulletTimeTutorial
 --- !u!61 &1410132318
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -62617,7 +62607,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 233951540}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1872662509
 PrefabInstance:
@@ -63177,4 +63167,90 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5441422770562737944, guid: 5d130bbbfee9ce74580749531c98ea35, type: 3}
   m_PrefabInstance: {fileID: 2096488014}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &158634482656774916
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 233951540}
+    m_Modifications:
+    - target: {fileID: 158634483272483449, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_Name
+      value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 42.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -12.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749012340418789412, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: index
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2749012340418789412, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: levelName
+      value: Bullet Time Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275012002024814788, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275012002024814788, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275012002024814788, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3275012002024814788, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+--- !u!4 &158634482656774917 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
+  m_PrefabInstance: {fileID: 158634482656774916}
   m_PrefabAsset: {fileID: 0}
