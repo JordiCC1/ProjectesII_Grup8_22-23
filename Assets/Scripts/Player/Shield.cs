@@ -27,14 +27,15 @@ namespace Player
             if(inputs.ShieldDown && staminaController.stamina > 0.0f)
             {
                 shield.SetActive(true);
-                staminaController.UseStamina();
                 isShieldUp = true;
+                staminaController.UseStamina();
             }
             else if(inputs.ShieldUp)
             {
                 shield.SetActive(false);
-                staminaController.StopStamina();
                 isShieldUp = false;
+                if(Time.timeScale < 1.0f)
+                    staminaController.StopStamina();
             }
 
         }
