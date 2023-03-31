@@ -81,7 +81,6 @@ namespace Player
             if (movement.landingThisFrame) return LockState(Land, 0.1f);
             if (movement.isOnWall)
             {
-                //TODO: lock flip for a while
                 sprite.flipX = true;
                 return Hang;
             }
@@ -121,7 +120,7 @@ namespace Player
         IEnumerator WaitAndRestart()
         {
             screenWipe.ToggleWipe(true);
-            yield return new WaitForSeconds(1.4f);
+            yield return new WaitForSeconds(1.2f);
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }

@@ -8,7 +8,7 @@ using DG.Tweening;
 namespace Player
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(CapsuleCollider2D))]
 
     public class Player : MonoBehaviour
     {
@@ -96,15 +96,11 @@ namespace Player
 
             btInputs = new BulletTimeInputs
             {
-                BulletTimeDown = Input.GetMouseButtonDown(0),
-                BulletTimeUp = Input.GetMouseButtonUp(0),
-                SwapUp = Input.GetMouseButtonUp(1)
+                BulletTimeDown = Input.GetMouseButtonDown(1),
+                BulletTimeUp = Input.GetMouseButtonUp(1),
+                SwapUp = Input.GetMouseButtonUp(0)
             };
-
-            if (Input.GetButtonDown("Restart"))
-            {
-                RestartScene();
-            }
+            
         }
 
         private bool CanBT()
@@ -129,7 +125,6 @@ namespace Player
                 isDead = true;
                 isAlive = false;
                 AudioManager.PlayAudio2D(this.transform, deathSound);
-                //Destroy(gameObject);
                 sprite.DOColor(targetColor, 0.2f);
                 this.gameObject.tag = "aPlayer";
             }

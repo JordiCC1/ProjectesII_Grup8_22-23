@@ -20,7 +20,7 @@ namespace Player
         [Header("Physics")]
         [SerializeField] private LayerMask groundLayer;
         public Rigidbody2D rb { get; private set; }
-        [SerializeField] private BoxCollider2D boxCol;
+        [SerializeField] private CapsuleCollider2D capsuleCol;
 
         [Header("Audio")]
         public AudioClip landingClip;
@@ -29,7 +29,7 @@ namespace Player
         private void Start()
         {
             rb = GetComponentInParent<Rigidbody2D>();
-            boxCol = GetComponentInParent<BoxCollider2D>();
+            capsuleCol = GetComponentInParent<CapsuleCollider2D>();
             normalGravity = rb.gravityScale;
             startDrag = rb.drag;
         }
@@ -66,11 +66,11 @@ namespace Player
         public bool landingThisFrame { get; private set; }
 
         public bool isGrounded =>
-           Physics2D.Raycast(transform.position - new Vector3(0, boxCol.bounds.extents.y, 0),
+           Physics2D.Raycast(transform.position - new Vector3(0, capsuleCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer) ||
-           Physics2D.Raycast(transform.position - new Vector3(boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+           Physics2D.Raycast(transform.position - new Vector3(capsuleCol.bounds.extents.x, capsuleCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer) ||
-           Physics2D.Raycast(transform.position - new Vector3(-boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+           Physics2D.Raycast(transform.position - new Vector3(-capsuleCol.bounds.extents.x, capsuleCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer);
 
         public bool isOnWall =>
@@ -99,8 +99,7 @@ namespace Player
         private void CheckRays()
         {
             var pos = transform.position;
-            var extent = boxCol.bounds.extents;
-
+            var extent = capsuleCol.bounds.extents;
             if (isFacingRight)
             {
                 colFront = Physics2D.Raycast(pos,
@@ -260,7 +259,6 @@ namespace Player
                     rb.AddForce(jumpHeight * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
                 else
                     rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
-
                 Flip();
                 shouldWallJump = false;
             }
@@ -275,7 +273,12 @@ namespace Player
 
             // DRAG
             if (isOnWall)
+            {
+                if(colBack)
+                    Flip();
+
                 rb.drag = wallDrag;
+            }
             else if (!colDown)
                 rb.drag = airDrag;
             else
@@ -289,9 +292,9 @@ namespace Player
 
             rb.AddForce(movement * Vector2.right);
 
-            if (isFacingRight && movementScale < 0)
+            if (isFacingRight && movementScale < 0 && !isOnWall)
                 Flip();
-            else if (!isFacingRight && movementScale > 0)
+            else if (!isFacingRight && movementScale > 0 && !isOnWall)
                 Flip();
         }
 
