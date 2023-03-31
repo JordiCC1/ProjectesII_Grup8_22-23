@@ -96,9 +96,9 @@ namespace Player
 
             btInputs = new BulletTimeInputs
             {
-                BulletTimeDown = Input.GetMouseButtonDown(0),
-                BulletTimeUp = Input.GetMouseButtonUp(0),
-                SwapUp = Input.GetMouseButtonUp(1)
+                BulletTimeDown = Input.GetMouseButtonDown(1),
+                BulletTimeUp = Input.GetMouseButtonUp(1),
+                SwapUp = Input.GetMouseButtonUp(0)
             };
             
         }
