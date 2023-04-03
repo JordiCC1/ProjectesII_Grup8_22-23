@@ -2492,7 +2492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229318, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_Size.x
-      value: 3.4703333
+      value: 2.9548497
       objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229318, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_Size.y
@@ -2500,7 +2500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229319, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_Size.x
-      value: 3.6631045
+      value: 2.7907443
       objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229319, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_Size.y
@@ -2508,7 +2508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229319, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_Offset.x
-      value: -0.046457708
+      value: 0.013021171
       objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229319, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_Offset.y
@@ -2516,7 +2516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229319, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
-      value: 3.4703333
+      value: 2.9548497
       objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229319, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
@@ -2532,7 +2532,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229337, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -37.7708
+      value: -38.0285
       objectReference: {fileID: 0}
     - target: {fileID: 1741668169188229337, guid: 677382c507915e94e894b6a67f3cba82, type: 3}
       propertyPath: m_LocalPosition.z
