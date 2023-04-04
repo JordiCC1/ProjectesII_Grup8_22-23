@@ -8,6 +8,6 @@ public class WalkSound : MonoBehaviour
 
     void PlayWalk()
     {
-        AudioManager.PlayAudio2D(this.transform, walkSound);
+        AudioManager.instance.PlayAudio2D(this.transform, walkSound);
     }
 }

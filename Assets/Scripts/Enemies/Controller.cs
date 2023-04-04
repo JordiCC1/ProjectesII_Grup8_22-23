@@ -82,7 +82,7 @@ namespace Enemy
         {
             isReloaded = true;
             CinemachineShake.Instance.ShakeCamera(5f, .1f);
-            AudioManager.PlayAudio2D(this.transform, enemyShoot);
+            AudioManager.instance.PlayAudio2D(this.transform, enemyShoot);
             GameObject BulletIns = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             BulletIns.GetComponent<Rigidbody2D>().AddForce(bulletDirection * bulletForce);
         }
@@ -110,7 +110,7 @@ namespace Enemy
         {
             if (col.gameObject.tag == "Player" && !nonPlayerkillable)
             {
-                AudioManager.PlayAudio2D(this.transform, enemyDeath);
+                AudioManager.instance.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
@@ -118,7 +118,7 @@ namespace Enemy
             }
             else if (col.gameObject.tag == "Bullet")
             {
-                AudioManager.PlayAudio2D(this.transform, enemyDeath);
+                AudioManager.instance.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
@@ -126,7 +126,7 @@ namespace Enemy
             }
             else if (col.gameObject.tag == "Trap")
             {
-                AudioManager.PlayAudio2D(this.transform, enemyDeath);
+                AudioManager.instance.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);

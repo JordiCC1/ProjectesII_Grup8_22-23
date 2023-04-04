@@ -29,14 +29,15 @@ public class AudioManager : MonoBehaviour
         lerp = new Interpolator(0.5f);
     }
 
-    public void PlayAudio2D(Transdorm root, AudioClip clip, bool loop = false)
+    public void PlayAudio2D(Transform root, AudioClip clip, bool loop = false)
     {
         if (audioSource != null)
         {
             if (loop)
             {
                 audioSource.loop = true;
-                audioSource.Play(clip);
+                audioSource.clip= clip;
+                audioSource.Play();
             }
             else
                 audioSource.PlayOneShot(clip);
@@ -70,7 +71,7 @@ public class AudioManager : MonoBehaviour
         return audioSource.volume;
     }
 
-¡   public void Mute() {
+   public void Mute() {
         audioSource.mute = !audioSource.mute;
     }
 }

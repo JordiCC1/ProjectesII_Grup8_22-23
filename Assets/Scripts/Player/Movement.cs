@@ -313,7 +313,7 @@ namespace Player
         {
             if (landingThisFrame)
             {
-                AudioManager.PlayAudio2D(this.transform, landingClip);
+                AudioManager.instance.PlayAudio2D(this.transform, landingClip);
                 CreateDust();
             }
         }

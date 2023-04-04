@@ -105,7 +105,7 @@ namespace Player
             actualTimeScale = slowdownFactor;
             isActive = true;
             AudioManager.instance.ChangePitch(0.5f);
-            AudioManager.PlayAudio2D(this.transform, enterSound);
+            AudioManager.instance.PlayAudio2D(this.transform, enterSound);
             hasStopped = false;
         }
 
@@ -117,7 +117,7 @@ namespace Player
             isActive = false;
             hasStopped = true;
             AudioManager.instance.ChangePitch(1.0f);
-            AudioManager.PlayAudio2D(this.transform, exitSound);
+            AudioManager.instance.PlayAudio2D(this.transform, exitSound);
         }
 
         public void BackToNormal()

@@ -37,11 +37,11 @@ namespace Player
             {
                 objCollided.GetComponent<Controller>().OnSwap();
                 SwapGameObject(objCollided);
-                AudioManager.PlayAudio2D(this.transform, enemyCollision);
+                AudioManager.instance.PlayAudio2D(this.transform, enemyCollision);
 
             }
             else
-                AudioManager.PlayAudio2D(this.transform, wallCollision);
+                AudioManager.instance.PlayAudio2D(this.transform, wallCollision);
 
             Destroy(gameObject);
         }
