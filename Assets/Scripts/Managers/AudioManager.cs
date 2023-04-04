@@ -29,19 +29,20 @@ public class AudioManager : MonoBehaviour
         lerp = new Interpolator(0.5f);
     }
 
-    public static AudioSource PlayAudio2D(Transform root, AudioClip clip, bool DestroyOnFinish = true)
+    public void PlayAudio2D(Transdorm root, AudioClip clip, bool loop = false)
     {
-        AudioSource source = Instantiate(new GameObject("AudioObject"), root).AddComponent<AudioSource>();
-        source.clip = clip;
-        source.Play();
-        if (DestroyOnFinish)
-            Destroy(source.gameObject, clip.length + 1f);
-        return source;
-    }
-
-    private void Start()
-    {
-        audioSource.Play();
+        if (audioSource != null)
+        {
+            if (loop)
+            {
+                audioSource.loop = true;
+                audioSource.Play(clip);
+            }
+            else
+                audioSource.PlayOneShot(clip);
+        }
+        else
+            Debug.Log("AudioSource = null");
     }
 
     public void ChangePitch(float pitch)
@@ -69,4 +70,7 @@ public class AudioManager : MonoBehaviour
         return audioSource.volume;
     }
 
+¡   public void Mute() {
+        audioSource.mute = !audioSource.mute;
+    }
 }
