@@ -36,6 +36,7 @@ namespace Enemy
         private float nextTimeToFire = 0;     
 
         public bool isDetected { get; private set; } = false;
+        public bool prevDetected { get; private set; } = false;
         public bool isSwapped { get; private set; } = false;
         public bool isReloaded { get; private set; } = false;
 
@@ -47,6 +48,7 @@ namespace Enemy
         [Header("Audio")]
         public AudioClip enemyShoot;
         public AudioClip enemyDeath;
+        public AudioClip enemyDetect;
 
         void Start()
         {
@@ -160,7 +162,14 @@ namespace Enemy
             {
                 isDetected = false;
             }
+
+            if(!prevDetected&&isDetected)
+                AudioManager.instance.PlayAudio2D(this.transform, enemyDetect);
+
+            prevDetected = isDetected;
         }
+
+
 
         #endregion
 

@@ -149,6 +149,7 @@ MonoBehaviour:
   swapPosition: {x: 0, y: 0, z: 0}
   enemyShoot: {fileID: 8300000, guid: 45f54b0b43ce01c49bb5b90849236aaf, type: 3}
   enemyDeath: {fileID: 8300000, guid: a16809ddb4c909d488fc49b199f5f221, type: 3}
+  enemyDetect: {fileID: 8300000, guid: 05bb98dc8bfaaa5449a6b59328485a05, type: 3}
 --- !u!50 &8152343628834463703
 Rigidbody2D:
   serializedVersion: 4
