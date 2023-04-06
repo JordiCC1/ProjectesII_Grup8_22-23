@@ -323,7 +323,6 @@ namespace Player
                 hasPlayed = true;
                 AudioManager.instance.PlayAudio2D(this.transform, landingClip);
                 CreateDust();
-                Debug.Log("a");
             }
             else if(!landingThisFrame)
                 hasPlayed = false;
