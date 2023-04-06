@@ -32,6 +32,7 @@ namespace Player
             capsuleCol = GetComponentInParent<CapsuleCollider2D>();
             normalGravity = rb.gravityScale;
             startDrag = rb.drag;
+            hasPlayed = false;
         }
         public void UpdateMovement(MovementInputs inputs)
         {
@@ -74,24 +75,27 @@ namespace Player
                -Vector3.up, rayLength, groundLayer);
 
         public bool isOnWall =>
-            !colDown && (colFront||colBack) && !isGrounded && rb.velocity.y <= 0; // this line might have to change
+            !colDown && (colFront || colBack) && !isGrounded && rb.velocity.y <= 0; // this line might have to change
 
         private void CheckCollisions()
         {
-            landingThisFrame = false;
 
             if (colDown && !isGrounded)
                 timeLeftGrounded = Time.time;
+
             if (!colDown && isGrounded)
             {
                 coyoteUsable = true;
                 landingThisFrame = true;
             }
+            else
+                landingThisFrame = false;
+
             if ((colBack || colFront) && !isOnWall)
                 timeLeftWall = Time.time;
-                
 
-                colDown = isGrounded;
+
+            colDown = isGrounded;
 
             CheckRays();
         }
@@ -274,7 +278,7 @@ namespace Player
             // DRAG
             if (isOnWall)
             {
-                if(colBack)
+                if (colBack)
                     Flip();
 
                 rb.drag = wallDrag;
@@ -309,13 +313,19 @@ namespace Player
         #endregion
 
         #region SFX
+        private bool hasPlayed;
+
         private void Landing()
         {
-            if (landingThisFrame)
-            {
+            if (landingThisFrame && !hasPlayed)
+            { 
+                hasPlayed = true;
                 AudioManager.instance.PlayAudio2D(this.transform, landingClip);
                 CreateDust();
+                Debug.Log("a");
             }
+            else if(!landingThisFrame)
+                hasPlayed = false;
         }
 
         #endregion
