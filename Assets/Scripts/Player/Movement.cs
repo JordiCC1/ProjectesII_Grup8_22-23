@@ -24,6 +24,7 @@ namespace Player
 
         [Header("Audio")]
         public AudioClip landingClip;
+        public AudioClip walljumpClip;
 
 
         private void Start()
@@ -252,7 +253,6 @@ namespace Player
                     rb.velocity = Vector3.zero;
                 CreateDust2();
                 rb.AddForce(jumpHeight * Vector2.up, ForceMode2D.Impulse);
-
                 shouldJump = false;
             }
 
@@ -265,6 +265,7 @@ namespace Player
                     rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
                 Flip();
                 shouldWallJump = false;
+                PlayWalljumpSFX();
             }
 
             if (endedJumpEarly)
@@ -326,6 +327,11 @@ namespace Player
             }
             else if(!landingThisFrame)
                 hasPlayed = false;
+        }
+
+        private void PlayWalljumpSFX()
+        {
+            AudioManager.instance.PlayAudio2D(this.transform, walljumpClip);
         }
 
         #endregion

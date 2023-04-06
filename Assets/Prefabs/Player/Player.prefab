@@ -5139,8 +5139,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   capsuleCol: {fileID: 0}
-  walkingSound: {fileID: 8300000, guid: bed33dc1922fbda41bc8232723415656, type: 3}
   landingClip: {fileID: 8300000, guid: c83680465315da34cbae8d4584fb018b, type: 3}
+  walljumpClip: {fileID: 8300000, guid: 628e59afc90b4024894fd5edbe7d750b, type: 3}
   rayLength: 0.25
   maxSpeed: 135
   acceleration: 23
