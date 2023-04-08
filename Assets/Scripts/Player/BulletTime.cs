@@ -52,7 +52,7 @@ namespace Player
                 Destroy(gameObject);
             }
 
-            FinishBulletTime();
+            //FinishBulletTime();
 
             lerp = new Interpolator(timeToNormal);
         }
