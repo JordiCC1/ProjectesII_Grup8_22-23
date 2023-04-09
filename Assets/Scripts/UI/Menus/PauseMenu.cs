@@ -103,4 +103,9 @@ public class PauseMenu : MonoBehaviour
         yield return new WaitForEndOfFrame();
         isPaused = false;
     }
+
+    public void Mute()
+    {
+        AudioManager.instance.Mute();
+    }
 }

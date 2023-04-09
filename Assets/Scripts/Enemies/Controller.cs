@@ -36,6 +36,7 @@ namespace Enemy
         private float nextTimeToFire = 0;     
 
         public bool isDetected { get; private set; } = false;
+        public bool prevDetected { get; private set; } = false;
         public bool isSwapped { get; private set; } = false;
         public bool isReloaded { get; private set; } = false;
 
@@ -44,6 +45,10 @@ namespace Enemy
 
         [HideInInspector] public Vector3 swapPosition;
 
+        [Header("Audio")]
+        public AudioClip enemyShoot;
+        public AudioClip enemyDeath;
+        public AudioClip enemyDetect;
 
         void Start()
         {
@@ -79,7 +84,7 @@ namespace Enemy
         {
             isReloaded = true;
             CinemachineShake.Instance.ShakeCamera(5f, .1f);
-            AudioManager.instance.EnemyShootSFX();
+            AudioManager.instance.PlayAudio2D(this.transform, enemyShoot);
             GameObject BulletIns = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             BulletIns.GetComponent<Rigidbody2D>().AddForce(bulletDirection * bulletForce);
         }
@@ -107,7 +112,7 @@ namespace Enemy
         {
             if (col.gameObject.tag == "Player" && !nonPlayerkillable)
             {
-                AudioManager.instance.EnemyDeathSFX();
+                AudioManager.instance.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
@@ -115,7 +120,7 @@ namespace Enemy
             }
             else if (col.gameObject.tag == "Bullet")
             {
-                AudioManager.instance.EnemyDeathSFX();
+                AudioManager.instance.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
@@ -123,7 +128,7 @@ namespace Enemy
             }
             else if (col.gameObject.tag == "Trap")
             {
-                AudioManager.instance.EnemyDeathSFX();
+                AudioManager.instance.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
@@ -140,8 +145,6 @@ namespace Enemy
 
                     if (isDetected == false)
                     {
-                        //Alarm1.GetComponent<SpriteRenderer>().color = alphaM;
-                        //Alarm2.GetComponent<SpriteRenderer>().color = alphaM;
                         isDetected = true;
                     }
                     if (isDetected && !isSwapped)
@@ -158,10 +161,15 @@ namespace Enemy
             else if (isDetected)
             {
                 isDetected = false;
-                //Alarm1.GetComponent<SpriteRenderer>().color = alphaZ;
-                //Alarm2.GetComponent<SpriteRenderer>().color = alphaZ;
             }
+
+            if(!prevDetected&&isDetected)
+                AudioManager.instance.PlayAudio2D(this.transform, enemyDetect);
+
+            prevDetected = isDetected;
         }
+
+
 
         #endregion
 

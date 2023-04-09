@@ -7,10 +7,8 @@ using DG.Tweening;
 
 namespace Player
 {
-    //AudioManager.instance.LandingSFX();
-
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(CapsuleCollider2D))]
 
     public class Player : MonoBehaviour
     {
@@ -45,6 +43,9 @@ namespace Player
 
         [HideInInspector] public CheckpointMaster cm;
         private ScreenWipe screenWipe;
+
+        [Header("Audio")]
+        public AudioClip deathSound;
 
         private void Start()
         {
@@ -95,14 +96,11 @@ namespace Player
 
             btInputs = new BulletTimeInputs
             {
-                BulletTimeDown = Input.GetMouseButtonDown(0),
-                BulletTimeUp = Input.GetMouseButtonUp(0)
+                BulletTimeDown = Input.GetMouseButtonDown(1),
+                BulletTimeUp = Input.GetMouseButtonUp(1),
+                SwapUp = Input.GetMouseButtonUp(0)
             };
-
-            if (Input.GetButtonDown("Restart"))
-            {
-                RestartScene();
-            }
+            
         }
 
         private bool CanBT()
@@ -119,18 +117,15 @@ namespace Player
             {
                 isDead = true;
                 isAlive = false;
-                AudioManager.instance.PlayerDeathSFX();
+                AudioManager.instance.PlayAudio2D(this.transform, deathSound);
                 sprite.DOColor(targetColor, 0.2f);
-                //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";               
             }else if (collision.gameObject.CompareTag("Trap") )
             {
                 isDead = true;
                 isAlive = false;
-                AudioManager.instance.PlayerDeathSFX();
-                //Destroy(gameObject);
+                AudioManager.instance.PlayAudio2D(this.transform, deathSound);
                 sprite.DOColor(targetColor, 0.2f);
-                //StartCoroutine("WaitThenDie");
                 this.gameObject.tag = "aPlayer";
             }
         }        

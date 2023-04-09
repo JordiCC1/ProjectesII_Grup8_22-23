@@ -20,14 +20,20 @@ namespace Player
         [Header("Physics")]
         [SerializeField] private LayerMask groundLayer;
         public Rigidbody2D rb { get; private set; }
-        [SerializeField] private BoxCollider2D boxCol;
+        [SerializeField] private CapsuleCollider2D capsuleCol;
+
+        [Header("Audio")]
+        public AudioClip landingClip;
+        public AudioClip walljumpClip;
+
 
         private void Start()
         {
             rb = GetComponentInParent<Rigidbody2D>();
-            boxCol = GetComponentInParent<BoxCollider2D>();
+            capsuleCol = GetComponentInParent<CapsuleCollider2D>();
             normalGravity = rb.gravityScale;
             startDrag = rb.drag;
+            hasPlayed = false;
         }
         public void UpdateMovement(MovementInputs inputs)
         {
@@ -39,8 +45,8 @@ namespace Player
         }
 
         public void MoveCharacterInPlayer(bool isAlive, bool isDoneRestarting)
-        {            
-                CheckCollisions();
+        {
+            CheckCollisions();
 
             if (isAlive && isDoneRestarting)
             {
@@ -49,20 +55,8 @@ namespace Player
                 CalculateWalk();
                 CalculateJump();
 
-                MoveCharacterPhysics();                
-            }           
-        }
-        private void Update()
-        {
-            Walking();
-        }
-        public void FixedUpdate()
-        {
-            //CheckCollisions();
-            //CalculateJumpApex();
-            //CalculateWalk();
-            //CalculateJump();
-            //MoveCharacterPhysics();
+                MoveCharacterPhysics();
+            }
         }
 
         #region Collisions
@@ -74,29 +68,33 @@ namespace Player
         public bool landingThisFrame { get; private set; }
 
         public bool isGrounded =>
-           Physics2D.Raycast(transform.position - new Vector3(0, boxCol.bounds.extents.y, 0),
+           Physics2D.Raycast(transform.position - new Vector3(0, capsuleCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer) ||
-           Physics2D.Raycast(transform.position - new Vector3(boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+           Physics2D.Raycast(transform.position - new Vector3(capsuleCol.bounds.extents.x, capsuleCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer) ||
-           Physics2D.Raycast(transform.position - new Vector3(-boxCol.bounds.extents.x, boxCol.bounds.extents.y, 0),
+           Physics2D.Raycast(transform.position - new Vector3(-capsuleCol.bounds.extents.x, capsuleCol.bounds.extents.y, 0),
                -Vector3.up, rayLength, groundLayer);
 
-        public bool isHanging =>
-            !colDown && colFront && movementScale != 0 && rb.velocity.y <= 0; // this line might have to change
+        public bool isOnWall =>
+            !colDown && (colFront || colBack) && !isGrounded && rb.velocity.y <= 0; // this line might have to change
 
         private void CheckCollisions()
         {
-            landingThisFrame = false;
 
             if (colDown && !isGrounded)
                 timeLeftGrounded = Time.time;
+
             if (!colDown && isGrounded)
             {
                 coyoteUsable = true;
                 landingThisFrame = true;
             }
-            if ((colBack || colFront) && !isHanging)
+            else
+                landingThisFrame = false;
+
+            if ((colBack || colFront) && !isOnWall)
                 timeLeftWall = Time.time;
+
 
             colDown = isGrounded;
 
@@ -106,18 +104,17 @@ namespace Player
         private void CheckRays()
         {
             var pos = transform.position;
-            var extent = boxCol.bounds.extents;
-
+            var extent = capsuleCol.bounds.extents;
             if (isFacingRight)
             {
-                colFront = Physics2D.Raycast(pos, 
+                colFront = Physics2D.Raycast(pos,
                     Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer);
 
-                colBack = Physics2D.Raycast(pos, 
+                colBack = Physics2D.Raycast(pos,
                     -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer) ||
@@ -126,14 +123,14 @@ namespace Player
             }
             else
             {
-                colFront = Physics2D.Raycast(pos, 
+                colFront = Physics2D.Raycast(pos,
                     -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x - extent.x, pos.y, pos.z),
                     -Vector3.right, rayLength, groundLayer);
 
-                colBack = Physics2D.Raycast(pos, 
+                colBack = Physics2D.Raycast(pos,
                     Vector3.right, rayLength, groundLayer) ||
                     Physics2D.Raycast(new Vector3(pos.x + extent.x, pos.y, pos.z),
                     Vector3.right, rayLength, groundLayer) ||
@@ -142,28 +139,6 @@ namespace Player
             }
 
         }
-
-        //draw lines
-        /*private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-
-            var pos = transform.position;
-            var extent = boxCol.bounds.extents;
-
-            for (int i = -1; i <= 1; i++)
-                Gizmos.DrawRay(pos + new Vector3(extent.x, extent.y * i, 0),
-                    extent * Vector2.right * rayLength);
-
-            for (int i = -1; i <= 1; i++)
-                Gizmos.DrawRay(pos - new Vector3(extent.x, extent.y * i, 0),
-                    extent * -Vector2.right * rayLength);
-
-            for (int i = -1; i <= 1; i++)
-                Gizmos.DrawRay(pos - new Vector3(extent.x * i, extent.y, 0),
-                    extent * -Vector2.up * rayLength);
-        }*/
-
         #endregion
 
         #region Walk
@@ -223,9 +198,9 @@ namespace Player
         private bool CanUseCoyote =>
             coyoteUsable && !colDown && timeLeftGrounded + coyoteTimeThreshold > Time.time;
         private bool HasWallJumpBuffered =>
-            isHanging && lastJumpInput + jumpBuffer > Time.time;
+            isOnWall && lastJumpInput + jumpBuffer > Time.time;
         private bool CanUseWallCoyote =>
-            coyoteUsable && !isHanging && timeLeftWall + coyoteTimeThreshold > Time.time;
+            coyoteUsable && !isOnWall && timeLeftWall + coyoteTimeThreshold > Time.time;
 
         [Header("Bullet Time")]
         [SerializeField] private float bulletTimeControl = 1.5f;
@@ -266,7 +241,8 @@ namespace Player
         #endregion
 
         #region Move
-        public bool isFacingRight = true;
+        [field: SerializeField]
+        public bool isFacingRight { get; private set; } = true;
 
         private void MoveCharacterPhysics()
         {
@@ -277,7 +253,6 @@ namespace Player
                     rb.velocity = Vector3.zero;
                 CreateDust2();
                 rb.AddForce(jumpHeight * Vector2.up, ForceMode2D.Impulse);
-
                 shouldJump = false;
             }
 
@@ -288,8 +263,9 @@ namespace Player
                     rb.AddForce(jumpHeight * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
                 else
                     rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
-
+                Flip();
                 shouldWallJump = false;
+                PlayWalljumpSFX();
             }
 
             if (endedJumpEarly)
@@ -301,8 +277,13 @@ namespace Player
             rb.gravityScale = isInApex ? apexGravity : normalGravity;
 
             // DRAG
-            if (isHanging)
+            if (isOnWall)
+            {
+                if (colBack)
+                    Flip();
+
                 rb.drag = wallDrag;
+            }
             else if (!colDown)
                 rb.drag = airDrag;
             else
@@ -316,9 +297,9 @@ namespace Player
 
             rb.AddForce(movement * Vector2.right);
 
-            if (isFacingRight && movementScale < 0)
+            if (isFacingRight && movementScale < 0 && !isOnWall)
                 Flip();
-            else if (!isFacingRight && movementScale > 0)
+            else if (!isFacingRight && movementScale > 0 && !isOnWall)
                 Flip();
         }
 
@@ -333,20 +314,23 @@ namespace Player
         #endregion
 
         #region SFX
-        private void Walking()
-        {
-            if (isGrounded && targetSpeed != 0)            
-                AudioManager.instance.WalkingSFX(true);                
-            else            
-                AudioManager.instance.WalkingSFX(false);            
-        }
+        private bool hasPlayed;
+
         private void Landing()
         {
-            if (landingThisFrame)
-            {
-                AudioManager.instance.LandingSFX();
+            if (landingThisFrame && !hasPlayed)
+            { 
+                hasPlayed = true;
+                AudioManager.instance.PlayAudio2D(this.transform, landingClip);
                 CreateDust();
             }
+            else if(!landingThisFrame)
+                hasPlayed = false;
+        }
+
+        private void PlayWalljumpSFX()
+        {
+            AudioManager.instance.PlayAudio2D(this.transform, walljumpClip);
         }
 
         #endregion
@@ -354,11 +338,12 @@ namespace Player
         #region DustAnimation
         void CreateDust()
         {
-            if(isGrounded)
+            if (isGrounded)
                 dust.Play();
-        }void CreateDust2()
+        }
+        void CreateDust2()
         {
-            if(isGrounded)
+            if (isGrounded)
                 dust2.Play();
         }
         #endregion
