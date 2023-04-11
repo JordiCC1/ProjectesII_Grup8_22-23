@@ -242,11 +242,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 27149512573143902, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -82.2
+      value: -82
       objectReference: {fileID: 0}
     - target: {fileID: 27149512573143902, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.1
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 27149512573143902, guid: 045ee97aab3ba3b4a921fce73f78649c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2854,11 +2854,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3720579701736056788, guid: 3c5db6f5de85ce1448130391dd1b6d06, type: 3}
       propertyPath: lastCheckPointPos.y
-      value: -11
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 3720579701736056789, guid: 3c5db6f5de85ce1448130391dd1b6d06, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3720579701736056789, guid: 3c5db6f5de85ce1448130391dd1b6d06, type: 3}
       propertyPath: m_LocalPosition.x
@@ -126826,6 +126826,63 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 17.999996, y: 23}
   m_EdgeRadius: 0
+--- !u!1001 &1168602812
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232917, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399000832258232919, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
+      propertyPath: m_Name
+      value: LevelLoader
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bbfc13a045dbe724fa60420deb384ec8, type: 3}
 --- !u!1001 &1256788445
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127487,7 +127544,7 @@ Transform:
   - {fileID: 1516918370}
   - {fileID: 706075193}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1512331052
 GameObject:

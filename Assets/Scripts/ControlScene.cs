@@ -19,7 +19,7 @@ public class ControlScene : MonoBehaviour
         sw = FindObjectOfType<ScreenWipe>();
         Ll = FindObjectOfType<LevelLoader>();
         if (other.CompareTag("Player")|| other.CompareTag("aPlayer"))
-        {            
+        {
             cm.DestroyThis();
             sw.DestroyThis();
             Ll.load = true;
