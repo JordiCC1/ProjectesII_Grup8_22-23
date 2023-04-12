@@ -1,22 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
     [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioSource audioSourceStep;
-    [SerializeField] AudioClip pBulletWallSFX;
-    [SerializeField] AudioClip pBulletEnemySFX;
-    [SerializeField] AudioClip landingSFX;
-    [SerializeField] AudioClip enemyDeathSFX;
-    [SerializeField] AudioClip playerDeathSFX;
-    [SerializeField] AudioClip enemyShoot;
-    [SerializeField] AudioClip enterBT;
-    [SerializeField] AudioClip exitBT;
-    [SerializeField] AudioClip enemyAlert;
+    [SerializeField] Slider slider;
 
     [Header("Interpolation")]
     Interpolator lerp;
@@ -37,9 +29,21 @@ public class AudioManager : MonoBehaviour
         lerp = new Interpolator(0.5f);
     }
 
-    private void Start()
+    public void PlayAudio2D(Transform root, AudioClip clip, bool loop = false)
     {
-        audioSource.Play();
+        if (audioSource != null)
+        {
+            if (loop)
+            {
+                audioSource.loop = true;
+                audioSource.clip= clip;
+                audioSource.Play();
+            }
+            else
+                audioSource.PlayOneShot(clip);
+        }
+        else
+            Debug.Log("AudioSource = null");
     }
 
     public void ChangePitch(float pitch)
@@ -57,59 +61,17 @@ public class AudioManager : MonoBehaviour
         audioSource.pitch = Mathf.Lerp(prevPitch, pitch, curve.Evaluate(lerp.Value));
     }
 
-    public void ChangeVolume(float sliderValue)
+    public void ChangeVolume()
     {
-        audioSource.volume = sliderValue;
+        audioSource.volume = slider.value;
     }
 
-    public void PBulletWallCollisionSFX()
+    public float GetVolume()
     {
-        audioSource.PlayOneShot(pBulletWallSFX);
-    } 
-    public void PBulletEnemyCollisionSFX()
-    {
-        audioSource.PlayOneShot(pBulletEnemySFX);
+        return audioSource.volume;
     }
 
-    public void LandingSFX()
-    {
-        audioSource.PlayOneShot(landingSFX);
-    }
-
-    public void WalkingSFX(bool moving)
-    {
-        audioSourceStep.enabled = moving;
-    }
-
-    public void EnemyDeathSFX()
-    {
-        audioSource.PlayOneShot(enemyDeathSFX);
-    } 
-    
-    public void PlayerDeathSFX()
-    {
-        audioSource.PlayOneShot(playerDeathSFX);
-    }
-    public void EnemyShootSFX()
-    {        
-        audioSource.PlayOneShot(enemyShoot,0.2f);        
-    } 
-    public void EnterBTSFX()
-    {        
-        audioSource.PlayOneShot(enterBT,0.2f);
-        //Temporal
-        audioSource.pitch = 1f;
-        
-    }
-    public void ExitBTSFX()
-    {        
-        audioSource.PlayOneShot(exitBT,0.2f);
-        //Temporal
-        audioSource.pitch = 0.38f;
-    }
-
-    public void EnemyAlertSFX()
-    {
-        audioSource.PlayOneShot(enemyAlert, 0.2f);
+   public void Mute() {
+        audioSource.mute = !audioSource.mute;
     }
 }

@@ -16,6 +16,9 @@ namespace Player
         [SerializeField] private GunTransform gT;
         RaycastHit2D hit;
 
+        [Header("Audio")]
+        public AudioClip enemyCollision;
+
         private void Awake()
         {
             _transform = GetComponent<Transform>();
@@ -33,7 +36,7 @@ namespace Player
             {
                 hit.collider.GetComponent<Controller>().OnSwap();
                 SwapGameObject(hit.collider.gameObject);
-                AudioManager.instance.PBulletEnemyCollisionSFX();
+                AudioManager.instance.PlayAudio2D(this.transform, enemyCollision);
                 lineRenderer.positionCount = 2;
                 lineRenderer.SetPosition(0, laserFirePoint.position);
                 lineRenderer.SetPosition(1, hit.point);

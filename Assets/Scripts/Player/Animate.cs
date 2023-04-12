@@ -79,9 +79,8 @@ namespace Player
 
             // Priorities
             if (movement.landingThisFrame) return LockState(Land, 0.1f);
-            if (movement.isHanging)
+            if (movement.isOnWall)
             {
-                //TODO: lock flip for a while
                 sprite.flipX = true;
                 return Hang;
             }
@@ -107,7 +106,6 @@ namespace Player
             GameObject ParticleIns = Instantiate(deathParticles, transform.position, Quaternion.identity);
             ParticleIns.GetComponent<ParticleSystem>().Play();
             StartCoroutine("WaitAndMove");
-            //player.GetComponent<Collider2D>().enabled = false;
             player.isDead = false;
             
         }
@@ -115,24 +113,18 @@ namespace Player
         IEnumerator WaitAndMove()
         {
             GameObject ParticleIns = Instantiate(deathParticles, transform.position, Quaternion.identity);
-            ParticleIns.GetComponent<ParticleSystem>().Play();            
-            //Seconds to wait after player death
-            yield return new WaitForSeconds(0.4f);
-            Tween t;
-            //player.GetComponent<Collider2D>().enabled = false;
-            t = DOTween.To(() => player.transform.position, x => player.transform.position = x, (Vector3)player.cm.lastCheckPointPos, 0.3f).SetEase(Ease.InOutQuad);
-            // player.GetComponent<Collider2D>().enabled = true;
+            ParticleIns.GetComponent<ParticleSystem>().Play();
+            yield return new WaitForSeconds(0.3f);            
             StartCoroutine("WaitAndRestart");
         }
         IEnumerator WaitAndRestart()
         {
-            //sprite.DOColor(player.originalColor, 1f);
             screenWipe.ToggleWipe(true);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.2f);
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
-            void Blink()
+        void Blink()
         {
             float t = Time.deltaTime;
             if (alpha >= maximum) increasing = false;

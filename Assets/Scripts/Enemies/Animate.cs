@@ -24,7 +24,6 @@ namespace Enemy
         private Color maxAlpha;
 
         private int currentState;
-        //private float pauseTime;
 
         private void Start()
         {
