@@ -3,7 +3,15 @@ guid: 212b2afa1f4e6a043aec597716edc580
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - player: {instanceID: 0}
+  - movement: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - sprite: {instanceID: 0}
+  - deathParticles: {instanceID: 0}
+  - landEffect: {fileID: 2251006070026033365, guid: d8af264fe9a300247b388859dd223dd0, type: 3}
+  - leftWallEffect: {fileID: 7239256561890098921, guid: d1043543298e095469370d51ab039591, type: 3}
+  - rightWallEffect: {fileID: 135843135486129245, guid: 4f5689ab3050b5445bebc4d974c42247, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
