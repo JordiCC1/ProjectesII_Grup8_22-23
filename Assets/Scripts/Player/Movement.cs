@@ -186,6 +186,8 @@ namespace Player
         [SerializeField] private float forceOfSideJumpUp = 2.0f;
         public bool shouldWallJump { get; private set; }
 
+        [HideInInspector] public bool leftWallJump = false;
+        [HideInInspector] public bool rightWallJump = false;
         [Header("Buffer and Coyote Time")]
         [SerializeField] private float jumpBuffer = 0.1f;
         [SerializeField] private float coyoteTimeThreshold = 0.5f;
@@ -261,13 +263,11 @@ namespace Player
                 rb.AddForce(jumpHeight * Vector2.up * forceOfSideJumpUp, ForceMode2D.Impulse);
                 if (!isFacingRight)
                 {
-                    rb.AddForce(jumpHeight * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
-
+                    rb.AddForce(jumpHeight * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);                    
                 }
                 else
                 {
-                    rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
-
+                    rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);                    
                 }
                 Flip();
                 shouldWallJump = false;

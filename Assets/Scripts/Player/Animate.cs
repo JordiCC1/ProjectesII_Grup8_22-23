@@ -69,6 +69,14 @@ namespace Player
             animator.CrossFade(state, 0, 0);
             currentState = state;
             
+            //if (movement.shouldWallJump)
+            //{
+            //    if (movement.isFacingRight)
+            //        LeftWallJumpEffect();
+            //    else if (!movement.isFacingRight)
+            //        RightWallJumpEffect();
+            //}
+
         }
         private void Update()
         {
@@ -77,13 +85,6 @@ namespace Player
                 DeathAnimation();
             }
 
-            if (movement.shouldWallJump)
-            {
-                if (!movement.isFacingRight)
-                    LeftWallJumpEffect();
-                else if (movement.isFacingRight)
-                    RightWallJumpEffect();
-            }
 
             if (movement.landingThisFrame)
                 LandEffect();
@@ -157,6 +158,7 @@ namespace Player
         {
             if (!effectPlaying)
             {
+                Debug.Log("L");
                 effectPlaying = true;
                 GameObject instance = Instantiate(leftWallEffect, transform.position, Quaternion.identity);
                 Destroy(instance, 0.5f);
@@ -167,6 +169,7 @@ namespace Player
         {
             if (!effectPlaying)
             {
+                Debug.Log("R");
                 effectPlaying = true;
                 GameObject instance = Instantiate(rightWallEffect, transform.position, Quaternion.identity);
                 Destroy(instance, 0.5f);
