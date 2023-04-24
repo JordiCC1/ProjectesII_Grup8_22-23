@@ -5155,6 +5155,8 @@ MonoBehaviour:
   earlyJumpModifier: 2.5
   forceOfSideJumpSide: 0.8
   forceOfSideJumpUp: 1
+  leftWallJump: 0
+  rightWallJump: 0
   jumpBuffer: 0.2
   coyoteTimeThreshold: 0.15
   lastJumpInput: 0
@@ -5197,6 +5199,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   sprite: {fileID: 0}
   deathParticles: {fileID: 3934082505798368739, guid: f1a3c6424ed681e4abdfc0fdbbf13e39, type: 3}
+  landEffect: {fileID: 2251006070026033365, guid: d8af264fe9a300247b388859dd223dd0, type: 3}
+  leftWallEffect: {fileID: 7239256561890098921, guid: d1043543298e095469370d51ab039591, type: 3}
+  rightWallEffect: {fileID: 135843135486129245, guid: 4f5689ab3050b5445bebc4d974c42247, type: 3}
 --- !u!1 &5202932575752996480
 GameObject:
   m_ObjectHideFlags: 0
