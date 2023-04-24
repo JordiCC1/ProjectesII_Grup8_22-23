@@ -13,6 +13,9 @@ namespace Player
         [SerializeField] private Animator animator;
         [SerializeField] private SpriteRenderer sprite;
         [SerializeField] private GameObject deathParticles;
+        [SerializeField] private GameObject landEffect;
+        [SerializeField] private GameObject leftWallEffect;
+        [SerializeField] private GameObject rightWallEffect;
 
         private static readonly int Idle = Animator.StringToHash("Idle");
         private static readonly int Walk = Animator.StringToHash("Walk");
@@ -23,6 +26,8 @@ namespace Player
 
         private int currentState;
         private float landTime;
+
+        private bool effectPlaying;
 
         //blink
         private float minimum = 0.3f;
@@ -71,6 +76,18 @@ namespace Player
             {
                 DeathAnimation();
             }
+
+            if (movement.shouldWallJump)
+            {
+                if (!movement.isFacingRight)
+                    LeftWallJumpEffect();
+                else if (movement.isFacingRight)
+                    RightWallJumpEffect();
+            }
+
+            if (movement.landingThisFrame)
+                LandEffect();
+
         }
 
         private int GetState()
@@ -124,6 +141,39 @@ namespace Player
             int scene = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(scene, LoadSceneMode.Single);
         }
+
+        private void LandEffect()
+        {
+            if(!effectPlaying)
+            {
+                effectPlaying = true;
+                GameObject instance = Instantiate(landEffect, transform.position, Quaternion.identity);
+                Destroy(instance, 0.5f);
+                effectPlaying = false;
+            }
+        }
+
+        private void LeftWallJumpEffect()
+        {
+            if (!effectPlaying)
+            {
+                effectPlaying = true;
+                GameObject instance = Instantiate(leftWallEffect, transform.position, Quaternion.identity);
+                Destroy(instance, 0.5f);
+                effectPlaying = false;
+            }
+        }
+        private void RightWallJumpEffect()
+        {
+            if (!effectPlaying)
+            {
+                effectPlaying = true;
+                GameObject instance = Instantiate(rightWallEffect, transform.position, Quaternion.identity);
+                Destroy(instance, 0.5f);
+                effectPlaying = false;
+            }
+        }
+
         void Blink()
         {
             float t = Time.deltaTime;

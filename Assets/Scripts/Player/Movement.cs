@@ -260,9 +260,15 @@ namespace Player
             {
                 rb.AddForce(jumpHeight * Vector2.up * forceOfSideJumpUp, ForceMode2D.Impulse);
                 if (!isFacingRight)
+                {
                     rb.AddForce(jumpHeight * Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
+
+                }
                 else
+                {
                     rb.AddForce(jumpHeight * -Vector2.right * forceOfSideJumpSide, ForceMode2D.Impulse);
+
+                }
                 Flip();
                 shouldWallJump = false;
                 PlayWalljumpSFX();
