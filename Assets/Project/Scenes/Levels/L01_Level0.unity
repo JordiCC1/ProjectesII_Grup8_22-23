@@ -109341,6 +109341,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 158634483272483460, guid: 94027ad4184781b4a9acd4d4344a4687, type: 3}
   m_PrefabInstance: {fileID: 1730012698}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1756000507 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2093142859650955530, guid: 083b830f6239c36499247c96674c2d3e, type: 3}
+  m_PrefabInstance: {fileID: 1872662509}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1763906854
 GameObject:
   m_ObjectHideFlags: 0
@@ -113171,6 +113182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 4665422050204572218, guid: 083b830f6239c36499247c96674c2d3e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4910997091616859869, guid: 083b830f6239c36499247c96674c2d3e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -113188,6 +113203,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7904500014058029064, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
+      propertyPath: slider
+      value: 
+      objectReference: {fileID: 1756000507}
     - target: {fileID: 7904500014058029065, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -113234,7 +113253,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7904500014058029066, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}
       propertyPath: m_Name
-      value: AudioManager (1)
+      value: SFXManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1766b5a67f5c8b843816139cdf1fd637, type: 3}

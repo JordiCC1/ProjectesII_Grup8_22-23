@@ -46,16 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 7904500014058029067}
-  audioSourceStep: {fileID: 0}
-  pBulletWallSFX: {fileID: 8300000, guid: 363486019977af446a5692c3634852b8, type: 3}
-  pBulletEnemySFX: {fileID: 8300000, guid: 37b9e37f7432221468dd4b40b9dac10c, type: 3}
-  landingSFX: {fileID: 8300000, guid: c83680465315da34cbae8d4584fb018b, type: 3}
-  enemyDeathSFX: {fileID: 8300000, guid: a16809ddb4c909d488fc49b199f5f221, type: 3}
-  playerDeathSFX: {fileID: 8300000, guid: 8f753176e097cbd49b24fb74dcdeddf5, type: 3}
-  enemyShoot: {fileID: 8300000, guid: 45f54b0b43ce01c49bb5b90849236aaf, type: 3}
-  enterBT: {fileID: 8300000, guid: 9adee2e5d0f85834aa655357e29ecce2, type: 3}
-  exitBT: {fileID: 8300000, guid: 12f018321aea652458c05c6bda729558, type: 3}
-  enemyAlert: {fileID: 8300000, guid: 05bb98dc8bfaaa5449a6b59328485a05, type: 3}
+  slider: {fileID: 0}
   curve:
     serializedVersion: 2
     m_Curve: []
@@ -74,7 +65,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

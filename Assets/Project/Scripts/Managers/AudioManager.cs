@@ -29,6 +29,12 @@ public class AudioManager : MonoBehaviour
         lerp = new Interpolator(0.5f);
     }
 
+    private void Start()
+    {
+        slider.value = audioSource.volume;
+        slider.onValueChanged.AddListener(ChangeVolume);
+    }
+
     public void PlayAudio2D(Transform root, AudioClip clip, bool loop = false)
     {
         if (audioSource != null)
@@ -61,9 +67,9 @@ public class AudioManager : MonoBehaviour
         audioSource.pitch = Mathf.Lerp(prevPitch, pitch, curve.Evaluate(lerp.Value));
     }
 
-    public void ChangeVolume()
+    public void ChangeVolume(float volume)
     {
-        audioSource.volume = slider.value;
+        audioSource.volume = volume;
     }
 
     public float GetVolume()
