@@ -46,7 +46,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 73fa78ad42951a240a0166dffb792095, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
-  m_Pitch: 1
+  m_Pitch: 1.4
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -142,10 +142,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 7904500014058029067}
+  menuClip: {fileID: 8300000, guid: 73fa78ad42951a240a0166dffb792095, type: 3}
+  gameClip: {fileID: 8300000, guid: a16809ddb4c909d488fc49b199f5f221, type: 3}
+  menu: Main Menu
   slider: {fileID: 0}
-  MenuScene: Main Menu
-  menuMusic: {fileID: 8300000, guid: 73fa78ad42951a240a0166dffb792095, type: 3}
-  gameMusic: {fileID: 0}
   curve:
     serializedVersion: 2
     m_Curve: []

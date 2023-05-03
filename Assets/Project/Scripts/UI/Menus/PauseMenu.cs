@@ -101,6 +101,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         StartCoroutine("SetPauseFalse");
         SceneManager.LoadScene("Main Menu");
+        MusicManager.instance.UpdateMusic("Main Menu");
+        MusicManager.instance.ChangePitch(1.4f);  
     }
 
     public void QuitGame()

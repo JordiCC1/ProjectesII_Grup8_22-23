@@ -10,8 +10,11 @@ public class MusicManager : MonoBehaviour
     public static MusicManager instance;
 
     [SerializeField] AudioSource audioSource;
-    [SerializeField] Slider slider;
+    [SerializeField] AudioClip menuClip;
+    [SerializeField] AudioClip gameClip;
     [SerializeField] string menu;
+
+    [SerializeField] Slider slider;
 
     [Header("Interpolation")]
     Interpolator lerp;
@@ -24,7 +27,7 @@ public class MusicManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else if(instance!=null || (SceneManager.GetActiveScene().name==menu))
+        else 
         {
             Destroy(gameObject);
         }
@@ -38,6 +41,19 @@ public class MusicManager : MonoBehaviour
         slider.onValueChanged.AddListener(ChangeVolume);
         audioSource.loop = true;
         audioSource.Play();
+    }
+
+    public void UpdateMusic(string nextScene)
+    {
+        if(nextScene==menu)
+        {
+            audioSource.clip = menuClip;
+        }
+        else
+        {
+            audioSource.clip = gameClip;
+        }
+        audioSource.Play(); 
     }
 
     public void ChangePitch(float pitch)

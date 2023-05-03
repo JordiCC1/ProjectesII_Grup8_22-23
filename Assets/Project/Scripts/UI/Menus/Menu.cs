@@ -16,6 +16,8 @@ public class Menu : MonoBehaviour
     public void ChangeScene(string name)
     {
         SceneManager.LoadScene(name);
+        MusicManager.instance.UpdateMusic(name);
+        MusicManager.instance.ChangePitch(1.0f);
     }
     public void Exit()
     { 
