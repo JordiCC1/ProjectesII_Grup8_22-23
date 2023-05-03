@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class AudioManager : MonoBehaviour
+public class MusicManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    public static MusicManager instance;
 
     [SerializeField] AudioSource audioSource;
     [SerializeField] Slider slider;
+    [SerializeField] string MenuScene;
+    string manuScene;
+
+    [Header("Music Clips")]
+    [SerializeField] AudioClip menuMusic;
+    [SerializeField] AudioClip gameMusic;
 
     [Header("Interpolation")]
     Interpolator lerp;
     public AnimationCurve curve;
+
+    bool sceneChanged = false;
 
     private void Awake()
     {
@@ -33,23 +43,35 @@ public class AudioManager : MonoBehaviour
     {
         slider.value = audioSource.volume;
         slider.onValueChanged.AddListener(ChangeVolume);
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
-    public void PlayAudio2D(Transform root, AudioClip clip, bool loop = false)
+    private void Update()
     {
-        if (audioSource != null)
+
+        if (SceneManager.GetActiveScene().name == MenuScene)
         {
-            if (loop)
-            {
-                audioSource.loop = true;
-                audioSource.clip= clip;
-                audioSource.Play();
-            }
-            else
-                audioSource.PlayOneShot(clip);
+            audioSource.clip = menuMusic;
+            sceneChanged = false;
         }
         else
-            Debug.Log("AudioSource = null");
+        {
+            audioSource.clip = gameMusic;
+            sceneChanged = true;
+        }
+
+        if (sceneChanged)
+        {
+            audioSource.Play();
+            sceneChanged = false;
+
+        }
+    }
+
+    private void LateUpdate()
+    {
+
     }
 
     public void ChangePitch(float pitch)
@@ -72,12 +94,8 @@ public class AudioManager : MonoBehaviour
         audioSource.volume = volume;
     }
 
-    public float GetVolume()
+    public void Mute()
     {
-        return audioSource.volume;
-    }
-
-   public void Mute() {
         audioSource.mute = !audioSource.mute;
     }
 }

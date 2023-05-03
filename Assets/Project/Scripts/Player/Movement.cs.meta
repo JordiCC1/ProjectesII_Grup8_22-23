@@ -8,7 +8,7 @@ MonoImporter:
   - dust2: {instanceID: 0}
   - capsuleCol: {instanceID: 0}
   - landingClip: {fileID: 8300000, guid: c83680465315da34cbae8d4584fb018b, type: 3}
-  - walljumpClip: {fileID: 8300000, guid: 628e59afc90b4024894fd5edbe7d750b, type: 3}
+  - walljumpClip: {fileID: 8300000, guid: a6e77f77ee2d8f04383501ecfd7c8f70, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -327,7 +327,7 @@ namespace Player
             if (landingThisFrame && !hasPlayed)
             { 
                 hasPlayed = true;
-                AudioManager.instance.PlayAudio2D(this.transform, landingClip);
+                SFXManager.instance.PlayAudio2D(this.transform, landingClip);
                 CreateDust();
             }
             else if(!landingThisFrame)
@@ -336,7 +336,7 @@ namespace Player
 
         private void PlayWalljumpSFX()
         {
-            AudioManager.instance.PlayAudio2D(this.transform, walljumpClip);
+            SFXManager.instance.PlayAudio2D(this.transform, walljumpClip);
         }
 
         #endregion
