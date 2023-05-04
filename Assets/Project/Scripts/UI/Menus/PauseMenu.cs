@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public static PauseMenu instance;
+
     //public GameObject pauseMenu;
     public GameObject[] menuParts;
     public GameObject[] settingsMenuParts;
@@ -16,6 +18,22 @@ public class PauseMenu : MonoBehaviour
     private CheckpointMaster cm;
     private ScreenWipe sw;
     private Scene currentScene;
+
+    [SerializeField] string mainMenu;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         //pauseMenu.SetActive(false);
@@ -29,7 +47,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetButtonDown(pauseButton))
+        if (Input.GetButtonDown(pauseButton) && !(SceneManager.GetActiveScene().name == mainMenu))
         {
             if (isPaused)
             {
@@ -39,8 +57,8 @@ public class PauseMenu : MonoBehaviour
             {
                 PauseGame();
             }
-        }     
-        
+        }
+
     }
 
     public void PauseGame()
@@ -58,7 +76,7 @@ public class PauseMenu : MonoBehaviour
         isPaused = true;
     }
 
-    
+
 
     public void ResumeGame()
     {
@@ -83,6 +101,8 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         StartCoroutine("SetPauseFalse");
         SceneManager.LoadScene("Main Menu");
+        MusicManager.instance.UpdateMusic("Main Menu");
+        MusicManager.instance.ChangePitch(1.4f);  
     }
 
     public void QuitGame()
@@ -106,6 +126,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Mute()
     {
-        AudioManager.instance.Mute();
+        SFXManager.instance.Mute();
     }
 }

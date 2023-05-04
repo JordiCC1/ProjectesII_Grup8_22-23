@@ -27,7 +27,7 @@ namespace Player
         public void Shoot()
         {
             hit = Physics2D.Raycast(laserFirePoint.position, transform.right, Mathf.Infinity);
-            
+
 
             if (hit.rigidbody == null)
                 return;
@@ -36,7 +36,7 @@ namespace Player
             {
                 hit.collider.GetComponent<Controller>().OnSwap();
                 SwapGameObject(hit.collider.gameObject);
-                AudioManager.instance.PlayAudio2D(this.transform, enemyCollision);
+                SFXManager.instance.PlayAudio2D(this.transform, enemyCollision);
                 lineRenderer.positionCount = 2;
                 lineRenderer.SetPosition(0, laserFirePoint.position);
                 lineRenderer.SetPosition(1, hit.point);
@@ -64,7 +64,7 @@ namespace Player
                 Objective.GetComponent<Controller>().SwapAnimation(lastPos);
             }
             this.gameObject.GetComponentInParent<Player>().Invincibility();
-            this.gameObject.GetComponentInParent<Player>().isSwapped = true;            
+            this.gameObject.GetComponentInParent<Player>().isSwapped = true;
             this.gameObject.GetComponentInParent<Player>().targetPosition = newPos;
             BulletTime.instance.BackToNormal();
         }

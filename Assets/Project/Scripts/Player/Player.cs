@@ -117,14 +117,14 @@ namespace Player
             {
                 isDead = true;
                 isAlive = false;
-                AudioManager.instance.PlayAudio2D(this.transform, deathSound);
+                SFXManager.instance.PlayAudio2D(this.transform, deathSound);
                 sprite.DOColor(targetColor, 0.2f);
                 this.gameObject.tag = "aPlayer";               
             }else if (collision.gameObject.CompareTag("Trap") )
             {
                 isDead = true;
                 isAlive = false;
-                AudioManager.instance.PlayAudio2D(this.transform, deathSound);
+                SFXManager.instance.PlayAudio2D(this.transform, deathSound);
                 sprite.DOColor(targetColor, 0.2f);
                 this.gameObject.tag = "aPlayer";
             }

@@ -84,7 +84,7 @@ namespace Enemy
         {
             isReloaded = true;
             CinemachineShake.Instance.ShakeCamera(5f, .1f);
-            AudioManager.instance.PlayAudio2D(this.transform, enemyShoot);
+            SFXManager.instance.PlayAudio2D(this.transform, enemyShoot);
             GameObject BulletIns = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             BulletIns.GetComponent<Rigidbody2D>().AddForce(bulletDirection * bulletForce);
         }
@@ -112,7 +112,7 @@ namespace Enemy
         {
             if (col.gameObject.tag == "Player" && !nonPlayerkillable)
             {
-                AudioManager.instance.PlayAudio2D(this.transform, enemyDeath);
+                SFXManager.instance.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
@@ -120,7 +120,7 @@ namespace Enemy
             }
             else if (col.gameObject.tag == "Bullet")
             {
-                AudioManager.instance.PlayAudio2D(this.transform, enemyDeath);
+                SFXManager.instance.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
@@ -128,7 +128,7 @@ namespace Enemy
             }
             else if (col.gameObject.tag == "Trap")
             {
-                AudioManager.instance.PlayAudio2D(this.transform, enemyDeath);
+                SFXManager.instance.PlayAudio2D(this.transform, enemyDeath);
                 GameObject ParticleIns = Instantiate(particles, transform.position, Quaternion.identity);
                 ParticleIns.GetComponent<ParticleSystem>().Play();
                 CinemachineShake.Instance.ShakeCamera(5f, .1f);
@@ -164,7 +164,7 @@ namespace Enemy
             }
 
             if(!prevDetected&&isDetected)
-                AudioManager.instance.PlayAudio2D(this.transform, enemyDetect);
+                SFXManager.instance.PlayAudio2D(this.transform, enemyDetect);
 
             prevDetected = isDetected;
         }
