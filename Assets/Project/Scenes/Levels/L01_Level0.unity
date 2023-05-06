@@ -114809,7 +114809,7 @@ PrefabInstance:
     - target: {fileID: 7904500014058029067, guid: 40fb38e64e08b0640ac1f7029f8d1f42, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 1dd98ad1debc0e84a94c48f54d48e6ea, type: 3}
     - target: {fileID: 8649865029257956666, guid: 40fb38e64e08b0640ac1f7029f8d1f42, type: 3}
       propertyPath: menu
       value: Main Menu
