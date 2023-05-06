@@ -29,7 +29,6 @@ namespace Player
 
         public float timeToNormal = .75f;
 
-        [SerializeField] PauseMenu pauseMenu;
         [SerializeField] StaminaController staminaController;
 
         [Header("Interpolation")]

@@ -33,7 +33,6 @@ namespace Player
         [HideInInspector] public Color originalColor;
         private Color targetColor;
 
-        [SerializeField] PauseMenu pauseMenu;
         [SerializeField] StaminaController staminaController;
 
         [SerializeField] private GameObject echo;
@@ -63,7 +62,7 @@ namespace Player
 
         void Update()
         {
-            if (!pauseMenu.isPaused)
+            if (!PauseMenu.instance.isPaused)
                 TakeInputs();
             movement.UpdateMovement(moveInputs);
             

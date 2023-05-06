@@ -58,6 +58,8 @@ public class PauseMenu : MonoBehaviour
                 PauseGame();
             }
         }
+        if (SceneManager.GetActiveScene().name == mainMenu)
+            ResumeGame();
 
     }
 
