@@ -47,6 +47,7 @@ public class SFXManager : MonoBehaviour
             }
             else
                 audioSource.PlayOneShot(clip);
+            StartCoroutine("ResetPitch");
         }
         else
             Debug.Log("AudioSource = null");
