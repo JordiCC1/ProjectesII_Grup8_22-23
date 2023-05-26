@@ -56,8 +56,8 @@ namespace Player
             originalColor = sprite.color;
             targetColor = new Color(1f, 1f, 1f, 0);
             Vector2 lastCheckPointPos = cm.lastCheckPointPos;
-            transform.position = lastCheckPointPos;          
-            
+            transform.position = lastCheckPointPos;
+
         }
 
         void Update()
@@ -65,16 +65,18 @@ namespace Player
             if (!PauseMenu.instance.isPaused)
                 TakeInputs();
             movement.UpdateMovement(moveInputs);
-            
+
             bt.UpdateBulletTime(btInputs, CanBT());
             UpdateSwapped();
             if (bt.trailOn)
-                UpdateTrail();            
-           
+                UpdateTrail();
+            if (cheatInput)
+                ToggleInvincibilityCheat();
+
         }
         private void FixedUpdate()
         {
-            movement.MoveCharacterInPlayer(isAlive,screenWipe.isDone);
+            movement.MoveCharacterInPlayer(isAlive, screenWipe.isDone);
         }
         #region Inputs
         private void TakeInputs()
@@ -99,7 +101,8 @@ namespace Player
                 BulletTimeUp = Input.GetMouseButtonUp(1),
                 SwapUp = Input.GetMouseButtonUp(0)
             };
-            
+
+            cheatInput = Input.GetButtonDown("Invincibility");
         }
 
         private bool CanBT()
@@ -118,8 +121,9 @@ namespace Player
                 isAlive = false;
                 SFXManager.instance.PlayAudio2D(this.transform, deathSound);
                 sprite.DOColor(targetColor, 0.2f);
-                this.gameObject.tag = "aPlayer";               
-            }else if (collision.gameObject.CompareTag("Trap") )
+                this.gameObject.tag = "aPlayer";
+            }
+            else if (collision.gameObject.CompareTag("Trap"))
             {
                 isDead = true;
                 isAlive = false;
@@ -127,7 +131,7 @@ namespace Player
                 sprite.DOColor(targetColor, 0.2f);
                 this.gameObject.tag = "aPlayer";
             }
-        }        
+        }
         IEnumerator WaitThenDie()
         {
             yield return new WaitForSeconds(1f);
@@ -140,14 +144,32 @@ namespace Player
         #region Invincibility
 
         public float invincibilityTime = 0.0f;
+        bool cheatInput = false;
+        bool cheatActive = false;
+
+        void ToggleInvincibilityCheat()
+        {
+            cheatActive = !cheatActive;
+            if (cheatActive)
+                isInvincible = true;
+            else
+                isInvincible = false;
+        }
 
         public void Invincibility()
         {
-            if (isInvincible)
+            if (cheatActive)
             {
-                StopInvincibility();
+                isInvincible = true;
             }
-            StartInvincibility();
+            else
+            {
+                if (isInvincible)
+                {
+                    StopInvincibility();
+                }
+                StartInvincibility();
+            }
         }
 
         void StartInvincibility()
@@ -179,12 +201,12 @@ namespace Player
             {
                 t = DOTween.To(() => gameObject.transform.position, x => gameObject.transform.position = x, targetPosition, 0.15f).SetEase(Ease.InOutQuad);
 
-                isSwapped = false;                
+                isSwapped = false;
             }
 
         }
 
-        
+
         #endregion
 
         #region trail
@@ -197,20 +219,20 @@ namespace Player
                     GameObject instance = Instantiate(echo, transform.position, Quaternion.identity);
                     Destroy(instance, 2f);
                 }
-                else if(movement.isFacingRight == false)
+                else if (movement.isFacingRight == false)
                 {
                     GameObject instance = Instantiate(echo_L, transform.position, Quaternion.identity);
-                    Destroy(instance, 2f);                   
+                    Destroy(instance, 2f);
                 }
                 timeBetweenSpawns = startTimeBetweenSpawns;
-                
+
             }
             else
-            {                
-                timeBetweenSpawns -= Time.deltaTime;                
+            {
+                timeBetweenSpawns -= Time.deltaTime;
             }
         }
-        
+
         #endregion
         private void RestartScene()
         {
