@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5bf574b37cad39946953b53cd16dfe06
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pauseMenu: {instanceID: 0}
+  - staminaController: {instanceID: 0}
+  - enterSound: {fileID: 8300000, guid: 9adee2e5d0f85834aa655357e29ecce2, type: 3}
+  - exitSound: {fileID: 8300000, guid: 12f018321aea652458c05c6bda729558, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
